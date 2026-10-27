@@ -19,7 +19,7 @@ export default function CommitteesPage() {
         compact
         eyebrow="Committees"
         title="Where the work actually happens."
-        description="Every senator serves on at least one committee, and most committees are open to any student. Filter by what you care about."
+        description="Every senator serves on at least one committee. Six are staffed by senators; the Student Activities Board takes any student. Filter by what you care about."
       />
       <Suspense fallback={<CommitteesDirectoryStatic />}>
         <CommitteesDirectory />

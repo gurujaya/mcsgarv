@@ -38,7 +38,7 @@ export const faq: FAQ[] = [
   {
     category: "joining",
     q: "Can I join a committee without being a senator?",
-    a: "Yes. Community Service, Food, Public Outreach, and SAB are open to all students. Budget Panel and Ethics are made up of senators. Come to a Monday meeting and ask for the committee you are interested in.",
+    a: "One: the Student Activities Board (SAB) takes any Rockville student, with rolling applications. Every other committee (Budget Panel, Community Service, Ethics, Food, Public Outreach, WDCE) is staffed by senators. If one of those is where you want to work, run for a Senator-at-Large seat and ask for it.",
   },
   {
     category: "joining",

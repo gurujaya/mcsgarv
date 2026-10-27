@@ -46,13 +46,13 @@ If your club needs money for an event, start on the Funding page. The panel meet
 
 The committee partners with MC's Service-Learning and Civic Engagement office so that student volunteers can find opportunities that count toward service hours and connect to the wider Rockville community.
 
-Open to all students, not just senators. If you want to help organize a drive or volunteer at one, come to a meeting.`,
+The committee is staffed by senators. If you want to help organize drives, run for a seat; if you just want to volunteer at one, watch the Events page.`,
     category: "service",
-    openTo: "all-students",
+    openTo: "senators-only",
     meets: "TODO: confirm meeting time",
     contact: "sgarv@montgomerycollege.edu",
     color: "green",
-    pills: ["Service", "Open to all"],
+    pills: ["Service"],
     responsibilities: [
       "Plan volunteer drives and seasonal collections (e.g., toy drives with Student Life)",
       "Support the campus food pantry with volunteers and donation pushes",
@@ -60,7 +60,7 @@ Open to all students, not just senators. If you want to help organize a drive or
       "Promote the annual Volunteer Fair and other service events",
     ],
     howToJoin:
-      "Open to any Rockville student. Come to a Monday open meeting and ask for the Community Service chair, or email the SGA.",
+      "Senators only. Become a Senator-at-Large to serve. Volunteer opportunities the committee organizes are open to everyone and listed on the Events page.",
     draft: true,
   },
   {
@@ -97,13 +97,13 @@ The committee is made up of senators and reports its recommendations to the full
 
 It also works alongside the campus food pantry so that students facing food insecurity know where to go and what is available.
 
-Open to all students. If you have opinions about what is (or is not) available to eat on campus, this is where they go.`,
+Staffed by senators, fed by everyone. If you have opinions about what is (or is not) available to eat on campus, bring them to an open meeting or the contact form and this committee is where they go.`,
     category: "advocacy",
-    openTo: "all-students",
+    openTo: "senators-only",
     meets: "TODO: confirm meeting time",
     contact: "sgarv@montgomerycollege.edu",
     color: "blue",
-    pills: ["Advocacy", "Open to all"],
+    pills: ["Advocacy"],
     responsibilities: [
       "Collect student feedback on campus dining options, hours, and pricing",
       "Liaise with MC food services on student concerns",
@@ -111,7 +111,7 @@ Open to all students. If you have opinions about what is (or is not) available t
       "Report dining and food-access issues to the SGA and campus administration",
     ],
     howToJoin:
-      "Open to any Rockville student. Come to a Monday open meeting and ask for the Food Committee, or email the SGA.",
+      "Senators only. Anyone can send the committee feedback through an open meeting or the contact form.",
     draft: true,
   },
   {
@@ -123,13 +123,13 @@ Open to all students. If you have opinions about what is (or is not) available t
 
 The committee manages SGA's Instagram, TikTok, and X accounts, designs flyers, staffs tabling and Club Rush, and runs "know your senator" campaigns so students can put a face to the people representing them.
 
-Open to all students. Designers, photographers, video editors, and anyone who likes talking to strangers are especially welcome.`,
+Staffed by senators. Designers, photographers, and video editors who want in should run for a seat and ask for this committee.`,
     category: "programming",
-    openTo: "all-students",
+    openTo: "senators-only",
     meets: "TODO: confirm meeting time",
     contact: "sgarv@montgomerycollege.edu",
     color: "orange",
-    pills: ["Comms", "Open to all"],
+    pills: ["Comms"],
     responsibilities: [
       "Run SGA's Instagram, TikTok, and X accounts",
       "Design flyers and digital graphics for SGA and SAB events",
@@ -138,7 +138,7 @@ Open to all students. Designers, photographers, video editors, and anyone who li
       "Photograph and recap SGA events",
     ],
     howToJoin:
-      "Open to any Rockville student. Come to a Monday open meeting and ask for Public Outreach, or DM the SGA Instagram.",
+      "Senators only. Become a Senator-at-Large and ask for Public Outreach. Tips and event photos are always welcome by DM.",
     draft: true,
   },
   {
@@ -157,7 +157,7 @@ Applications are accepted on an ongoing basis, so you can join any time during t
     meets: "TODO: confirm SAB meeting time",
     contact: "RVSAB@montgomerycollege.edu",
     color: "blue",
-    pills: ["Events", "Open to all", "Rolling applications"],
+    pills: ["Events", "Open to all students", "Rolling applications"],
     responsibilities: [
       "Plan and promote social, cultural, recreational, and educational programs on campus",
       "Represent the diverse interests of the student body in programming decisions",
@@ -183,7 +183,7 @@ Its job is to make sure non-credit students are represented when decisions are m
 
 If you are a WDCE student with a concern, or a credit student who wants to help bridge the gap, this committee is the place to start.`,
     category: "advocacy",
-    openTo: "all-students",
+    openTo: "senators-only",
     meets: "TODO: confirm meeting time",
     contact: "sgarv@montgomerycollege.edu",
     color: "green",
@@ -195,7 +195,7 @@ If you are a WDCE student with a concern, or a credit student who wants to help 
       "Build awareness of SGA among WDCE programs",
     ],
     howToJoin:
-      "TODO: confirm whether the WDCE Committee is open to all students or senators only.",
+      "Senators only. Become a Senator-at-Large to serve. WDCE students with a concern can reach the committee through the contact form.",
     draft: true,
   },
 ];

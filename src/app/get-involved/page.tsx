@@ -17,7 +17,7 @@ import { isTodo } from "@/lib/todo";
 export const metadata: Metadata = {
   title: "Get Involved",
   description:
-    "How to become a Senator-at-Large, join the Student Activities Board, join an open committee, or just attend a Monday open meeting.",
+    "How to become a Senator-at-Large, join the Student Activities Board, or just attend an open meeting.",
 };
 
 const steps = [
@@ -40,7 +40,7 @@ const steps = [
 ];
 
 export default function GetInvolvedPage() {
-  const open = committees.filter((c) => c.openTo === "all-students" && c.slug !== "sab");
+  const senatorCommittees = committees.filter((c) => c.openTo === "senators-only");
   const sab = committees.find((c) => c.slug === "sab");
 
   return (
@@ -54,7 +54,6 @@ export default function GetInvolvedPage() {
           {[
             ["#senator", "Senator-at-Large"],
             ["#sab", "Student Activities Board"],
-            ["#committees", "Open committees"],
             ["#meetings", "Open meetings"],
           ].map(([href, label]) => (
             <a
@@ -155,7 +154,7 @@ export default function GetInvolvedPage() {
               className="mb-6"
             />
             <div className="flex flex-wrap gap-2">
-              <Pill tone="green">Open to all</Pill>
+              <Pill tone="green">Open to all students</Pill>
               <Pill tone="orange">Rolling applications</Pill>
               <Pill tone="blue">Events</Pill>
             </div>
@@ -220,20 +219,20 @@ export default function GetInvolvedPage() {
         </Container>
       </section>
 
-      {/* Open committees */}
+      {/* Committees are where senators work */}
       <section
         id="committees"
         className="scroll-mt-24 border-y border-line bg-surface/50 py-20"
       >
         <Container>
           <SectionHeading
-            eyebrow="Path 3"
-            title="Join an open committee"
-            description="These committees take any Rockville student. No GPA requirement, no election. Pick one and come to a meeting."
+            eyebrow="Where senators work"
+            title="Six committees. One way in."
+            description="Budget Panel, Community Service, Ethics, Food, Public Outreach, and WDCE are staffed by senators. If one of these is the work you want to do, run for a Senator-at-Large seat and ask for it when you are sworn in."
             action={{ label: "All committees", href: "/committees" }}
           />
-          <ul className="grid gap-4 md:grid-cols-3">
-            {open.map((c) => (
+          <ul className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {senatorCommittees.map((c) => (
               <li key={c.slug}>
                 <Link
                   href={`/committees/${c.slug}`}
@@ -246,7 +245,7 @@ export default function GetInvolvedPage() {
                       {c.tagline}
                     </p>
                   </div>
-                  <span className="mt-auto inline-flex items-center gap-1 text-sm font-medium text-mc-purple">
+                  <span className="mt-auto inline-flex items-center gap-1 text-sm font-medium text-ink">
                     Learn more{" "}
                     <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
                   </span>
@@ -262,7 +261,7 @@ export default function GetInvolvedPage() {
         <Container className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <SectionHeading
-              eyebrow="Path 0"
+              eyebrow="Path 3"
               title="Just come to a meeting."
               description={`Open meetings are every other ${site.meeting.day}, ${site.meeting.time}, in the ${site.meeting.location}. ${site.meeting.note} You can sit in the back, or you can speak during open floor.`}
               className="mb-6"

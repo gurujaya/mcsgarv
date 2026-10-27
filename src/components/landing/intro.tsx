@@ -5,7 +5,7 @@ import { Reveal, RevealItem } from "@/components/primitives/reveal";
 
 const stats = [
   { value: "15,000+", label: "Students represented every semester" },
-  { value: String(committees.length), label: "Committees, most open to any student" },
+  { value: String(committees.length), label: "Committees, staffed by senators" },
   { value: String(elected.length), label: "Elected officers and senators" },
 ];
 

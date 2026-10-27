@@ -339,7 +339,7 @@ function NavEntry({
               <div className="flex flex-col justify-between border-l border-line bg-surface p-5">
                 <p className="font-mono text-[11px] leading-[1.7] tracking-[0.08em] text-ink-muted uppercase">
                   {item.label === "Committees"
-                    ? `${item.children.length} committees · most open to any student`
+                    ? `${item.children.length} committees · staffed by senators · SAB open to all`
                     : "Funding, forms, answers, and how to reach us"}
                 </p>
                 <Link

@@ -17,7 +17,8 @@ export function CommitteesIndex() {
               Where the work happens.
             </h2>
             <p className="mt-5 max-w-[34ch] text-[15px] leading-[1.6] text-ink-muted">
-              Every senator serves on at least one. Most take any student who shows up.
+              Every senator serves on at least one. The Student Activities Board takes any
+              student; the rest are where senators do their work.
             </p>
             <Link
               href="/committees"

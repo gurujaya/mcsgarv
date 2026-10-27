@@ -132,89 +132,67 @@ export const people: Person[] = [
     committees: ["public-outreach"],
   },
 
-  // On the MC page but NOT in the SGA group as of 2026-10-27.
-  // TODO: confirm Gabriele Pastore is still serving; remove if not.
-  {
-    slug: "gabriele-pastore",
-    name: "Gabriele Pastore",
-    role: "Senator-at-Large",
-    committees: [],
-    unconfirmed: true,
-  },
-
-  // In the SGA group (2026-10-27) but not on the MC page. Listed as
-  // Senators-at-Large on the assumption they were sworn in after the page was
-  // updated. TODO: confirm each role; any Student Life staff should become
-  // role: "Advisor" or be removed.
+  // In the SGA group but not yet on the MC page (sworn in after it was updated).
+  // Confirmed by Guru 2026-10-27: 30 senators and officers in total.
   {
     slug: "nila-amin",
     name: "Nila Amin",
     role: "Senator-at-Large",
     committees: [],
-    unconfirmed: true,
   },
   {
     slug: "advika-babu",
     name: "Advika Babu",
     role: "Senator-at-Large",
     committees: [],
-    unconfirmed: true,
   },
   {
     slug: "ana-bocachica",
     name: "Ana Bocachica",
     role: "Senator-at-Large",
     committees: [],
-    unconfirmed: true,
   },
   {
     slug: "nourhayet-chaherli",
     name: "Nourhayet Chaherli",
     role: "Senator-at-Large",
     committees: [],
-    unconfirmed: true,
   },
   {
     slug: "sahasra-chittampelli",
     name: "Sahasra Chittampelli",
     role: "Senator-at-Large",
     committees: [],
-    unconfirmed: true,
   },
   {
     slug: "samantha-melton",
     name: "Samantha Melton",
     role: "Senator-at-Large",
     committees: [],
-    unconfirmed: true,
   },
   {
     slug: "dana-narh",
     name: "Dana Narh",
     role: "Senator-at-Large",
     committees: [],
-    unconfirmed: true,
   },
   {
     slug: "khadija-saleck-ould-belkhair",
     name: "Khadija Saleck Ould Belkhair",
     role: "Senator-at-Large",
     committees: [],
-    unconfirmed: true,
   },
   {
     slug: "douglas-salerno",
     name: "Douglas Salerno",
     role: "Senator-at-Large",
     committees: [],
-    unconfirmed: true,
   },
   {
     slug: "eden-tenagashaw",
     name: "Eden Tenagashaw",
     role: "Senator-at-Large",
     committees: [],
-    unconfirmed: true,
   },
 
   // Advisor: Director of Student Life and an owner of the SGA group.

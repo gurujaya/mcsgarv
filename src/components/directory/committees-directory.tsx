@@ -96,7 +96,7 @@ function CommitteesDirectoryView({ s }: { s: DirectoryState<(typeof KEYS)[number
             <Pill
               key={p}
               tone={
-                p === "Open to all"
+                p === "Open to all students"
                   ? "green"
                   : p === "Rolling applications"
                     ? "orange"
