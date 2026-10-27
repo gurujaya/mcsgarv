@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { PageHeader } from "@/components/page-header";
-import { Container } from "@/components/primitives/container";
-import { SectionHeading } from "@/components/primitives/section-heading";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Reveal, RevealItem } from "@/components/primitives/reveal";
-import { CTA } from "@/components/primitives/cta";
+import { Todo } from "@/components/primitives/todo-chip";
+import { committees } from "@/content/committees";
+import { elected } from "@/content/people";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -32,6 +33,44 @@ const responsibilities = [
   },
 ];
 
+const glance = [
+  ["Campus", "Rockville, the largest of MC’s three"],
+  ["Students represented", "About 15,000 per semester"],
+  ["Elected members", `${elected.length} officers and senators`],
+  [
+    "Committees",
+    `${committees.length}, ${committees.filter((c) => c.openTo === "all-students").length} open to any student`,
+  ],
+  ["Open meetings", `${site.meeting.day}s, ${site.meeting.time}`],
+  ["Office", `${site.office.room}, ${site.office.within}`],
+  ["Advising office", `${site.studentLife.name}, ${site.studentLife.room}`],
+  ["Term", site.term],
+];
+
+const structure = [
+  {
+    level: "01",
+    name: "Montgomery College leadership",
+    note: "Campus and College administration",
+  },
+  {
+    level: "02",
+    name: "Office of Student Life",
+    note: `Advises SGA · Director ${site.studentLife.director}`,
+  },
+  {
+    level: "03",
+    name: "Student Government Association",
+    note: "Elected officers and senators-at-large",
+  },
+  {
+    level: "04",
+    name: "Committees and the Student Activities Board",
+    note: "Where the work gets done",
+  },
+  { level: "05", name: "130+ clubs and 15,000 students", note: "Who all of it is for" },
+];
+
 const values = [
   "Equity and inclusion",
   "Excellence",
@@ -42,169 +81,270 @@ const values = [
   "Respect",
 ];
 
+function CornerMarks() {
+  const c = "absolute size-3 border-ink/35";
+  return (
+    <>
+      <span aria-hidden className={`${c} -top-px -left-px border-t border-l`} />
+      <span aria-hidden className={`${c} -top-px -right-px border-t border-r`} />
+      <span aria-hidden className={`${c} -bottom-px -left-px border-b border-l`} />
+      <span aria-hidden className={`${c} -right-px -bottom-px border-r border-b`} />
+    </>
+  );
+}
+
+const Eyebrow = ({ children }: { children: React.ReactNode }) => (
+  <p className="font-mono text-[11px] tracking-[0.14em] text-ink-muted uppercase">
+    {children}
+  </p>
+);
+
 export default function AboutPage() {
   return (
     <>
-      <PageHeader
-        eyebrow="About SGA"
-        title="Students, elected by students, for students."
-        description="The Student Government Association is the official representative body for all students on the Montgomery College Rockville Campus. It represents student interests, works closely with College leadership, and advocates for a positive campus experience."
-      />
-
-      <Container className="grid gap-12 pt-12 md:pt-16 lg:grid-cols-12">
-        <div className="prose-sga lg:col-span-7">
-          <h2>Mission</h2>
-          <p>
-            SGA strives to act as the conduit through which students communicate openly
-            with the administration, to facilitate events beneficial to the student body,
-            and to provide a forum for the exchange of student ideas and opinions.
-          </p>
-          <p>
-            Put simply: if you have an idea or a problem that affects students on this
-            campus, SGA exists to make sure the people who can act on it hear it.
-          </p>
-
-          <h2>What we are responsible for</h2>
-          <p>
-            Four responsibilities define the job. Everything else is in service of these.
-          </p>
-        </div>
-        <aside className="lg:col-span-5">
-          <div className="sticky top-24 rounded-card border border-line bg-surface p-6">
-            <h2 className="eyebrow">At a glance</h2>
-            <dl className="mt-4 space-y-3 text-sm">
-              <div className="flex justify-between gap-4 border-b border-line pb-3">
-                <dt className="text-ink-muted">Campus</dt>
-                <dd className="text-right text-ink">Rockville (largest of MC’s three)</dd>
-              </div>
-              <div className="flex justify-between gap-4 border-b border-line pb-3">
-                <dt className="text-ink-muted">Students represented</dt>
-                <dd className="text-right text-ink">~15,000 per semester</dd>
-              </div>
-              <div className="flex justify-between gap-4 border-b border-line pb-3">
-                <dt className="text-ink-muted">Open meetings</dt>
-                <dd className="text-right text-ink">
-                  {site.meeting.day}s, {site.meeting.time}
-                </dd>
-              </div>
-              <div className="flex justify-between gap-4 border-b border-line pb-3">
-                <dt className="text-ink-muted">Office</dt>
-                <dd className="text-right text-ink">{site.office.room}, Student Life</dd>
-              </div>
-              <div className="flex justify-between gap-4">
-                <dt className="text-ink-muted">Term</dt>
-                <dd className="text-right text-ink">{site.term}</dd>
-              </div>
-            </dl>
-            <div className="mt-6 flex flex-col gap-2">
-              <CTA href="/senators" size="sm">
-                Meet the senators
-              </CTA>
-              <CTA href="/constitution" variant="ghost" size="sm">
-                Read the constitution
-              </CTA>
+      {/* Header: statement + framed photo with mono metadata */}
+      <section className="border-b border-line bg-bg">
+        <div className="mx-auto grid max-w-[1400px] gap-14 px-6 pt-32 pb-20 md:px-10 md:pt-40 md:pb-28 lg:grid-cols-12 lg:gap-10">
+          <div className="flex flex-col justify-end lg:col-span-7">
+            <Eyebrow>About SGA</Eyebrow>
+            <h1 className="serif-display mt-6 max-w-[14ch] text-[48px] md:text-[88px]">
+              Students, elected by students, for students.
+            </h1>
+            <p className="mt-8 max-w-[52ch] text-[17px] leading-[1.55] text-ink-muted md:text-[19px]">
+              The Student Government Association is the official representative body for
+              all students on the Montgomery College Rockville Campus. It represents
+              student interests, works closely with College leadership, and advocates for
+              a positive campus experience.
+            </p>
+          </div>
+          <figure className="lg:col-span-5">
+            <div className="flex items-center justify-between border-t border-line pt-3 font-mono text-[11px] tracking-[0.08em] text-ink-muted uppercase">
+              <span>Rockville SGA / {site.term}</span>
+              <span>Fig. 01</span>
             </div>
-          </div>
-        </aside>
-      </Container>
-
-      <Container className="mt-4">
-        <Reveal as="ol" className="grid gap-4 md:grid-cols-2">
-          {responsibilities.map((r, i) => (
-            <RevealItem
-              key={r.title}
-              as="li"
-              className="rounded-card border border-line bg-surface p-6"
-            >
-              <span className="font-mono text-[12px] tracking-[0.08em] text-ink-muted uppercase">
-                0{i + 1}
-              </span>
-              <h3 className="mt-3 text-lg font-medium text-ink">{r.title}</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-ink-muted">{r.body}</p>
-            </RevealItem>
-          ))}
-        </Reveal>
-      </Container>
-
-      <section className="mt-24 border-y border-line bg-surface/50 py-20">
-        <Container className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <SectionHeading
-              eyebrow="Governance"
-              title="Where SGA sits"
-              description="SGA is student-run and student-elected. It is not part of the College administration, but it is the formal channel between students and the people who run the College."
-              className="mb-0"
-            />
-          </div>
-          <div className="prose-sga lg:col-span-7">
-            <p>
-              Montgomery College has three campuses: Germantown, Rockville, and Takoma
-              Park/Silver Spring. Each has its own Student Government Association.
-              Rockville is the largest campus, with about 15,000 students per semester,
-              which makes this SGA the largest student body on the College’s three
-              campuses.
-            </p>
-            <p>
-              SGA works day to day with the{" "}
-              <a href={site.studentLife.url} target="_blank" rel="noopener noreferrer">
-                Office of Student Life
-              </a>{" "}
-              (SV 104, directed by {site.studentLife.director}), which advises SGA,
-              processes approved club funding, and manages campus programming. Elected
-              senators and officers meet weekly, serve on committees, and bring student
-              concerns to campus and College leadership.
-            </p>
-            <p>
-              Under the MC Club Handbook, SGA is also the formal channel through which
-              recognized clubs propose recommendations and initiatives to the College. If
-              your club wants something changed, SGA is how the request moves.
-            </p>
-            <p>
-              Once a year, Rockville students join peers from all 16 Maryland community
-              colleges at <Link href="/events?type=advocacy">Student Advocacy Day</Link>{" "}
-              in Annapolis to meet state legislators about tuition and campus investment.
-            </p>
-          </div>
-        </Container>
+            <div className="relative mt-4 aspect-[4/5] border border-line bg-surface p-3">
+              <CornerMarks />
+              <div className="relative size-full overflow-hidden">
+                <Image
+                  src="/images/sga-group.jpg"
+                  alt="Rockville SGA senators and officers on a staircase before an advocacy event"
+                  fill
+                  sizes="(min-width: 1024px) 520px, 100vw"
+                  className="object-cover grayscale-[20%]"
+                />
+              </div>
+            </div>
+            <figcaption className="mt-3 font-mono text-[11px] tracking-[0.04em] text-ink-muted uppercase">
+              <Todo
+                value="TODO: add where and when this photo was taken"
+                fallback="Senators and officers of the Rockville SGA"
+              />
+            </figcaption>
+          </figure>
+        </div>
       </section>
 
-      <Container className="py-20">
-        <SectionHeading
-          eyebrow="Values"
-          title="We run on MC’s core values."
-          description="Every SGA decision, event, and campaign should be defensible against these seven."
-        />
-        <ul className="flex flex-wrap gap-2.5">
-          {values.map((v) => (
-            <li
-              key={v}
-              className="rounded-md border border-line bg-surface px-3.5 py-2 text-[13px] text-ink"
-            >
-              {v}
-            </li>
-          ))}
-        </ul>
-      </Container>
-
-      <Container className="pb-8">
-        <div className="rounded-card bg-mc-purple px-8 py-12 text-white md:px-12">
-          <h2 className="display max-w-[22ch] text-[30px] md:text-4xl md:text-[36px]">
-            History is still being written. Help write the {site.term} chapter.
-          </h2>
-          <p className="mt-4 max-w-[55ch] text-white/80">
-            SGA Rockville is rebuilding its public record. If you served in a past SGA and
-            have photos, minutes, or stories, we want them for this page.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <CTA href={site.applyUrl} variant="accent">
-              Apply to be a Senator
-            </CTA>
-            <CTA href="/contact" className="bg-white/10 text-white hover:bg-white/20">
-              Share SGA history
-            </CTA>
+      {/* Mission: serif statement, two-column body */}
+      <section className="bg-surface">
+        <div className="mx-auto grid max-w-[1400px] gap-12 px-6 py-24 md:px-10 md:py-32 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <Eyebrow>Mission</Eyebrow>
+            <h2 className="serif-display mt-5 text-[36px] md:text-[52px]">
+              The conduit between students and the people who run the College.
+            </h2>
+          </div>
+          <div className="grid gap-8 text-[16px] leading-[1.65] text-ink-muted sm:grid-cols-2 lg:col-span-7 lg:pt-2">
+            <p>
+              SGA strives to act as the conduit through which students communicate openly
+              with the administration, to facilitate events beneficial to the student
+              body, and to provide a forum for the exchange of student ideas and opinions.
+            </p>
+            <p>
+              Put simply: if you have an idea or a problem that affects students on this
+              campus, SGA exists to make sure the people who can act on it hear it. Under
+              the MC Club Handbook, it is also the formal channel through which recognized
+              clubs propose recommendations and initiatives to the College.
+            </p>
           </div>
         </div>
-      </Container>
+      </section>
+
+      {/* Responsibilities: numbered hairline list */}
+      <section className="border-y border-line bg-bg">
+        <div className="mx-auto grid max-w-[1400px] gap-12 px-6 py-24 md:px-10 md:py-32 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <div className="lg:sticky lg:top-28">
+              <Eyebrow>Responsibilities</Eyebrow>
+              <h2 className="serif-display mt-5 text-[36px] md:text-[48px]">
+                Four jobs define the role.
+              </h2>
+              <p className="mt-5 max-w-[34ch] text-[15px] leading-[1.6] text-ink-muted">
+                Everything else SGA does is in service of these.
+              </p>
+            </div>
+          </div>
+          <Reveal as="ol" className="border-t border-line lg:col-span-8">
+            {responsibilities.map((r, i) => (
+              <RevealItem
+                key={r.title}
+                as="li"
+                className="grid grid-cols-[3rem_1fr] gap-4 border-b border-line py-7 md:grid-cols-[5rem_1fr] md:py-9"
+              >
+                <span className="font-mono text-[12px] text-ink-faint">0{i + 1}</span>
+                <div>
+                  <h3 className="font-serif text-[26px] leading-none tracking-[-0.01em] text-ink md:text-[32px]">
+                    {r.title}
+                  </h3>
+                  <p className="mt-3 max-w-[58ch] text-[15px] leading-[1.65] text-ink-muted">
+                    {r.body}
+                  </p>
+                </div>
+              </RevealItem>
+            ))}
+          </Reveal>
+        </div>
+      </section>
+
+      {/* At a glance + where SGA sits: two tables */}
+      <section className="bg-surface">
+        <div className="mx-auto grid max-w-[1400px] gap-16 px-6 py-24 md:px-10 md:py-32 lg:grid-cols-2 lg:gap-12">
+          <div>
+            <Eyebrow>At a glance</Eyebrow>
+            <h2 className="serif-display mt-5 text-[36px] md:text-[44px]">The facts.</h2>
+            <dl className="mt-10 border-t border-line">
+              {glance.map(([k, v]) => (
+                <div
+                  key={k}
+                  className="grid grid-cols-[1fr_1.4fr] gap-6 border-b border-line py-4"
+                >
+                  <dt className="font-mono text-[11px] tracking-[0.06em] text-ink-muted uppercase">
+                    {k}
+                  </dt>
+                  <dd className="text-[15px] text-ink">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <div>
+            <Eyebrow>Governance</Eyebrow>
+            <h2 className="serif-display mt-5 text-[36px] md:text-[44px]">
+              Where SGA sits.
+            </h2>
+            <ol className="mt-10 border-t border-line">
+              {structure.map((s, i) => (
+                <li
+                  key={s.level}
+                  className={`grid grid-cols-[3rem_1fr] gap-4 border-b border-line py-4 ${i === 2 ? "bg-bg" : ""}`}
+                >
+                  <span className="pl-1 font-mono text-[11px] text-ink-faint">
+                    {s.level}
+                  </span>
+                  <div className="pr-2">
+                    <p
+                      className={`text-[15px] ${i === 2 ? "font-medium text-ink" : "text-ink"}`}
+                    >
+                      {s.name}
+                    </p>
+                    <p className="mt-0.5 font-mono text-[11px] tracking-[0.04em] text-ink-muted uppercase">
+                      {s.note}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <p className="mt-6 max-w-[48ch] text-[14px] leading-[1.6] text-ink-muted">
+              SGA is run by students and elected by students. It is not part of the
+              administration, but it is the formal channel between students and the people
+              who run the College. Each of MC’s three campuses has its own SGA; Rockville
+              is the largest. Once a year, Rockville students join peers from all 16
+              Maryland community colleges at{" "}
+              <Link
+                href="/events?type=advocacy"
+                className="text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink"
+              >
+                Student Advocacy Day
+              </Link>{" "}
+              in Annapolis.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Values: numbered cells */}
+      <section className="border-y border-line bg-bg">
+        <div className="mx-auto max-w-[1400px] px-6 py-24 md:px-10 md:py-32">
+          <div className="grid gap-8 md:grid-cols-12 md:items-end">
+            <div className="md:col-span-7">
+              <Eyebrow>Values</Eyebrow>
+              <h2 className="serif-display mt-5 text-[36px] md:text-[52px]">
+                We run on MC’s core values.
+              </h2>
+            </div>
+            <p className="max-w-[40ch] text-[15px] leading-[1.6] text-ink-muted md:col-span-5">
+              Every SGA decision, event, and campaign should be defensible against these
+              seven.
+            </p>
+          </div>
+          <ul className="mt-12 grid border-t border-l border-line bg-surface sm:grid-cols-2 lg:grid-cols-4">
+            {values.map((v, i) => (
+              <li
+                key={v}
+                className="flex flex-col gap-6 border-r border-b border-line p-6"
+              >
+                <span className="font-mono text-[11px] text-ink-faint">0{i + 1}</span>
+                <span className="font-serif text-[24px] leading-none tracking-[-0.01em] text-ink">
+                  {v}
+                </span>
+              </li>
+            ))}
+            <li className="flex flex-col justify-between gap-6 border-r border-b border-line bg-bg p-6">
+              <span className="font-mono text-[11px] text-ink-faint">Source</span>
+              <a
+                href="https://www.montgomerycollege.edu/about-mc/index.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 font-mono text-[11px] tracking-[0.08em] text-ink uppercase"
+              >
+                MC core values <ArrowUpRight className="size-3.5" aria-hidden />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Closing dark band */}
+      <section className="bg-ink text-white">
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-10 px-6 py-24 md:flex-row md:items-end md:justify-between md:px-10 md:py-32">
+          <div>
+            <p className="font-mono text-[11px] tracking-[0.14em] text-white/60 uppercase">
+              History
+            </p>
+            <h2 className="serif-display mt-5 max-w-[18ch] text-[40px] text-white md:text-[64px]">
+              The record is still being written. Help write the {site.term} chapter.
+            </h2>
+          </div>
+          <div className="flex flex-col gap-4 md:items-end">
+            <p className="max-w-[40ch] text-[15px] leading-[1.6] text-white/70 md:text-right">
+              SGA Rockville is rebuilding its public record. If you served in a past SGA
+              and have photos, minutes, or stories, we want them for this page.
+            </p>
+            <div className="flex gap-3">
+              <Link
+                href={site.applyUrl}
+                className="mono-button bg-white text-ink hover:bg-white/90"
+              >
+                Apply to serve <ArrowRight className="size-3.5" aria-hidden />
+              </Link>
+              <Link
+                href="/contact"
+                className="mono-button border border-white/30 text-white hover:border-white/70"
+              >
+                Share SGA history
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
