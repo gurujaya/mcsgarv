@@ -82,7 +82,7 @@ export function buildSearchIndex(): SearchItem[] {
       kind: "person",
       title: p.name,
       subtitle: p.role,
-      href: `/senators?q=${encodeURIComponent(p.name.split(" ")[0] ?? p.name)}`,
+      href: `/senators#${p.slug}`,
       keywords: p.committees.join(" "),
     })),
     ...events

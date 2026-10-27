@@ -7,8 +7,8 @@ import { isTodo } from "@/lib/todo";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-24 border-t border-line">
-      <div className="grid gap-12 px-6 py-16 md:px-10 lg:grid-cols-12">
+    <footer className="border-t border-line">
+      <div className="mx-auto grid max-w-[1400px] gap-12 px-6 py-16 md:px-10 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <Link href="/" className="inline-flex items-center gap-2.5">
             <Seal size={26} />
@@ -84,7 +84,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-line">
-        <div className="flex flex-col gap-2 px-6 py-5 font-mono text-[11px] tracking-[0.02em] text-ink-muted uppercase sm:flex-row sm:items-center sm:justify-between md:px-10">
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-2 px-6 py-5 font-mono text-[11px] tracking-[0.02em] text-ink-muted uppercase sm:flex-row sm:items-center sm:justify-between md:px-10">
           <p>© {new Date().getFullYear()} Montgomery College Rockville SGA</p>
           <p>
             Student-run ·{" "}

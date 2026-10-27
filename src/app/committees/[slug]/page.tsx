@@ -49,7 +49,7 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
     <>
       <Container
         as="header"
-        className="border-b border-line pt-10 pb-10 md:pt-14 md:pb-12"
+        className="border-b border-line pt-26 pb-10 md:pt-30 md:pb-12"
       >
         <Link
           href="/committees"

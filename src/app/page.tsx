@@ -1,12 +1,9 @@
-import { Hero } from "@/components/home/hero";
-import { StatStrip } from "@/components/home/stat-strip";
-import { WhatWeDo } from "@/components/home/what-we-do";
-import { CommitteesPreview } from "@/components/home/committees-preview";
-import { UpcomingEvents } from "@/components/home/upcoming-events";
-import { MeetSenators } from "@/components/home/meet-senators";
-import { GetInvolvedPaths } from "@/components/home/get-involved-paths";
-import { committees } from "@/content/committees";
-import { elected } from "@/content/people";
+import { Hero } from "@/components/landing/hero";
+import { Intro } from "@/components/landing/intro";
+import { WhatWeDo } from "@/components/landing/what-we-do";
+import { PhotoBand } from "@/components/landing/photo-band";
+import { CommitteesIndex } from "@/components/landing/committees-index";
+import { NextEvents } from "@/components/landing/next-events";
 import { site } from "@/content/site";
 
 // Upcoming events are computed from the current date at render time; refresh hourly.
@@ -16,19 +13,11 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <StatStrip
-        stats={[
-          { value: 15000, suffix: "+", label: "students represented" },
-          { value: committees.length, label: "committees" },
-          { value: elected.length, label: "senators & officers" },
-          { value: site.meeting.day, label: `open meetings, ${site.meeting.time}` },
-        ]}
-      />
+      <Intro />
       <WhatWeDo />
-      <CommitteesPreview />
-      <UpcomingEvents />
-      <MeetSenators />
-      <GetInvolvedPaths />
+      <CommitteesIndex />
+      <PhotoBand />
+      <NextEvents />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

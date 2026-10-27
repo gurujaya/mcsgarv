@@ -36,11 +36,11 @@
   /* Site-level tokens. decision: near-monochrome surfaces. The ink is a
      purple-black so the page still reads as MC's without tinting every surface.
      Hairlines are the ink at low alpha, which keeps them consistent on any bg. */
-  --color-bg: #fcfcfd;
+  --color-bg: #f7f5f1;
   --color-surface: #ffffff;
   --color-line: color-mix(in srgb, #0f0b14 10%, transparent);
   --color-line-strong: color-mix(in srgb, #0f0b14 22%, transparent);
-  --color-ink: #0f0b14;
+  --color-ink: #16111c;
   --color-ink-muted: #5f5a66;
   --color-ink-faint: #8a8691;
   --color-todo: #b45309; /* amber "Needs content" chip, dev only */
@@ -49,7 +49,7 @@
   --radius-card: 8px;
   --radius-pill: 999px;
 
-  --container-site: 1320px;
+  --container-site: 1400px;
 
   --tracking-display: -0.035em;
 }
@@ -59,6 +59,7 @@
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
 
   /* shadcn/ui semantic tokens → MC brand */
   --color-background: var(--background);
@@ -104,7 +105,7 @@
 /* Light mode only for v1 (MC brand is light). Dark values can be added under
    `.dark` later; every component reads semantic tokens, not raw hex. */
 :root {
-  --background: #fcfcfd;
+  --background: #f7f5f1;
   --foreground: #0f0b14;
   --card: #ffffff;
   --card-foreground: #0f0b14;
@@ -128,7 +129,7 @@
   --chart-4: #28a689;
   --chart-5: #ff5e3a;
   --radius: 0.5rem;
-  --sidebar: #fcfcfd;
+  --sidebar: #f7f5f1;
   --sidebar-foreground: #0f0b14;
   --sidebar-primary: #51237f;
   --sidebar-primary-foreground: #ffffff;
@@ -180,15 +181,9 @@
 }
 
 @layer components {
-  /* The page frame: content column with hairline rails on large screens,
-     the structural lines you see on Payload / Aimdoc. */
+  /* The page frame: a centered content column. Sections may break out of it. */
   .site-frame {
-    @apply mx-auto w-full max-w-site;
-  }
-  @media (min-width: 1024px) {
-    .site-frame {
-      border-inline: 1px solid var(--color-line);
-    }
+    @apply mx-auto w-full;
   }
 
   /* Type roles */
@@ -198,6 +193,19 @@
   .display {
     @apply font-medium tracking-display text-ink;
     line-height: 1.02;
+  }
+  /* Editorial serif display: single weight, slight negative tracking. */
+  .serif-display {
+    @apply font-serif font-normal tracking-[-0.02em] text-ink;
+    line-height: 1;
+    text-wrap: balance;
+  }
+  .serif-lede {
+    @apply font-serif font-normal tracking-[-0.01em] text-ink-muted;
+    line-height: 1.15;
+  }
+  .mono-button {
+    @apply inline-flex h-10 items-center justify-center gap-2 rounded-[5px] px-4 font-mono text-[12px] tracking-[0.08em] uppercase transition-colors duration-200;
   }
   .lede {
     @apply text-[17px] leading-[1.55] text-ink-muted;

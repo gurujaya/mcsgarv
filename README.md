@@ -1,6 +1,6 @@
 # SGA Rockville — Montgomery College Rockville Student Government Association
 
-The official website for the Montgomery College Rockville Campus SGA. Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, shadcn/ui, and motion.dev. No CMS: every piece of content is a typed TypeScript file a student officer can edit in a text editor.
+The official website for the Montgomery College Rockville Campus SGA. Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, shadcn/ui, motion.dev, and a three.js shader hero. No CMS: every piece of content is a typed TypeScript file a student officer can edit in a text editor.
 
 Live site: set `NEXT_PUBLIC_SITE_URL` (see below). Official MC page: <https://www.montgomerycollege.edu/life-at-mc/student-life/student-government-association/rockville.html>
 
@@ -112,7 +112,7 @@ Everything is in `src/content/site.ts`: email, phone, office room, meeting day/t
 
 ## Swap the hero photo
 
-Replace `public/images/sga-group.jpg` with any portrait photo (4:5 works best, at least 1200px tall). Update the `alt` text and the caption `TODO` in `src/components/home/hero.tsx`.
+Replace `public/images/sga-group-wide.jpg` with a landscape photo (16:9, at least 1600px wide) for the band on the home page, and update the `alt` text in `src/components/landing/photo-band.tsx`.
 
 ## Forms (contact, interest, funding)
 
@@ -132,11 +132,13 @@ In development with no endpoint set, submissions are printed to the terminal. In
 
 The look is deliberately restrained: one typeface, near-monochrome surfaces, hairline rules instead of cards and tints, and MC purple used for one action per screen. Everything is defined once in `src/app/globals.css`:
 
-- **Type:** Geist (UI, body, display) and Geist Mono (eyebrows, labels, metadata), loaded via `next/font/google`. Role classes: `.display` (tight-tracked headlines), `.lede` (intro paragraphs), `.eyebrow` (mono caps labels). Note: this departs from MC's Roboto + Crimson Text pairing; swap the two font imports in `src/app/layout.tsx` and the `--font-*` lines in `globals.css` to revert.
-- **Color:** page `#FCFCFD`, ink `#0F0B14` (a purple-black), muted ink `#5F5A66`, hairlines are ink at 10% and 22% alpha. MC purple `#51237F` is the only button fill. The MC accents (orange, blue, green) appear only as 6px dots on category chips and the "Today" badge.
+- **Type:** Instrument Serif for display headlines (one weight, `.serif-display` / `.serif-lede`), Geist for UI and body (`.display`, `.lede`), Geist Mono for eyebrows, labels, and the `.mono-button` style. All load via `next/font/google`. Note: this departs from MC's Roboto + Crimson Text pairing; swap the font imports in `src/app/layout.tsx` and the `--font-*` lines in `globals.css` to revert.
+- **Color:** warm paper page `#F7F5F1`, white surfaces, ink `#16111C` (a purple-black), muted ink `#5F5A66`, hairlines are ink at 10% and 22% alpha. MC purple `#51237F` is the only button fill. The MC accents (orange, blue, green) appear only as 6px dots on category chips and the "Today" badge.
 - **Shape:** 8px radius on cards and images, 6px on controls, 4px on chips. No shadows, no hover lift.
 - **Layout:** a 1320px `.site-frame` with vertical hairline rails on large screens. Sections are separated by full-width rules; grids of cells share borders instead of gaps.
-- **Hero photo:** `public/images/sga-group.jpg`. Replace the file to change it; keep a 4:5 portrait crop. Set its caption in `src/components/home/hero.tsx`.
+- **Landing page:** a warm-paper hero whose only visual is the group photo rendered as an ink halftone dot screen through a small three.js shader (`src/components/landing/hero-shader.tsx`, React Three Fiber, loaded at idle after the page is interactive, with a masked grayscale photo as the fallback when WebGL or motion is unavailable). Then intro + stats, the "Four jobs" cells, a committee index, the full-bleed photo band, and the next four events. Each section is one file in `src/components/landing/`.
+- **Photos:** `public/images/sga-group.jpg` (portrait) and `sga-group-wide.jpg` (16:9 crop used in the photo band). Replace both to change the photo.
+- **Nav:** `src/components/layout/nav-links.ts` defines the items. "Committees" and "Resources" are dropdowns; committee entries are generated from `committees.ts`, so new committees appear automatically.
 
 ## Deploy to Vercel
 
@@ -155,7 +157,7 @@ src/
   components/
     directory/         YC-style directory: shell, sidebar filters, rows, URL state
     forms/             react-hook-form + zod forms and the submit helper
-    home/              hero (photo), stats, section components
+    landing/           home page: shader hero, intro, bands, committee index, events
     layout/            header, footer, ⌘K command menu, providers
     primitives/        Container, Pill, SectionHeading, Reveal, Seal, Avatar, CTA
     ui/                shadcn/ui components

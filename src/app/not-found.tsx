@@ -3,7 +3,7 @@ import { CTA } from "@/components/primitives/cta";
 
 export default function NotFound() {
   return (
-    <Container className="flex min-h-[60vh] flex-col items-start justify-center py-24">
+    <Container className="flex min-h-[70vh] flex-col items-start justify-center pt-40 pb-24">
       <p className="eyebrow">404</p>
       <h1 className="display mt-2 text-[44px] text-ink">
         That page isn’t on the agenda.

@@ -22,7 +22,7 @@ export function PageHeader({
       as="header"
       className={cn(
         "border-b border-line",
-        compact ? "pt-12 pb-10 md:pt-16 md:pb-12" : "pt-16 pb-12 md:pt-24 md:pb-16",
+        compact ? "pt-28 pb-10 md:pt-32 md:pb-12" : "pt-32 pb-12 md:pt-40 md:pb-16",
         className,
       )}
     >

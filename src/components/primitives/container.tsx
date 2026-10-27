@@ -10,5 +10,9 @@ export function Container({
   children: React.ReactNode;
   as?: "div" | "section" | "header" | "footer" | "main" | "nav" | "article";
 }) {
-  return <Tag className={cn("w-full px-6 md:px-10", className)}>{children}</Tag>;
+  return (
+    <Tag className={cn("mx-auto w-full max-w-site px-6 md:px-10", className)}>
+      {children}
+    </Tag>
+  );
 }

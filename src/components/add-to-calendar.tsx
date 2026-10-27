@@ -31,10 +31,10 @@ export function AddToCalendar({
         className ??
         "relative z-10 inline-flex h-[22px] items-center gap-1 rounded-[4px] border border-line bg-surface px-1.5 font-mono text-[11px] text-ink-muted transition-colors hover:border-line-strong hover:text-ink"
       }
-      aria-label={`Add ${event.title} to calendar`}
     >
-      <CalendarPlus className="size-3.5" />
+      <CalendarPlus className="size-3.5" aria-hidden />
       .ics
+      <span className="sr-only">, add {event.title} to your calendar</span>
     </button>
   );
 }
