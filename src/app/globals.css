@@ -204,6 +204,29 @@
     @apply font-serif font-normal tracking-[-0.01em] text-ink-muted;
     line-height: 1.15;
   }
+  /* Isometric figure tokens. Add `.iso-dark` on an ancestor for dark bands. */
+  .iso {
+    --iso-stroke: color-mix(in srgb, var(--color-ink) 42%, transparent);
+    --iso-guide: color-mix(in srgb, var(--color-ink) 22%, transparent);
+    --iso-top: var(--color-surface);
+    --iso-right: color-mix(in srgb, var(--color-ink) 5%, var(--color-surface));
+    --iso-front: color-mix(in srgb, var(--color-ink) 9%, var(--color-surface));
+    --iso-stroke-ink: color-mix(in srgb, var(--color-mc-purple) 80%, transparent);
+    --iso-ink-top: color-mix(in srgb, var(--color-mc-purple) 14%, var(--color-surface));
+    --iso-ink-right: color-mix(in srgb, var(--color-mc-purple) 22%, var(--color-surface));
+    --iso-ink-front: color-mix(in srgb, var(--color-mc-purple) 30%, var(--color-surface));
+  }
+  .iso-dark .iso {
+    --iso-stroke: rgba(255, 255, 255, 0.55);
+    --iso-guide: rgba(255, 255, 255, 0.22);
+    --iso-top: #241b2e;
+    --iso-right: #1c1424;
+    --iso-front: #16111c;
+    --iso-stroke-ink: #b79be0;
+    --iso-ink-top: #4a2a70;
+    --iso-ink-right: #3b2159;
+    --iso-ink-front: #2e1847;
+  }
   .mono-button {
     @apply inline-flex h-10 items-center justify-center gap-2 rounded-[5px] px-4 font-mono text-[12px] tracking-[0.08em] whitespace-nowrap uppercase transition-colors duration-200;
   }

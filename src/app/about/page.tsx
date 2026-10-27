@@ -7,6 +7,8 @@ import { Todo } from "@/components/primitives/todo-chip";
 import { committees } from "@/content/committees";
 import { elected } from "@/content/people";
 import { site } from "@/content/site";
+import { ConduitFig, GovernanceFig } from "@/components/diagrams/figures";
+import { MandateScroller } from "@/components/diagrams/mandate-scroller";
 
 export const metadata: Metadata = {
   title: "About",
@@ -41,6 +43,7 @@ function CornerMarks({ light }: { light?: boolean }) {
 const jobs = [
   {
     n: "01",
+    fig: "represent" as const,
     verb: "Represent",
     claim: "Someone elected by students is in the room when decisions get made.",
     how: "SGA represents the student body to the College administration. When campus or College leadership needs to know what students think, SGA is who they ask, and SGA brings what it has heard at open meetings and in committees.",
@@ -48,6 +51,7 @@ const jobs = [
   },
   {
     n: "02",
+    fig: "fund" as const,
     verb: "Fund",
     claim: "Student activity fees are spent on students, by a panel of students.",
     how: "SGA recommends the financial expenditures for student activities. Recognized clubs request money through the Budget Panel, chaired by the Treasurer, which evaluates each request on whether it promotes student engagement and strengthens campus community.",
@@ -55,6 +59,7 @@ const jobs = [
   },
   {
     n: "03",
+    fig: "listen" as const,
     verb: "Listen",
     claim: "Student opinion is collected on purpose, not by accident.",
     how: "SGA secures and invites student opinions regarding official policies and priorities: open floor at every meeting, the contact form, tabling at Club Rush, and committees like Food and WDCE that exist to gather feedback from specific groups.",
@@ -62,6 +67,7 @@ const jobs = [
   },
   {
     n: "04",
+    fig: "build" as const,
     verb: "Build",
     claim: "A commuter campus gets the events that make it feel like one place.",
     how: "SGA develops activities and events that enhance students’ academic and social experiences, and the Student Activities Board plans the social, cultural, and recreational calendar: the talent show, cultural nights, Club Rush, the International Ball.",
@@ -270,54 +276,25 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 3 · The four jobs, as claims with mechanisms */}
-      <section className="border-y border-line bg-bg">
-        <div className="mx-auto max-w-[1400px] px-6 py-24 md:px-10 md:py-32">
+      {/* 3 · The mandate, as a scroll-driven sequence */}
+      <section className="bg-ink text-white">
+        <div className="mx-auto max-w-[1400px] px-6 pt-24 md:px-10 md:pt-32">
           <div className="grid gap-8 md:grid-cols-12 md:items-end">
             <div className="md:col-span-7">
-              <Eyebrow>The mandate</Eyebrow>
-              <h2 className="serif-display mt-5 text-[36px] md:text-[56px]">
+              <Eyebrow light>The mandate</Eyebrow>
+              <h2 className="serif-display mt-5 text-[36px] text-white md:text-[56px]">
                 Four jobs. Each one has a mechanism.
               </h2>
             </div>
-            <p className="max-w-[40ch] text-[15px] leading-[1.6] text-ink-muted md:col-span-5">
+            <p className="max-w-[40ch] text-[15px] leading-[1.6] text-white/60 md:col-span-5">
               These are SGA’s four responsibilities as the College defines them. A
               responsibility without a mechanism is a slogan, so each one comes with how
               it actually happens.
             </p>
           </div>
-          <Reveal as="ol" className="mt-14 border-t border-line md:mt-20">
-            {jobs.map((j) => (
-              <RevealItem
-                key={j.n}
-                as="li"
-                className="grid gap-5 border-b border-line py-8 md:grid-cols-12 md:gap-8 md:py-10"
-              >
-                <div className="flex items-baseline gap-4 md:col-span-3">
-                  <span className="font-mono text-[12px] text-ink-faint">{j.n}</span>
-                  <h3 className="font-serif text-[34px] leading-none tracking-[-0.01em] text-ink md:text-[44px]">
-                    {j.verb}
-                  </h3>
-                </div>
-                <div className="md:col-span-5">
-                  <p className="text-[18px] leading-[1.35] font-medium tracking-[-0.01em] text-ink">
-                    {j.claim}
-                  </p>
-                  <p className="mt-3 text-[15px] leading-[1.65] text-ink-muted">
-                    {j.how}
-                  </p>
-                </div>
-                <div className="md:col-span-4 md:border-l md:border-line md:pl-8">
-                  <p className="font-mono text-[11px] tracking-[0.1em] text-ink-faint uppercase">
-                    Where it happens
-                  </p>
-                  <p className="mt-2 text-[14px] leading-[1.6] text-ink-muted">
-                    {j.where}
-                  </p>
-                </div>
-              </RevealItem>
-            ))}
-          </Reveal>
+        </div>
+        <div className="mx-auto max-w-[1400px] px-6 pb-16 md:px-10 md:pb-24">
+          <MandateScroller chapters={jobs} />
         </div>
       </section>
 
@@ -397,8 +374,19 @@ export default function AboutPage() {
               </p>
               <figure className="mt-10">
                 <div className="flex items-center justify-between border-t border-line pt-3 font-mono text-[11px] tracking-[0.08em] text-ink-muted uppercase">
+                  <span>The loop</span>
+                  <span>Fig. 03</span>
+                </div>
+                <ConduitFig className="mt-2 h-[300px] w-full" />
+                <figcaption className="font-mono text-[11px] tracking-[0.04em] text-ink-muted uppercase">
+                  01 You · 02 Secretary · 03 Committee · 04 SGA vote · 05 Leadership · 06
+                  Back to you
+                </figcaption>
+              </figure>
+              <figure className="mt-10">
+                <div className="flex items-center justify-between border-t border-line pt-3 font-mono text-[11px] tracking-[0.08em] text-ink-muted uppercase">
                   <span>Open meeting · {site.office.room}</span>
-                  <span>Fig. 02</span>
+                  <span>Fig. 04</span>
                 </div>
                 <div className="relative mt-4 aspect-[3/2] overflow-hidden border border-line bg-surface">
                   <Image
@@ -544,6 +532,16 @@ export default function AboutPage() {
             </ol>
           </div>
           <div className="lg:col-span-5">
+            <figure>
+              <div className="flex items-center justify-between border-t border-line pt-3 font-mono text-[11px] tracking-[0.08em] text-ink-muted uppercase">
+                <span>Authority flows up</span>
+                <span>Fig. 05</span>
+              </div>
+              <GovernanceFig className="mt-2 h-[300px] w-full" />
+              <figcaption className="mb-10 font-mono text-[11px] tracking-[0.04em] text-ink-muted uppercase">
+                Bottom: 15,000 students · Highlighted: SGA · Top: College leadership
+              </figcaption>
+            </figure>
             <Eyebrow>At a glance</Eyebrow>
             <dl className="mt-5 border-t border-line">
               {glance.map(([k, v]) => (

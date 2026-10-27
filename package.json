@@ -4,13 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "tsx scripts/build-search-index.ts",
+    "prebuild": "node scripts/clean-dupes.mjs && tsx scripts/build-search-index.ts",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "node scripts/clean-dupes.mjs && tsc --noEmit",
     "search-index": "tsx scripts/build-search-index.ts"
   },
   "dependencies": {
