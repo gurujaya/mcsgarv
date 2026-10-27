@@ -11,7 +11,8 @@ export function MeetingBand() {
       <MeetingVideo
         src="/video/open-meeting.mp4"
         poster="/images/open-meeting.jpg"
-        className="absolute inset-0 size-full object-cover object-[50%_40%]"
+        alt="Students seated around tables at a Monday open meeting in the Student Life room"
+        className="absolute inset-0"
       />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(22,17,28,0.25)_0%,rgba(22,17,28,0.35)_45%,rgba(22,17,28,0.88)_100%)]" />
       <div className="relative mx-auto flex w-full max-w-[1400px] flex-col gap-10 px-6 pt-40 pb-14 md:flex-row md:items-end md:justify-between md:px-10 md:pb-20">
