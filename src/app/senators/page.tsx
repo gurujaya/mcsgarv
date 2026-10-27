@@ -16,8 +16,15 @@ export const metadata: Metadata = {
 function PersonCard({ p, large }: { p: Person; large?: boolean }) {
   const coms = p.committees.map((c) => getCommittee(c)).filter(Boolean);
   return (
-    <li id={p.slug} className="flex flex-col bg-surface p-6 md:p-7">
-      <Avatar name={p.name} photo={p.photo} size={large ? "xl" : "lg"} />
+    <li id={p.slug} className="flex flex-col bg-surface p-4 sm:p-6 md:p-7">
+      <Avatar
+        name={p.name}
+        photo={p.photo}
+        size={large ? "xl" : "lg"}
+        className={
+          large ? "max-sm:size-16 max-sm:text-lg" : "max-sm:size-12 max-sm:text-sm"
+        }
+      />
       <p className="mt-6 font-mono text-[11px] tracking-[0.1em] text-ink-muted uppercase">
         {p.role}
       </p>

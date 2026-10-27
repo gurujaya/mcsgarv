@@ -36,7 +36,7 @@ export function Reveal({
       variants={parent}
       initial="hidden"
       whileInView="show"
-      viewport={{ once, margin: "-80px" }}
+      viewport={{ once, margin: "0px 0px -60px 0px", amount: 0.05 }}
     >
       {children}
     </Comp>

@@ -149,19 +149,24 @@ export function ConduitFig({ className }: { className?: string }) {
         return <Link key={`l${i}`} from={lift(s)} to={lift(n)} />;
       })}
       {sorted.map((s) => (
-        <g key={s.i}>
-          <Box
-            x={s.x - 1.6}
-            y={s.y - 1.6}
-            z={-4}
-            w={3.2}
-            d={3.2}
-            h={s.i === 0 ? 2.2 : s.i === 3 ? 4.6 : 3}
-            tone={s.i === 3 ? "ink" : s.i === 0 ? "ghost" : "paper"}
-          />
+        <Box
+          key={s.i}
+          x={s.x - 1.6}
+          y={s.y - 1.6}
+          z={-4}
+          w={3.2}
+          d={3.2}
+          h={s.i === 0 ? 2.2 : s.i === 3 ? 4.6 : 3}
+          tone={s.i === 3 ? "ink" : s.i === 0 ? "ghost" : "paper"}
+        />
+      ))}
+      {stations.map((s) => {
+        const [lx, ly] = pt(s.x * 1.42, s.y * 1.42, -4);
+        return (
           <text
-            x={pt(s.x * 1.32, s.y * 1.32, -4)[0]}
-            y={pt(s.x * 1.32, s.y * 1.32, -4)[1] + 1}
+            key={`t${s.i}`}
+            x={lx}
+            y={ly + 1}
             textAnchor="middle"
             fontFamily="var(--font-mono)"
             fontSize="2.6"
@@ -169,8 +174,8 @@ export function ConduitFig({ className }: { className?: string }) {
           >
             0{s.i + 1}
           </text>
-        </g>
-      ))}
+        );
+      })}
     </IsoCanvas>
   );
 }
