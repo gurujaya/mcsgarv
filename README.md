@@ -138,7 +138,7 @@ The look is deliberately restrained: one typeface, near-monochrome surfaces, hai
 - **Layout:** a 1320px `.site-frame` with vertical hairline rails on large screens. Sections are separated by full-width rules; grids of cells share borders instead of gaps.
 - **Landing page:** a warm-paper hero whose only visual is the group photo rendered as an ink halftone dot screen through a small three.js shader (`src/components/landing/hero-shader.tsx`, React Three Fiber, loaded at idle after the page is interactive, with a masked grayscale photo as the fallback when WebGL or motion is unavailable). Then intro + stats, the "Four jobs" cells, a committee index, the full-bleed photo band, and the next four events. Each section is one file in `src/components/landing/`.
 - **Photos:** `public/images/sga-group.jpg` (portrait) and `sga-group-wide.jpg` (16:9 crop used in the photo band). Replace both to change the photo.
-- **Nav:** `src/components/layout/nav-links.ts` defines the items. "Committees" and "Resources" are dropdowns; committee entries are generated from `committees.ts`, so new committees appear automatically.
+- **Nav:** a celled bar (brand, links, live meeting status, search, Apply) that condenses on scroll. `src/components/layout/nav-links.ts` defines the items; "Committees" and "Resources" open numbered editorial dropdowns, and committee entries are generated from `committees.ts`. The status cell counts down to the next Monday 4 PM meeting (`src/lib/next-meeting.ts`) and turns green while it is in session. On phones the menu is a full-screen serif list.
 
 ## Deploy to Vercel
 
