@@ -49,8 +49,7 @@ export function Hero() {
         </div>
         <p className="mt-16 flex items-center gap-3 font-mono text-[11px] tracking-[0.06em] text-ink-muted uppercase">
           <span className="h-px w-8 bg-line-strong" aria-hidden />
-          Open meetings · {site.meeting.day}s {site.meeting.time} ·{" "}
-          {site.meeting.location}
+          Open meetings · {site.meeting.short} · {site.meeting.location}
         </p>
       </div>
     </section>
