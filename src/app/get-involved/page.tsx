@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Check, ArrowRight } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { Container } from "@/components/primitives/container";
@@ -269,6 +270,27 @@ export default function GetInvolvedPage() {
             <CTA href="/events?type=meeting" variant="ghost" size="sm">
               See upcoming meetings
             </CTA>
+            <figure className="mt-10">
+              <div className="flex items-center justify-between border-t border-line pt-3 font-mono text-[11px] tracking-[0.08em] text-ink-muted uppercase">
+                <span>Monday open meeting</span>
+                <span>SV 104A</span>
+              </div>
+              <div className="relative mt-4 aspect-[3/2] overflow-hidden border border-line bg-surface">
+                <Image
+                  src="/images/open-meeting.jpg"
+                  alt="Students seated around tables in the Student Life room listening to a presenter at a Monday open meeting"
+                  fill
+                  sizes="(min-width: 1024px) 520px, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="mt-3 font-mono text-[11px] tracking-[0.04em] text-ink-muted uppercase">
+                <Todo
+                  value="TODO: add the date of this meeting"
+                  fallback="A Monday open meeting, Office of Student Life"
+                />
+              </figcaption>
+            </figure>
           </div>
           <div className="rounded-card border border-line bg-surface p-6 md:p-8 lg:col-span-7">
             <h3 className="text-[22px] font-medium tracking-[-0.02em] text-ink">

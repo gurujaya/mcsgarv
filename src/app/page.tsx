@@ -1,7 +1,8 @@
 import { Hero } from "@/components/landing/hero";
 import { Intro } from "@/components/landing/intro";
 import { WhatWeDo } from "@/components/landing/what-we-do";
-import { PhotoBand } from "@/components/landing/photo-band";
+import { CampusLife } from "@/components/landing/campus-life";
+import { MeetingBand } from "@/components/landing/meeting-band";
 import { CommitteesIndex } from "@/components/landing/committees-index";
 import { NextEvents } from "@/components/landing/next-events";
 import { site } from "@/content/site";
@@ -16,7 +17,8 @@ export default function HomePage() {
       <Intro />
       <WhatWeDo />
       <CommitteesIndex />
-      <PhotoBand />
+      <CampusLife />
+      <MeetingBand />
       <NextEvents />
       <script
         type="application/ld+json"
