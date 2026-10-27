@@ -2,7 +2,7 @@
 
 The official website for the Montgomery College Rockville Campus SGA. Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, shadcn/ui, motion.dev, and a three.js shader hero. No CMS: every piece of content is a typed TypeScript file a student officer can edit in a text editor.
 
-Live site: set `NEXT_PUBLIC_SITE_URL` (see below). Official MC page: <https://www.montgomerycollege.edu/life-at-mc/student-life/student-government-association/rockville.html>
+Live site: <https://mcsgarv.vercel.app> (Vercel project `mcsgarv`, team `gurujayas-projects`). Source: <https://github.com/gurujaya/mcsgarv>. Official MC page: <https://www.montgomerycollege.edu/life-at-mc/student-life/student-government-association/rockville.html>
 
 ## Quick start
 
@@ -142,10 +142,15 @@ The look is deliberately restrained: one typeface, near-monochrome surfaces, hai
 
 ## Deploy to Vercel
 
-1. Push this repository to GitHub.
-2. In Vercel, **Add New Project** → import the repo. Framework preset: Next.js. Build command and output are the defaults.
-3. Add environment variables: `FORM_ENDPOINT` and `NEXT_PUBLIC_SITE_URL` (your final domain, e.g. `https://sgarv.vercel.app`).
-4. Deploy. Every push to `main` redeploys. Vercel Analytics and Speed Insights are already wired in `src/app/layout.tsx`; enable them in the Vercel dashboard.
+The project is already linked (`.vercel/project.json` is git-ignored; run `npx vercel link --project mcsgarv` on a new machine). To ship:
+
+```bash
+npx vercel deploy --prod --yes
+```
+
+Environment variables live in the Vercel dashboard (Project → Settings → Environment Variables). `NEXT_PUBLIC_SITE_URL` is set to `https://mcsgarv.vercel.app`. `FORM_ENDPOINT` is **not set yet**: until it is, the contact and funding forms show an "email us instead" message in production.
+
+To make every push to `main` deploy automatically, connect the GitHub repo under Project → Settings → Git. Vercel Analytics and Speed Insights are wired in `src/app/layout.tsx`; enable them in the dashboard.
 
 To point a custom domain (for example a subdomain Student Life provides), add it under Project → Settings → Domains and update `NEXT_PUBLIC_SITE_URL`.
 
