@@ -8,17 +8,19 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { site } from "@/content/site";
 
+// decision: only the weights the design actually uses are loaded (Roboto 400/500,
+// Crimson Text 400/600). Every extra weight is a ~23 KB preloaded file that sits on
+// the LCP critical path on slow connections. Add a weight here if you use it.
 const roboto = Roboto({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700", "900"],
+  weight: ["400", "500"],
   variable: "--font-roboto",
   display: "swap",
 });
 
 const crimson = Crimson_Text({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  style: ["normal", "italic"],
+  weight: ["400", "600"],
   variable: "--font-crimson",
   display: "swap",
 });

@@ -1,0 +1,297 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ArrowLeft, Mail, Clock, Users, UserCheck, ExternalLink } from "lucide-react";
+import { Container } from "@/components/primitives/container";
+import { Pill } from "@/components/primitives/pill";
+import { CTA } from "@/components/primitives/cta";
+import { Avatar } from "@/components/primitives/avatar";
+import { Todo, TodoChip } from "@/components/primitives/todo-chip";
+import { CommitteeIcon } from "@/components/committee-icon";
+import { committees, getCommittee, committeeCategories } from "@/content/committees";
+import { people } from "@/content/people";
+import { site } from "@/content/site";
+import { isTodo } from "@/lib/todo";
+
+export function generateStaticParams() {
+  return committees.map((c) => ({ slug: c.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps<"/committees/[slug]">): Promise<Metadata> {
+  const { slug } = await params;
+  const c = getCommittee(slug);
+  if (!c) return {};
+  return { title: c.name, description: c.tagline };
+}
+
+const toneBg: Record<string, string> = {
+  purple: "bg-mc-purple/8 text-mc-purple",
+  blue: "bg-mc-blue/10 text-mc-blue-ink",
+  green: "bg-mc-green/10 text-mc-green-ink",
+  orange: "bg-mc-orange/10 text-mc-orange-ink",
+};
+
+export default async function CommitteePage({ params }: PageProps<"/committees/[slug]">) {
+  const { slug } = await params;
+  const c = getCommittee(slug);
+  if (!c) notFound();
+
+  const members = people.filter((p) => p.committees.includes(c.slug));
+  const paragraphs = c.description.split(/\n\s*\n/);
+  const chairPerson = c.chair
+    ? people.find((p) => p.role === c.chair || p.name === c.chair)
+    : undefined;
+  const others = committees.filter((o) => o.slug !== c.slug).slice(0, 3);
+
+  return (
+    <>
+      <Container as="header" className="pt-10 pb-10 md:pt-14 md:pb-12">
+        <Link
+          href="/committees"
+          className="inline-flex items-center gap-1.5 text-sm text-ink-muted hover:text-mc-purple"
+        >
+          <ArrowLeft className="size-4" /> All committees
+        </Link>
+        <div className="mt-8 flex flex-col gap-6 md:flex-row md:items-start md:gap-8">
+          <span
+            className={`flex size-20 shrink-0 items-center justify-center rounded-card ${toneBg[c.color]}`}
+          >
+            <CommitteeIcon slug={c.slug} className="size-9" />
+          </span>
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
+              <Pill tone={c.color}>{committeeCategories[c.category]}</Pill>
+              <Pill tone={c.openTo === "all-students" ? "green" : "neutral"}>
+                {c.openTo === "all-students" ? "Open to all students" : "Senators only"}
+              </Pill>
+              {c.draft ? (
+                <TodoChip note="Description is a draft; an officer must confirm." />
+              ) : null}
+            </div>
+            <h1 className="mt-4 font-serif text-4xl leading-[1.05] font-semibold tracking-tight text-ink md:text-6xl">
+              {c.name}
+              {c.shortName ? (
+                <span className="ml-3 align-middle font-sans text-xl font-normal text-ink-muted">
+                  {c.shortName}
+                </span>
+              ) : null}
+            </h1>
+            <p className="mt-4 max-w-[60ch] text-lg leading-relaxed text-ink-muted">
+              {c.tagline}
+            </p>
+          </div>
+        </div>
+      </Container>
+
+      <Container className="grid gap-12 pb-24 lg:grid-cols-12">
+        <div className="lg:col-span-7">
+          <div className="prose-sga">
+            {paragraphs.map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
+          </div>
+
+          <h2 className="mt-12 text-xs font-medium tracking-[0.14em] text-ink uppercase">
+            Responsibilities
+          </h2>
+          <ul className="mt-4 divide-y divide-line rounded-card border border-line bg-surface">
+            {c.responsibilities.map((r) => (
+              <li key={r} className="flex gap-3 px-5 py-3.5 text-[15px] text-ink">
+                <span
+                  aria-hidden
+                  className="mt-2 size-1.5 shrink-0 rounded-full bg-mc-purple"
+                />
+                {r}
+              </li>
+            ))}
+          </ul>
+
+          {c.howToJoin ? (
+            <>
+              <h2 className="mt-12 text-xs font-medium tracking-[0.14em] text-ink uppercase">
+                How to join
+              </h2>
+              <p className="mt-3 max-w-[65ch] text-[15px] leading-relaxed text-ink-muted">
+                <Todo value={c.howToJoin} fallback="Ask at a Monday open meeting." />
+              </p>
+            </>
+          ) : null}
+
+          {members.length ? (
+            <>
+              <h2 className="mt-12 text-xs font-medium tracking-[0.14em] text-ink uppercase">
+                Members
+              </h2>
+              <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                {members.map((m) => (
+                  <li
+                    key={m.slug}
+                    className="flex items-center gap-3 rounded-card border border-line bg-surface p-3"
+                  >
+                    <Avatar name={m.name} photo={m.photo} size="sm" />
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-medium text-ink">{m.name}</p>
+                      <p className="text-xs text-ink-muted">{m.role}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 text-xs text-ink-muted">
+                Committee rosters are being updated.{" "}
+                <TodoChip note="Add committee assignments in people.ts" />
+              </p>
+            </>
+          ) : (
+            <p className="mt-12 text-sm text-ink-muted">
+              Committee roster coming soon.{" "}
+              <TodoChip note="Add committee assignments in people.ts" />
+            </p>
+          )}
+        </div>
+
+        <aside className="lg:col-span-5">
+          <div className="sticky top-24 space-y-4">
+            <div className="rounded-card border border-line bg-surface p-6">
+              <dl className="space-y-4 text-sm">
+                <div className="flex gap-3">
+                  <UserCheck
+                    className="mt-0.5 size-4 shrink-0 text-mc-purple"
+                    aria-hidden
+                  />
+                  <div>
+                    <dt className="text-ink-muted">Chair</dt>
+                    <dd className="text-ink">
+                      {chairPerson
+                        ? `${chairPerson.name} (${chairPerson.role})`
+                        : (c.chair ?? "Elected by the committee")}
+                    </dd>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <Clock className="mt-0.5 size-4 shrink-0 text-mc-purple" aria-hidden />
+                  <div>
+                    <dt className="text-ink-muted">Meets</dt>
+                    <dd className="text-ink">
+                      <Todo value={c.meets} fallback="Time to be confirmed" />
+                    </dd>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <Users className="mt-0.5 size-4 shrink-0 text-mc-purple" aria-hidden />
+                  <div>
+                    <dt className="text-ink-muted">Who can join</dt>
+                    <dd className="text-ink">
+                      {c.openTo === "all-students"
+                        ? "Any Rockville student"
+                        : "Current senators"}
+                    </dd>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <Mail className="mt-0.5 size-4 shrink-0 text-mc-purple" aria-hidden />
+                  <div>
+                    <dt className="text-ink-muted">Contact</dt>
+                    <dd>
+                      <a
+                        href={`mailto:${c.contact ?? site.email}`}
+                        className="text-mc-purple hover:underline"
+                      >
+                        {c.contact ?? site.email}
+                      </a>
+                    </dd>
+                  </div>
+                </div>
+              </dl>
+              <div className="mt-6 flex flex-col gap-2">
+                {c.openTo === "all-students" ? (
+                  <CTA
+                    href={
+                      c.slug === "sab" ? "/get-involved#sab" : "/get-involved#committees"
+                    }
+                    variant="accent"
+                    size="sm"
+                  >
+                    Join this committee
+                  </CTA>
+                ) : (
+                  <CTA href="/get-involved#senator" variant="accent" size="sm">
+                    Become a Senator to serve
+                  </CTA>
+                )}
+                <CTA href="/contact" variant="ghost" size="sm">
+                  Ask a question
+                </CTA>
+              </div>
+            </div>
+
+            {c.links?.length ? (
+              <div className="rounded-card border border-line bg-surface p-6">
+                <h2 className="text-xs font-medium tracking-[0.14em] text-ink uppercase">
+                  Links
+                </h2>
+                <ul className="mt-3 space-y-2">
+                  {c.links.map((l) => (
+                    <li
+                      key={l.label}
+                      className="flex items-center justify-between gap-3 text-sm"
+                    >
+                      {isTodo(l.href) ? (
+                        <span className="flex items-center gap-2 text-ink-muted">
+                          {l.label} <TodoChip note="Add link" />
+                        </span>
+                      ) : l.href.startsWith("/") ? (
+                        <Link href={l.href} className="text-mc-purple hover:underline">
+                          {l.label}
+                        </Link>
+                      ) : (
+                        <a
+                          href={l.href}
+                          target={l.href.startsWith("mailto:") ? undefined : "_blank"}
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-mc-purple hover:underline"
+                        >
+                          {l.label}
+                          {l.href.startsWith("http") ? (
+                            <ExternalLink className="size-3.5" />
+                          ) : null}
+                        </a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+
+            <div className="rounded-card border border-line bg-surface p-6">
+              <h2 className="text-xs font-medium tracking-[0.14em] text-ink uppercase">
+                Other committees
+              </h2>
+              <ul className="mt-3 space-y-2">
+                {others.map((o) => (
+                  <li key={o.slug}>
+                    <Link
+                      href={`/committees/${o.slug}`}
+                      className="text-sm text-ink hover:text-mc-purple"
+                    >
+                      {o.name}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link
+                    href="/committees"
+                    className="text-sm font-medium text-mc-purple hover:underline"
+                  >
+                    All {committees.length} committees →
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+      </Container>
+    </>
+  );
+}

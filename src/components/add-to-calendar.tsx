@@ -1,0 +1,40 @@
+"use client";
+
+import { CalendarPlus } from "lucide-react";
+import type { Event } from "@/content/types";
+import { buildIcs } from "@/lib/ics";
+
+/** Downloads a one-event .ics file generated in the browser. */
+export function AddToCalendar({
+  event,
+  className,
+}: {
+  event: Event;
+  className?: string;
+}) {
+  const onClick = () => {
+    const blob = new Blob([buildIcs(event)], { type: "text/calendar;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${event.slug}.ics`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={
+        className ??
+        "relative z-10 inline-flex items-center gap-1.5 rounded-pill border border-line bg-surface px-2.5 py-1 text-xs font-medium text-ink-muted transition-colors hover:border-mc-purple/40 hover:text-mc-purple"
+      }
+      aria-label={`Add ${event.title} to calendar`}
+    >
+      <CalendarPlus className="size-3.5" />
+      .ics
+    </button>
+  );
+}

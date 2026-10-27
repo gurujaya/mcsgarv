@@ -8,7 +8,7 @@ const parent: Variants = {
   show: { transition: { staggerChildren: 0.05, delayChildren: 0.05 } },
 };
 
-const child: Variants = {
+export const revealChild: Variants = {
   hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
 };
@@ -54,7 +54,7 @@ export function RevealItem({
 }) {
   const Comp = motion[as];
   return (
-    <Comp className={cn(className)} variants={child}>
+    <Comp className={cn(className)} variants={revealChild}>
       {children}
     </Comp>
   );

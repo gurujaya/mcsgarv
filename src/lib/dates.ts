@@ -82,10 +82,44 @@ export function monthLabel(key: string): string {
   }).format(new Date(Date.UTC(y, m - 1, 1)));
 }
 
+/** Local wall-clock parts of an instant in the site time zone. */
+function localParts(d: Date) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: TZ,
+    hourCycle: "h23",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).formatToParts(d);
+  const get = (t: string) => Number(parts.find((x) => x.type === t)?.value);
+  return {
+    y: get("year"),
+    m: get("month"),
+    d: get("day"),
+    h: get("hour"),
+    min: get("minute"),
+  };
+}
+
+/** Instant for a wall-clock time in the site time zone (handles DST). */
+function fromLocal(y: number, m: number, d: number, h: number, min: number): Date {
+  // First guess as UTC, then correct by the zone offset at that instant (twice,
+  // which is enough to converge across a DST boundary).
+  let guess = Date.UTC(y, m - 1, d, h, min);
+  for (let i = 0; i < 2; i++) {
+    const lp = localParts(new Date(guess));
+    const asUtc = Date.UTC(lp.y, lp.m - 1, lp.d, lp.h, lp.min);
+    guess += Date.UTC(y, m - 1, d, h, min) - asUtc;
+  }
+  return new Date(guess);
+}
+
+/** Add whole days while keeping the same local wall-clock time across DST. */
 function addDays(iso: string, days: number): string {
-  const d = new Date(iso);
-  d.setUTCDate(d.getUTCDate() + days);
-  return d.toISOString();
+  const lp = localParts(new Date(iso));
+  return fromLocal(lp.y, lp.m, lp.d + days, lp.h, lp.min).toISOString();
 }
 
 /**

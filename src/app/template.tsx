@@ -1,16 +1,7 @@
-"use client";
-
-import { motion } from "motion/react";
-
-/** Subtle 150ms crossfade on route change. Never blocks navigation. */
+/**
+ * Subtle 150ms crossfade on route change, done in CSS so server-rendered HTML
+ * paints immediately (no opacity:0 until hydration). Never blocks navigation.
+ */
 export default function Template({ children }: { children: React.ReactNode }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.15, ease: "easeOut" }}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className="page-enter">{children}</div>;
 }

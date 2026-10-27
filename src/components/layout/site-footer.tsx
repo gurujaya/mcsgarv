@@ -11,11 +11,7 @@ export function SiteFooter() {
     <footer className="mt-24 border-t border-line bg-surface">
       <Container className="grid gap-10 py-14 md:grid-cols-12">
         <div className="md:col-span-5">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-3"
-            aria-label="SGA Rockville home"
-          >
+          <Link href="/" className="inline-flex items-center gap-3">
             <Seal size={44} />
             <span className="flex flex-col leading-tight">
               <span className="font-serif text-xl font-semibold text-ink">

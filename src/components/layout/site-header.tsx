@@ -29,10 +29,6 @@ export function SiteHeader() {
 
   useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 8));
 
-  React.useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
-
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
   return (
@@ -44,11 +40,7 @@ export function SiteHeader() {
       )}
     >
       <Container as="nav" className="flex h-16 items-center justify-between gap-4">
-        <Link
-          href="/"
-          className="flex items-center gap-2.5 rounded-md"
-          aria-label="SGA Rockville home"
-        >
+        <Link href="/" className="flex items-center gap-2.5 rounded-md">
           <Seal size={34} />
           <span className="flex flex-col leading-none">
             <span className="text-[15px] font-medium tracking-tight text-ink">
@@ -129,6 +121,7 @@ export function SiteHeader() {
                     key={l.href}
                     href={l.href}
                     aria-current={isActive(l.href) ? "page" : undefined}
+                    onClick={() => setMobileOpen(false)}
                     className={cn(
                       "rounded-lg px-3 py-2.5 text-base",
                       isActive(l.href)
@@ -141,6 +134,7 @@ export function SiteHeader() {
                 ))}
                 <Link
                   href={site.applyUrl}
+                  onClick={() => setMobileOpen(false)}
                   className="mt-4 inline-flex h-11 items-center justify-center rounded-pill bg-mc-orange px-4 text-sm font-medium text-ink"
                 >
                   Apply to be a Senator

@@ -1,5 +1,5 @@
 /** Content marked "TODO:" is missing. Used by <TodoChip/> and <Todo/>. */
-export function isTodo(value: string | undefined | null): value is string {
+export function isTodo(value: string | undefined | null): boolean {
   return typeof value === "string" && value.trim().toUpperCase().startsWith("TODO:");
 }
 
