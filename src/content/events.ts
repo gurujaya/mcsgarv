@@ -103,6 +103,20 @@ export const events: Event[] = [
 
   // ---- Past -------------------------------------------------------------
   {
+    slug: "fall-fest-2026",
+    title: "Fall Fest",
+    start: "2026-10-15T12:00:00-04:00",
+    end: "2026-10-15T14:00:00-04:00",
+    location: "The Quad",
+    type: "social",
+    committee: "sab",
+    approximate: true,
+    past: true,
+    cover: "/images/fall-fest.jpg",
+    description:
+      "Tents on the Quad, balloons, music, and an afternoon of students meeting students. TODO: confirm the 2026 date and who hosted it.",
+  },
+  {
     slug: "club-rush-fall-2026",
     title: "Club Rush — Fall 2026",
     start: "2026-09-24T12:00:00-04:00",

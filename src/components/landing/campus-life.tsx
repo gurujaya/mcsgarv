@@ -30,7 +30,7 @@ function Figure({
         <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" />
       </div>
       <figcaption className="mt-3 font-mono text-[11px] tracking-[0.04em] text-ink-muted uppercase">
-        <Todo value={caption} fallback="On the Rockville Quad" />
+        <Todo value={caption} fallback="Fall Fest on the Rockville Quad" />
       </figcaption>
     </figure>
   );
@@ -67,11 +67,11 @@ export function CampusLife() {
         <Reveal className="mt-14 grid gap-8 md:mt-20 md:grid-cols-12 md:gap-10">
           <RevealItem className="md:col-span-7">
             <Figure
-              src="/images/fall-on-the-quad.jpg"
-              alt="Students in costume laughing together on the Quad, one holding a pumpkin and an ‘Oh My Gourd’ sign"
+              src="/images/fall-fest.jpg"
+              alt="Three students with their arms around each other, smiling in front of a white tent at Fall Fest on the Quad"
               ratio="aspect-[3/2]"
-              label="Fig. 02 · Fall on the Quad"
-              caption="TODO: name this event and the date"
+              label="Fig. 02 · Fall Fest"
+              caption="TODO: add the Fall Fest date"
               sizes="(min-width: 768px) 760px, 100vw"
             />
           </RevealItem>
@@ -80,8 +80,8 @@ export function CampusLife() {
               src="/images/fall-fest-pair.jpg"
               alt="Two students smiling and flashing peace signs on the lawn during a fall event"
               ratio="aspect-[2/3] md:aspect-[4/5]"
-              label="Fig. 03 · Fall on the Quad"
-              caption="TODO: name this event and the date"
+              label="Fig. 03 · Fall Fest"
+              caption="TODO: add the Fall Fest date"
               sizes="(min-width: 768px) 540px, 100vw"
             />
           </RevealItem>
