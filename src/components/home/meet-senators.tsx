@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Container } from "@/components/primitives/container";
 import { SectionHeading } from "@/components/primitives/section-heading";
 import { Avatar } from "@/components/primitives/avatar";
-import { officers, people } from "@/content/people";
+import { officers, elected } from "@/content/people";
 import { site } from "@/content/site";
 import { Reveal, RevealItem } from "@/components/primitives/reveal";
 
@@ -13,8 +13,8 @@ export function MeetSenators() {
         <SectionHeading
           eyebrow="04 — Your representatives"
           title="Meet your senators"
-          description={`${people.length} students elected to speak for the Rockville Campus in ${site.term}. This is the Executive Board.`}
-          action={{ label: `See all ${people.length}`, href: "/senators" }}
+          description={`${elected.length} students elected to speak for the Rockville Campus in ${site.term}. This is the Executive Board.`}
+          action={{ label: `See all ${elected.length}`, href: "/senators" }}
         />
       </Container>
       <Reveal as="ul" className="grid border-t border-line sm:grid-cols-2 lg:grid-cols-4">

@@ -12,6 +12,7 @@ import {
 import { Pill } from "@/components/primitives/pill";
 import { Avatar } from "@/components/primitives/avatar";
 import { CTA } from "@/components/primitives/cta";
+import { TodoChip } from "@/components/primitives/todo-chip";
 import { people, roleOrder } from "@/content/people";
 import { committees, getCommittee } from "@/content/committees";
 import { site } from "@/content/site";
@@ -122,10 +123,13 @@ function SenatorsDirectoryView({ s }: { s: DirectoryState<(typeof KEYS)[number]>
                   .join(" · ")
               : p.role === "Senator-at-Large"
                 ? "Senator-at-Large, 2026–2027"
-                : `${p.role}, Executive Board`)
+                : p.role === "Advisor"
+                  ? "Office of Student Life"
+                  : `${p.role}, Executive Board`)
           }
           pills={
             <>
+              {p.unconfirmed ? <TodoChip note="Confirm this person's role" /> : null}
               <Pill tone={roleTone(p.role)}>{p.role}</Pill>
               {p.committees.map((c) => {
                 const com = getCommittee(c);

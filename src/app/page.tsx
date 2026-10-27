@@ -6,7 +6,7 @@ import { UpcomingEvents } from "@/components/home/upcoming-events";
 import { MeetSenators } from "@/components/home/meet-senators";
 import { GetInvolvedPaths } from "@/components/home/get-involved-paths";
 import { committees } from "@/content/committees";
-import { people } from "@/content/people";
+import { elected } from "@/content/people";
 import { site } from "@/content/site";
 
 // Upcoming events are computed from the current date at render time; refresh hourly.
@@ -20,7 +20,7 @@ export default function HomePage() {
         stats={[
           { value: 15000, suffix: "+", label: "students represented" },
           { value: committees.length, label: "committees" },
-          { value: people.length, label: "senators & officers" },
+          { value: elected.length, label: "senators & officers" },
           { value: site.meeting.day, label: `open meetings, ${site.meeting.time}` },
         ]}
       />

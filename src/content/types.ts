@@ -50,6 +50,11 @@ export type Person = {
   major?: string;
   bio?: string;
   email?: string;
+  /**
+   * Role is inferred (e.g. from group membership) and not yet confirmed by an
+   * officer. Shows a dev-only "Confirm role" chip; renders normally in production.
+   */
+  unconfirmed?: boolean;
 };
 
 export type EventType =

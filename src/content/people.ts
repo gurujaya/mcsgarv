@@ -2,20 +2,20 @@ import type { Person, Role } from "./types";
 
 /**
  * 2026–2027 Rockville SGA officers and senators.
- * Source: montgomerycollege.edu SGA Rockville page.
+ * Sources: montgomerycollege.edu SGA Rockville page, reconciled against the
+ * SGA Rockville group membership (31 members) on 2026-10-27.
  *
  * To add a senator: append an object with a unique `slug`, the person's `name`,
  * and `role`. Add a square photo at /public/people/<slug>.jpg and set
  * `photo: "/people/<slug>.jpg"`; otherwise an initials avatar is used.
  *
- * TODO: verify spelling against the official roster before launch.
- * TODO: add senators sworn in after the MC page was last updated.
+ * Names marked `unconfirmed: true` need an officer to confirm the role.
  * TODO: add committee assignments for each senator (only Guru's and the
  *       Treasurer's Budget Panel seat are known).
  * TODO: add the SGA faculty/staff advisor (role: "Advisor").
  */
 export const people: Person[] = [
-  // Executive Board
+  // Executive Board (group owners)
   {
     slug: "lizelle-rodriguez",
     name: "Lizelle Rodriguez",
@@ -36,7 +36,7 @@ export const people: Person[] = [
     committees: ["budget-panel"],
   },
 
-  // Senators-at-Large
+  // Senators-at-Large listed on the MC page and present in the SGA group
   {
     slug: "tanzeel-agarib",
     name: "Tanzeel Agarib",
@@ -55,12 +55,14 @@ export const people: Person[] = [
     role: "Senator-at-Large",
     committees: [],
   },
+  // Group record: "Jalili, Amir Ali". MC page: "Amirali". Keeping the MC page form.
   {
     slug: "amirali-jalili",
     name: "Amirali Jalili",
     role: "Senator-at-Large",
     committees: [],
   },
+  // Group record: "Kivembele, Edna". MC page: "EdnaJoan". Keeping the MC page form.
   {
     slug: "ednajoan-kivembele",
     name: "EdnaJoan Kivembele",
@@ -93,20 +95,15 @@ export const people: Person[] = [
     committees: [],
   },
   {
-    slug: "gabriele-pastore",
-    name: "Gabriele Pastore",
-    role: "Senator-at-Large",
-    committees: [],
-  },
-  {
     slug: "paniz-salehi",
     name: "Paniz Salehi",
     role: "Senator-at-Large",
     committees: [],
   },
+  // Group record spells it "Corrianne"; the MC page had "Corriane". Using the record.
   {
-    slug: "corriane-smith",
-    name: "Corriane Smith",
+    slug: "corrianne-smith",
+    name: "Corrianne Smith",
     role: "Senator-at-Large",
     committees: [],
   },
@@ -134,6 +131,103 @@ export const people: Person[] = [
     role: "Senator-at-Large",
     committees: ["public-outreach"],
   },
+
+  // On the MC page but NOT in the SGA group as of 2026-10-27.
+  // TODO: confirm Gabriele Pastore is still serving; remove if not.
+  {
+    slug: "gabriele-pastore",
+    name: "Gabriele Pastore",
+    role: "Senator-at-Large",
+    committees: [],
+    unconfirmed: true,
+  },
+
+  // In the SGA group (2026-10-27) but not on the MC page. Listed as
+  // Senators-at-Large on the assumption they were sworn in after the page was
+  // updated. TODO: confirm each role; any Student Life staff should become
+  // role: "Advisor" or be removed.
+  {
+    slug: "nila-amin",
+    name: "Nila Amin",
+    role: "Senator-at-Large",
+    committees: [],
+    unconfirmed: true,
+  },
+  {
+    slug: "advika-babu",
+    name: "Advika Babu",
+    role: "Senator-at-Large",
+    committees: [],
+    unconfirmed: true,
+  },
+  {
+    slug: "ana-bocachica",
+    name: "Ana Bocachica",
+    role: "Senator-at-Large",
+    committees: [],
+    unconfirmed: true,
+  },
+  {
+    slug: "nourhayet-chaherli",
+    name: "Nourhayet Chaherli",
+    role: "Senator-at-Large",
+    committees: [],
+    unconfirmed: true,
+  },
+  {
+    slug: "sahasra-chittampelli",
+    name: "Sahasra Chittampelli",
+    role: "Senator-at-Large",
+    committees: [],
+    unconfirmed: true,
+  },
+  {
+    slug: "samantha-melton",
+    name: "Samantha Melton",
+    role: "Senator-at-Large",
+    committees: [],
+    unconfirmed: true,
+  },
+  {
+    slug: "dana-narh",
+    name: "Dana Narh",
+    role: "Senator-at-Large",
+    committees: [],
+    unconfirmed: true,
+  },
+  {
+    slug: "khadija-saleck-ould-belkhair",
+    name: "Khadija Saleck Ould Belkhair",
+    role: "Senator-at-Large",
+    committees: [],
+    unconfirmed: true,
+  },
+  {
+    slug: "douglas-salerno",
+    name: "Douglas Salerno",
+    role: "Senator-at-Large",
+    committees: [],
+    unconfirmed: true,
+  },
+  {
+    slug: "eden-tenagashaw",
+    name: "Eden Tenagashaw",
+    role: "Senator-at-Large",
+    committees: [],
+    unconfirmed: true,
+  },
+
+  // Advisor: Director of Student Life and an owner of the SGA group.
+  // TODO: confirm "Advisor" is the right title to display.
+  {
+    slug: "lisa-hackley",
+    name: "Lisa Hackley",
+    role: "Advisor",
+    committees: [],
+    bio: "Director of Student Life",
+    email: "stlifer@montgomerycollege.edu",
+    unconfirmed: true,
+  },
 ];
 
 export const roleOrder: Role[] = [
@@ -149,6 +243,9 @@ export const officers = people.filter(
   (p) => p.role !== "Senator-at-Large" && p.role !== "Advisor",
 );
 export const senators = people.filter((p) => p.role === "Senator-at-Large");
+export const advisors = people.filter((p) => p.role === "Advisor");
+/** Elected members only (officers + senators), used for the public headcount. */
+export const elected = people.filter((p) => p.role !== "Advisor");
 
 export function getPerson(slug: string): Person | undefined {
   return people.find((p) => p.slug === slug);
