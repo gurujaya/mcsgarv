@@ -22,12 +22,12 @@ export default function ContactPage() {
         title="Talk to your student government."
         description="Three ways to reach us, in order of speed: come to a Monday meeting, email, or use the form. All of them get a reply."
       />
-      <Container className="grid gap-12 pb-24 lg:grid-cols-12">
+      <Container className="grid gap-12 pt-12 pb-24 md:pt-16 lg:grid-cols-12">
         <div className="space-y-4 lg:col-span-5">
           <div className="rounded-card border border-line bg-surface p-6">
             <dl className="space-y-5 text-sm">
               <div className="flex gap-3">
-                <Clock className="mt-0.5 size-4 shrink-0 text-mc-purple" aria-hidden />
+                <Clock className="mt-0.5 size-4 shrink-0 text-ink-muted" aria-hidden />
                 <div>
                   <dt className="text-ink-muted">Open meeting</dt>
                   <dd className="font-medium text-ink">
@@ -37,7 +37,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className="flex gap-3">
-                <MapPin className="mt-0.5 size-4 shrink-0 text-mc-purple" aria-hidden />
+                <MapPin className="mt-0.5 size-4 shrink-0 text-ink-muted" aria-hidden />
                 <div>
                   <dt className="text-ink-muted">Office</dt>
                   <dd className="font-medium text-ink">
@@ -53,7 +53,7 @@ export default function ContactPage() {
                       href={site.office.mapsUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-mc-purple hover:underline"
+                      className="text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink"
                     >
                       Open in Maps
                     </a>
@@ -62,13 +62,13 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className="flex gap-3">
-                <Mail className="mt-0.5 size-4 shrink-0 text-mc-purple" aria-hidden />
+                <Mail className="mt-0.5 size-4 shrink-0 text-ink-muted" aria-hidden />
                 <div>
                   <dt className="text-ink-muted">Email</dt>
                   <dd>
                     <a
                       href={`mailto:${site.email}`}
-                      className="font-medium text-mc-purple hover:underline"
+                      className="font-medium text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink"
                     >
                       {site.email}
                     </a>
@@ -77,7 +77,7 @@ export default function ContactPage() {
                     Senator applications:{" "}
                     <a
                       href={`mailto:${site.senatorInquiriesEmail}`}
-                      className="text-mc-purple hover:underline"
+                      className="text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink"
                     >
                       {site.senatorInquiriesEmail}
                     </a>
@@ -86,7 +86,7 @@ export default function ContactPage() {
                     SAB:{" "}
                     <a
                       href={`mailto:${site.sab.email}`}
-                      className="text-mc-purple hover:underline"
+                      className="text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink"
                     >
                       {site.sab.email}
                     </a>
@@ -94,13 +94,13 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className="flex gap-3">
-                <Phone className="mt-0.5 size-4 shrink-0 text-mc-purple" aria-hidden />
+                <Phone className="mt-0.5 size-4 shrink-0 text-ink-muted" aria-hidden />
                 <div>
                   <dt className="text-ink-muted">Phone</dt>
                   <dd>
                     <a
                       href={site.phoneHref}
-                      className="font-medium text-mc-purple hover:underline"
+                      className="font-medium text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink"
                     >
                       {site.phone}
                     </a>
@@ -111,9 +111,7 @@ export default function ContactPage() {
           </div>
 
           <div className="rounded-card border border-line bg-surface p-6">
-            <h2 className="text-xs font-medium tracking-[0.14em] text-ink uppercase">
-              Follow
-            </h2>
+            <h2 className="eyebrow">Follow</h2>
             <ul className="mt-3 space-y-2">
               {site.socials.map((s) => (
                 <li key={s.kind}>
@@ -121,7 +119,7 @@ export default function ContactPage() {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2.5 text-sm text-ink hover:text-mc-purple"
+                    className="inline-flex items-center gap-2.5 text-[14px] text-ink-muted hover:text-ink"
                   >
                     <SocialIcon kind={s.kind} className="size-4" />
                     {s.label}
@@ -139,22 +137,20 @@ export default function ContactPage() {
           </div>
 
           <div className="rounded-card border border-line bg-surface p-6">
-            <h2 className="text-xs font-medium tracking-[0.14em] text-ink uppercase">
-              Office of Student Life
-            </h2>
+            <h2 className="eyebrow">Office of Student Life</h2>
             <p className="mt-3 text-sm text-ink-muted">
               SGA’s advising office. {site.studentLife.room} · {site.studentLife.hours}
               <br />
               <a
                 href={site.studentLife.phoneHref}
-                className="text-mc-purple hover:underline"
+                className="text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink"
               >
                 {site.studentLife.phone}
               </a>{" "}
               ·{" "}
               <a
                 href={`mailto:${site.studentLife.email}`}
-                className="text-mc-purple hover:underline"
+                className="text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink"
               >
                 {site.studentLife.email}
               </a>
@@ -166,7 +162,9 @@ export default function ContactPage() {
 
         <div className="space-y-6 lg:col-span-7">
           <div className="rounded-card border border-line bg-surface p-6 md:p-8">
-            <h2 className="font-serif text-2xl font-semibold text-ink">Send a message</h2>
+            <h2 className="text-[22px] font-medium tracking-[-0.02em] text-ink">
+              Send a message
+            </h2>
             <p className="mt-1 mb-6 text-sm text-ink-muted">
               Goes to the SGA Secretary, who routes it to the right senator or committee.
             </p>

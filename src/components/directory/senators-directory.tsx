@@ -87,13 +87,13 @@ function SenatorsDirectoryView({ s }: { s: DirectoryState<(typeof KEYS)[number]>
         </>
       }
       aside={
-        <div className="rounded-card border border-line bg-surface p-4">
-          <p className="text-sm font-medium text-ink">Want your name here?</p>
-          <p className="mt-1 text-xs leading-relaxed text-ink-muted">
+        <div className="border-t border-line pt-5">
+          <p className="text-[14px] font-medium text-ink">Want your name here?</p>
+          <p className="mt-1 text-[13px] leading-relaxed text-ink-muted">
             Senator-at-Large positions are elected. Applications go to the Office of
             Student Life.
           </p>
-          <CTA href={site.applyUrl} variant="accent" size="sm" className="mt-3 w-full">
+          <CTA href={site.applyUrl} variant="primary" size="sm" className="mt-4 w-full">
             Apply
           </CTA>
         </div>

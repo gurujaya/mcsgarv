@@ -31,7 +31,7 @@ export default function FAQPage() {
         title="Questions students actually ask."
         description="Short answers, with links to the longer version. If yours is not here, ask at a Monday meeting or send it through the contact form."
       />
-      <Container className="grid gap-12 pb-24 lg:grid-cols-12">
+      <Container className="grid gap-12 pt-12 pb-24 md:pt-16 lg:grid-cols-12">
         <nav aria-label="FAQ sections" className="lg:col-span-3">
           <ul className="flex flex-wrap gap-2 lg:sticky lg:top-24 lg:flex-col lg:gap-1">
             {order.map((c) => (
@@ -52,9 +52,7 @@ export default function FAQPage() {
         <div className="space-y-12 lg:col-span-9">
           {order.map((c) => (
             <section key={c} id={`faq-${c}`} className="scroll-mt-24">
-              <h2 className="mb-3 text-xs font-medium tracking-[0.14em] text-ink uppercase">
-                {faqCategories[c]}
-              </h2>
+              <h2 className="eyebrow mb-3">{faqCategories[c]}</h2>
               <Accordion
                 type="multiple"
                 className="rounded-card border border-line bg-surface px-6"

@@ -6,20 +6,20 @@ import { cn } from "cn";
 
 const MotionLink = motion.create(Link);
 
+/* decision: two button styles only. Primary is MC purple, used once or twice per
+   screen; everything else is a hairline ghost. "accent" is kept as an alias of
+   primary so older call sites keep working; orange is no longer a button color. */
 const variants = {
-  /* purple: the primary action everywhere */
-  primary: "bg-mc-purple text-white hover:bg-mc-purple-77",
-  /* orange: the ONE key-contrast CTA per page. Ink text keeps AA contrast. */
-  accent: "bg-mc-orange text-ink hover:brightness-95",
-  ghost:
-    "border border-line bg-surface text-ink hover:border-mc-purple/40 hover:text-mc-purple",
-  link: "text-mc-purple hover:text-mc-purple-77 px-0",
+  primary: "bg-mc-purple text-white hover:bg-[#45186f]",
+  accent: "bg-mc-purple text-white hover:bg-[#45186f]",
+  ghost: "border border-line-strong bg-surface text-ink hover:border-ink",
+  link: "text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink px-0",
 } as const;
 
 const sizes = {
-  sm: "h-9 px-4 text-sm",
-  md: "h-11 px-5 text-sm",
-  lg: "h-12 px-6 text-base",
+  sm: "h-9 px-3.5 text-[13px]",
+  md: "h-10 px-4 text-[14px]",
+  lg: "h-11 px-5 text-[15px]",
 } as const;
 
 export type CTAProps = {
@@ -31,7 +31,8 @@ export type CTAProps = {
   external?: boolean;
 };
 
-const spring = { type: "spring", stiffness: 500, damping: 30 } as const;
+const base =
+  "inline-flex items-center justify-center gap-2 rounded-md font-medium whitespace-nowrap transition-colors duration-150";
 
 export function CTA({
   href,
@@ -41,12 +42,7 @@ export function CTA({
   children,
   external,
 }: CTAProps) {
-  const cls = cn(
-    "inline-flex items-center justify-center gap-2 rounded-pill font-medium whitespace-nowrap transition-colors",
-    variants[variant],
-    variant !== "link" && sizes[size],
-    className,
-  );
+  const cls = cn(base, variants[variant], variant !== "link" && sizes[size], className);
   if (external) {
     return (
       <motion.a
@@ -54,22 +50,14 @@ export function CTA({
         target="_blank"
         rel="noopener noreferrer"
         className={cls}
-        whileHover={{ y: -1 }}
-        whileTap={{ scale: 0.98 }}
-        transition={spring}
+        whileTap={{ scale: 0.985 }}
       >
         {children}
       </motion.a>
     );
   }
   return (
-    <MotionLink
-      href={href}
-      className={cls}
-      whileHover={{ y: -1 }}
-      whileTap={{ scale: 0.98 }}
-      transition={spring}
-    >
+    <MotionLink href={href} className={cls} whileTap={{ scale: 0.985 }}>
       {children}
     </MotionLink>
   );
@@ -88,14 +76,13 @@ export function MotionButton({
   return (
     <motion.button
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-pill font-medium whitespace-nowrap transition-colors disabled:opacity-60",
+        base,
+        "disabled:opacity-60",
         variants[variant],
         variant !== "link" && sizes[size],
         className,
       )}
-      whileHover={{ y: -1 }}
-      whileTap={{ scale: 0.98 }}
-      transition={spring}
+      whileTap={{ scale: 0.985 }}
       {...props}
     >
       {children}

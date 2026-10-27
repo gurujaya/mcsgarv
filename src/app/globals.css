@@ -33,34 +33,32 @@
   --color-mc-black: #000000;
   --color-mc-white: #ffffff;
 
-  /* Site-level tokens (derived, for YC-style surfaces) */
-  --color-bg: #faf9fc;
+  /* Site-level tokens. decision: near-monochrome surfaces. The ink is a
+     purple-black so the page still reads as MC's without tinting every surface.
+     Hairlines are the ink at low alpha, which keeps them consistent on any bg. */
+  --color-bg: #fcfcfd;
   --color-surface: #ffffff;
-  --color-line: #e6e3ec;
-  --color-ink: #1a1523;
-  --color-ink-muted: #666666;
+  --color-line: color-mix(in srgb, #0f0b14 10%, transparent);
+  --color-line-strong: color-mix(in srgb, #0f0b14 22%, transparent);
+  --color-ink: #0f0b14;
+  --color-ink-muted: #5f5a66;
+  --color-ink-faint: #8a8691;
   --color-todo: #b45309; /* amber "Needs content" chip, dev only */
   --color-todo-bg: #fef3c7;
 
-  --radius-card: 12px;
+  --radius-card: 8px;
   --radius-pill: 999px;
 
-  --container-site: 1200px;
+  --container-site: 1320px;
 
-  --animate-marquee: marquee 40s linear infinite;
-  @keyframes marquee {
-    to {
-      transform: translateX(-50%);
-    }
-  }
+  --tracking-display: -0.035em;
 }
 
 /* Fonts come from next/font (variables set on <html>), so map them inline. */
 @theme inline {
-  --font-sans: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-crimson), ui-serif, Georgia, serif;
-  --font-heading: var(--font-crimson), ui-serif, Georgia, serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* shadcn/ui semantic tokens → MC brand */
   --color-background: var(--background);
@@ -106,37 +104,37 @@
 /* Light mode only for v1 (MC brand is light). Dark values can be added under
    `.dark` later; every component reads semantic tokens, not raw hex. */
 :root {
-  --background: #faf9fc;
-  --foreground: #1a1523;
+  --background: #fcfcfd;
+  --foreground: #0f0b14;
   --card: #ffffff;
-  --card-foreground: #1a1523;
+  --card-foreground: #0f0b14;
   --popover: #ffffff;
-  --popover-foreground: #1a1523;
+  --popover-foreground: #0f0b14;
   --primary: #51237f;
   --primary-foreground: #ffffff;
-  --secondary: #f1eef6;
-  --secondary-foreground: #51237f;
-  --muted: #f3f1f7;
-  --muted-foreground: #666666;
-  --accent: #f1eef6;
-  --accent-foreground: #51237f;
+  --secondary: #f3f2f5;
+  --secondary-foreground: #0f0b14;
+  --muted: #f3f2f5;
+  --muted-foreground: #5f5a66;
+  --accent: #f3f2f5;
+  --accent-foreground: #0f0b14;
   --destructive: #b91c1c;
-  --border: #e6e3ec;
-  --input: #e6e3ec;
+  --border: color-mix(in srgb, #0f0b14 10%, transparent);
+  --input: color-mix(in srgb, #0f0b14 14%, transparent);
   --ring: #51237f;
   --chart-1: #51237f;
   --chart-2: #6e4d94;
   --chart-3: #0e8ad9;
   --chart-4: #28a689;
   --chart-5: #ff5e3a;
-  --radius: 0.625rem;
-  --sidebar: #faf9fc;
-  --sidebar-foreground: #1a1523;
+  --radius: 0.5rem;
+  --sidebar: #fcfcfd;
+  --sidebar-foreground: #0f0b14;
   --sidebar-primary: #51237f;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #f1eef6;
   --sidebar-accent-foreground: #51237f;
-  --sidebar-border: #e6e3ec;
+  --sidebar-border: color-mix(in srgb, #0f0b14 10%, transparent);
   --sidebar-ring: #51237f;
 }
 
@@ -153,8 +151,14 @@
     @apply bg-bg text-ink;
     font-feature-settings:
       "kern" 1,
-      "liga" 1;
+      "liga" 1,
+      "ss03" 1;
     text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
   }
   button:not(:disabled),
   [role="button"]:not(:disabled) {
@@ -176,6 +180,29 @@
 }
 
 @layer components {
+  /* The page frame: content column with hairline rails on large screens,
+     the structural lines you see on Payload / Aimdoc. */
+  .site-frame {
+    @apply mx-auto w-full max-w-site;
+  }
+  @media (min-width: 1024px) {
+    .site-frame {
+      border-inline: 1px solid var(--color-line);
+    }
+  }
+
+  /* Type roles */
+  .eyebrow {
+    @apply font-mono text-[11px] font-normal tracking-[0.1em] text-ink-muted uppercase;
+  }
+  .display {
+    @apply font-medium tracking-display text-ink;
+    line-height: 1.02;
+  }
+  .lede {
+    @apply text-[17px] leading-[1.55] text-ink-muted;
+  }
+
   .page-enter {
     animation: page-enter 150ms ease-out both;
   }
@@ -194,11 +221,11 @@
   }
 
   .prose-sga {
-    @apply text-[15px] leading-relaxed text-ink-muted;
-    max-width: 70ch;
+    @apply text-[16px] leading-[1.65] text-ink-muted;
+    max-width: 64ch;
   }
   .prose-sga h2 {
-    @apply mt-10 mb-3 font-serif text-3xl font-semibold tracking-tight text-ink;
+    @apply mt-12 mb-4 text-[26px] font-medium tracking-[-0.02em] text-ink;
   }
   .prose-sga h3 {
     @apply mt-8 mb-2 text-lg font-medium text-ink;
@@ -217,13 +244,13 @@
     @apply list-decimal;
   }
   .prose-sga a {
-    @apply text-mc-purple underline decoration-mc-purple/30 underline-offset-4 hover:decoration-mc-purple;
+    @apply text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink;
   }
   .prose-sga strong {
     @apply font-medium text-ink;
   }
   .prose-sga blockquote {
-    @apply my-6 border-l-2 border-mc-purple pl-5 font-serif text-xl text-ink italic;
+    @apply my-6 border-l border-line-strong pl-5 text-[17px] text-ink;
   }
   .prose-sga hr {
     @apply my-10 border-line;

@@ -27,10 +27,10 @@ export async function generateMetadata({
 }
 
 const toneBg: Record<string, string> = {
-  purple: "bg-mc-purple/8 text-mc-purple",
-  blue: "bg-mc-blue/10 text-mc-blue-ink",
-  green: "bg-mc-green/10 text-mc-green-ink",
-  orange: "bg-mc-orange/10 text-mc-orange-ink",
+  purple: "border border-line bg-surface text-ink",
+  blue: "border border-line bg-surface text-ink",
+  green: "border border-line bg-surface text-ink",
+  orange: "border border-line bg-surface text-ink",
 };
 
 export default async function CommitteePage({ params }: PageProps<"/committees/[slug]">) {
@@ -47,10 +47,13 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
 
   return (
     <>
-      <Container as="header" className="pt-10 pb-10 md:pt-14 md:pb-12">
+      <Container
+        as="header"
+        className="border-b border-line pt-10 pb-10 md:pt-14 md:pb-12"
+      >
         <Link
           href="/committees"
-          className="inline-flex items-center gap-1.5 text-sm text-ink-muted hover:text-mc-purple"
+          className="inline-flex items-center gap-1.5 text-[14px] text-ink-muted hover:text-ink"
         >
           <ArrowLeft className="size-4" /> All committees
         </Link>
@@ -70,7 +73,7 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
                 <TodoChip note="Description is a draft; an officer must confirm." />
               ) : null}
             </div>
-            <h1 className="mt-4 font-serif text-4xl leading-[1.05] font-semibold tracking-tight text-ink md:text-6xl">
+            <h1 className="display mt-4 text-[40px] text-ink md:text-6xl md:text-[52px]">
               {c.name}
               {c.shortName ? (
                 <span className="ml-3 align-middle font-sans text-xl font-normal text-ink-muted">
@@ -85,7 +88,7 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
         </div>
       </Container>
 
-      <Container className="grid gap-12 pb-24 lg:grid-cols-12">
+      <Container className="grid gap-12 pt-12 pb-24 md:pt-16 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <div className="prose-sga">
             {paragraphs.map((p, i) => (
@@ -93,16 +96,11 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
             ))}
           </div>
 
-          <h2 className="mt-12 text-xs font-medium tracking-[0.14em] text-ink uppercase">
-            Responsibilities
-          </h2>
+          <h2 className="eyebrow mt-12">Responsibilities</h2>
           <ul className="mt-4 divide-y divide-line rounded-card border border-line bg-surface">
             {c.responsibilities.map((r) => (
               <li key={r} className="flex gap-3 px-5 py-3.5 text-[15px] text-ink">
-                <span
-                  aria-hidden
-                  className="mt-2 size-1.5 shrink-0 rounded-full bg-mc-purple"
-                />
+                <span aria-hidden className="mt-2 size-1 shrink-0 rounded-full bg-ink" />
                 {r}
               </li>
             ))}
@@ -110,9 +108,7 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
 
           {c.howToJoin ? (
             <>
-              <h2 className="mt-12 text-xs font-medium tracking-[0.14em] text-ink uppercase">
-                How to join
-              </h2>
+              <h2 className="eyebrow mt-12">How to join</h2>
               <p className="mt-3 max-w-[65ch] text-[15px] leading-relaxed text-ink-muted">
                 <Todo value={c.howToJoin} fallback="Ask at a Monday open meeting." />
               </p>
@@ -121,9 +117,7 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
 
           {members.length ? (
             <>
-              <h2 className="mt-12 text-xs font-medium tracking-[0.14em] text-ink uppercase">
-                Members
-              </h2>
+              <h2 className="eyebrow mt-12">Members</h2>
               <ul className="mt-4 grid gap-3 sm:grid-cols-2">
                 {members.map((m) => (
                   <li
@@ -170,7 +164,7 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <Clock className="mt-0.5 size-4 shrink-0 text-mc-purple" aria-hidden />
+                  <Clock className="mt-0.5 size-4 shrink-0 text-ink-muted" aria-hidden />
                   <div>
                     <dt className="text-ink-muted">Meets</dt>
                     <dd className="text-ink">
@@ -179,7 +173,7 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <Users className="mt-0.5 size-4 shrink-0 text-mc-purple" aria-hidden />
+                  <Users className="mt-0.5 size-4 shrink-0 text-ink-muted" aria-hidden />
                   <div>
                     <dt className="text-ink-muted">Who can join</dt>
                     <dd className="text-ink">
@@ -190,13 +184,13 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <Mail className="mt-0.5 size-4 shrink-0 text-mc-purple" aria-hidden />
+                  <Mail className="mt-0.5 size-4 shrink-0 text-ink-muted" aria-hidden />
                   <div>
                     <dt className="text-ink-muted">Contact</dt>
                     <dd>
                       <a
                         href={`mailto:${c.contact ?? site.email}`}
-                        className="text-mc-purple hover:underline"
+                        className="text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink"
                       >
                         {c.contact ?? site.email}
                       </a>
@@ -228,9 +222,7 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
 
             {c.links?.length ? (
               <div className="rounded-card border border-line bg-surface p-6">
-                <h2 className="text-xs font-medium tracking-[0.14em] text-ink uppercase">
-                  Links
-                </h2>
+                <h2 className="eyebrow">Links</h2>
                 <ul className="mt-3 space-y-2">
                   {c.links.map((l) => (
                     <li
@@ -242,7 +234,10 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
                           {l.label} <TodoChip note="Add link" />
                         </span>
                       ) : l.href.startsWith("/") ? (
-                        <Link href={l.href} className="text-mc-purple hover:underline">
+                        <Link
+                          href={l.href}
+                          className="text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink"
+                        >
                           {l.label}
                         </Link>
                       ) : (
@@ -250,7 +245,7 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
                           href={l.href}
                           target={l.href.startsWith("mailto:") ? undefined : "_blank"}
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-mc-purple hover:underline"
+                          className="inline-flex items-center gap-1 text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink"
                         >
                           {l.label}
                           {l.href.startsWith("http") ? (
@@ -265,15 +260,13 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
             ) : null}
 
             <div className="rounded-card border border-line bg-surface p-6">
-              <h2 className="text-xs font-medium tracking-[0.14em] text-ink uppercase">
-                Other committees
-              </h2>
+              <h2 className="eyebrow">Other committees</h2>
               <ul className="mt-3 space-y-2">
                 {others.map((o) => (
                   <li key={o.slug}>
                     <Link
                       href={`/committees/${o.slug}`}
-                      className="text-sm text-ink hover:text-mc-purple"
+                      className="text-[14px] text-ink-muted hover:text-ink"
                     >
                       {o.name}
                     </Link>
@@ -282,7 +275,7 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
                 <li>
                   <Link
                     href="/committees"
-                    className="text-sm font-medium text-mc-purple hover:underline"
+                    className="text-sm font-medium text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink"
                   >
                     All {committees.length} committees →
                   </Link>

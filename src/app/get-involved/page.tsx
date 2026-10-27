@@ -59,7 +59,7 @@ export default function GetInvolvedPage() {
             <a
               key={href}
               href={href}
-              className="rounded-pill border border-line bg-surface px-4 py-2 text-sm text-ink transition-colors hover:border-mc-purple/40 hover:text-mc-purple"
+              className="rounded-md border border-line bg-surface px-3.5 py-2 text-[13px] text-ink transition-colors hover:border-line-strong hover:text-mc-purple"
             >
               {label}
             </a>
@@ -81,9 +81,7 @@ export default function GetInvolvedPage() {
               className="mb-6"
             />
             <div className="rounded-card border border-line bg-surface p-6">
-              <h3 className="text-xs font-medium tracking-[0.14em] text-ink uppercase">
-                Requirements
-              </h3>
+              <h3 className="eyebrow">Requirements</h3>
               <ul className="mt-4 space-y-3">
                 {[
                   "In good standing with the College and free from Code of Conduct violations",
@@ -130,7 +128,7 @@ export default function GetInvolvedPage() {
                 key={s.title}
                 className="flex gap-5 rounded-card border border-line bg-surface p-6"
               >
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-mc-purple font-serif text-lg font-semibold text-white">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-line-strong font-mono text-[12px] text-ink">
                   {i + 1}
                 </span>
                 <div>
@@ -164,9 +162,7 @@ export default function GetInvolvedPage() {
           <div className="lg:col-span-7">
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-card border border-line bg-surface p-6">
-                <h3 className="text-xs font-medium tracking-[0.14em] text-ink uppercase">
-                  What SAB has done
-                </h3>
+                <h3 className="eyebrow">What SAB has done</h3>
                 <ul className="mt-3 space-y-1.5 text-sm text-ink-muted">
                   <li>Masquerade ball</li>
                   <li>Halloween Bash</li>
@@ -175,15 +171,13 @@ export default function GetInvolvedPage() {
                 </ul>
               </div>
               <div className="rounded-card border border-line bg-surface p-6">
-                <h3 className="text-xs font-medium tracking-[0.14em] text-ink uppercase">
-                  How to join
-                </h3>
+                <h3 className="eyebrow">How to join</h3>
                 <ol className="mt-3 list-decimal space-y-1.5 pl-4 text-sm text-ink-muted">
                   <li>
                     Email{" "}
                     <a
                       href={`mailto:${site.sab.email}`}
-                      className="text-mc-purple hover:underline"
+                      className="text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink"
                     >
                       {site.sab.email}
                     </a>{" "}
@@ -215,7 +209,7 @@ export default function GetInvolvedPage() {
               {sab ? (
                 <Link
                   href={`/committees/${sab.slug}`}
-                  className="inline-flex items-center gap-1 text-sm font-medium text-mc-purple hover:underline"
+                  className="inline-flex items-center gap-1 text-sm font-medium text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink"
                 >
                   About SAB <ArrowRight className="size-4" />
                 </Link>
@@ -242,13 +236,11 @@ export default function GetInvolvedPage() {
               <li key={c.slug}>
                 <Link
                   href={`/committees/${c.slug}`}
-                  className="group flex h-full flex-col gap-4 rounded-card border border-line bg-surface p-6 transition-[transform,box-shadow,border-color] hover:-translate-y-0.5 hover:border-mc-purple/30 hover:shadow-sm"
+                  className="group flex h-full flex-col gap-4 rounded-card border border-line bg-surface p-6 transition-colors hover:border-line-strong"
                 >
                   <CommitteeTile committee={c} />
                   <div>
-                    <h3 className="text-lg font-medium text-ink group-hover:text-mc-purple">
-                      {c.name}
-                    </h3>
+                    <h3 className="text-lg font-medium text-ink">{c.name}</h3>
                     <p className="mt-1 text-sm leading-relaxed text-ink-muted">
                       {c.tagline}
                     </p>
@@ -279,7 +271,7 @@ export default function GetInvolvedPage() {
             </CTA>
           </div>
           <div className="rounded-card border border-line bg-surface p-6 md:p-8 lg:col-span-7">
-            <h3 className="font-serif text-2xl font-semibold text-ink">
+            <h3 className="text-[22px] font-medium tracking-[-0.02em] text-ink">
               Tell us you’re interested
             </h3>
             <p className="mt-1 mb-6 text-sm text-ink-muted">

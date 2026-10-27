@@ -29,7 +29,7 @@ export default function ConstitutionPage() {
           <TodoChip note="Paste the official constitution text into constitution.mdx" />
         </p>
       </PageHeader>
-      <Container className="pb-24">
+      <Container className="pt-12 pb-24 md:pt-16">
         <article className="prose-sga rounded-card border border-line bg-surface px-6 py-8 md:px-10 md:py-12">
           <Constitution />
         </article>

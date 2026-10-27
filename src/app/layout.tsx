@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Roboto, Crimson_Text } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -8,20 +8,14 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { site } from "@/content/site";
 
-// decision: only the weights the design actually uses are loaded (Roboto 400/500,
-// Crimson Text 400/600). Every extra weight is a ~23 KB preloaded file that sits on
-// the LCP critical path on slow connections. Add a weight here if you use it.
-const roboto = Roboto({
+// decision: Geist (sans) + Geist Mono, one family each, variable weight. This
+// departs from MC's Roboto + Crimson Text pairing on purpose: the clean,
+// single-family look the references share is not achievable with that pair.
+// To revert, swap the imports here and the --font-* lines in globals.css.
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
+const geistMono = Geist_Mono({
   subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-roboto",
-  display: "swap",
-});
-
-const crimson = Crimson_Text({
-  subsets: ["latin"],
-  weight: ["400", "600"],
-  variable: "--font-crimson",
+  variable: "--font-geist-mono",
   display: "swap",
 });
 
@@ -65,7 +59,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${roboto.variable} ${crimson.variable} h-full antialiased`}
+      className={`${geist.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <Providers>
@@ -76,10 +70,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             Skip to content
           </a>
           <SiteHeader />
-          <main id="main" className="flex-1">
-            {children}
-          </main>
-          <SiteFooter />
+          <div className="site-frame flex flex-1 flex-col">
+            <main id="main" className="flex-1">
+              {children}
+            </main>
+            <SiteFooter />
+          </div>
         </Providers>
         <Analytics />
         <SpeedInsights />

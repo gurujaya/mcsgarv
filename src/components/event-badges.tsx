@@ -9,12 +9,7 @@ export function EventTypePill({ type }: { type: Event["type"] }) {
 
 export function TodayBadge({ event, now }: { event: Event; now?: Date }) {
   if (event.approximate || !isToday(event.start, now)) return null;
-  return (
-    <Pill tone="live">
-      <span aria-hidden className="size-1.5 animate-pulse rounded-full bg-ink/70" />
-      Today
-    </Pill>
-  );
+  return <Pill tone="live">Today</Pill>;
 }
 
 /** Date tile used as the leading slot in event rows: "NOV / 20". */
@@ -36,7 +31,7 @@ export function DateTile({ iso, approximate }: { iso: string; approximate?: bool
       <span className="text-[10px] font-medium tracking-wide text-mc-purple uppercase">
         {month}
       </span>
-      <span className="mt-0.5 font-serif text-xl font-semibold text-ink">
+      <span className="mt-0.5 text-[18px] font-medium tracking-[-0.01em] text-ink">
         {approximate ? "—" : day}
       </span>
     </span>

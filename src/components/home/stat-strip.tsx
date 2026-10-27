@@ -26,7 +26,7 @@ function CountUp({
       return;
     }
     const controls = animate(0, to, {
-      duration: 1.4,
+      duration: 1.2,
       ease: [0.22, 1, 0.36, 1],
       onUpdate: (v) => {
         el.textContent = `${prefix}${Math.round(v).toLocaleString()}${suffix}`;
@@ -42,16 +42,19 @@ function CountUp({
   );
 }
 
+/** Bordered cells, like a table row: number, then a mono label. */
 export function StatStrip({ stats }: { stats: Stat[] }) {
   return (
-    <dl className="grid grid-cols-2 divide-line overflow-hidden rounded-card border border-line bg-surface md:grid-cols-4 md:divide-x">
+    <dl className="grid grid-cols-2 border-b border-line md:grid-cols-4">
       {stats.map((s, i) => (
         <div
           key={s.label}
-          className={`flex flex-col gap-1 px-6 py-6 ${i < 2 ? "border-b md:border-b-0" : ""} ${i % 2 === 0 ? "border-r md:border-r-0" : ""} border-line`}
+          className={`flex flex-col gap-2 px-6 py-7 md:px-10 md:py-8 ${i % 2 === 1 ? "border-l border-line" : ""} ${i >= 2 ? "border-t border-line md:border-t-0 md:border-l" : ""}`}
         >
-          <dt className="order-2 text-xs text-ink-muted">{s.label}</dt>
-          <dd className="order-1 font-serif text-3xl font-semibold tracking-tight text-mc-purple md:text-4xl">
+          <dt className="order-2 font-mono text-[11px] tracking-[0.06em] text-ink-muted uppercase">
+            {s.label}
+          </dt>
+          <dd className="order-1 text-[32px] leading-none font-medium tracking-[-0.03em] text-ink md:text-[40px]">
             {typeof s.value === "number" ? (
               <CountUp to={s.value} suffix={s.suffix} prefix={s.prefix} />
             ) : (

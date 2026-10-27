@@ -4,10 +4,8 @@ import { CTA } from "@/components/primitives/cta";
 export default function NotFound() {
   return (
     <Container className="flex min-h-[60vh] flex-col items-start justify-center py-24">
-      <p className="text-xs font-medium tracking-[0.14em] text-mc-purple uppercase">
-        404
-      </p>
-      <h1 className="mt-2 font-serif text-5xl font-semibold tracking-tight text-ink">
+      <p className="eyebrow">404</p>
+      <h1 className="display mt-2 text-[44px] text-ink">
         That page isn’t on the agenda.
       </h1>
       <p className="mt-4 max-w-[60ch] text-ink-muted">

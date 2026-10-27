@@ -1,4 +1,3 @@
-import { Container } from "@/components/primitives/container";
 import { Hero } from "@/components/home/hero";
 import { StatStrip } from "@/components/home/stat-strip";
 import { WhatWeDo } from "@/components/home/what-we-do";
@@ -17,16 +16,14 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <Container className="-mt-8 md:-mt-12">
-        <StatStrip
-          stats={[
-            { value: 15000, suffix: "+", label: "students represented" },
-            { value: committees.length, label: "committees" },
-            { value: people.length, label: "senators & officers" },
-            { value: site.meeting.day, label: `open meetings, ${site.meeting.time}` },
-          ]}
-        />
-      </Container>
+      <StatStrip
+        stats={[
+          { value: 15000, suffix: "+", label: "students represented" },
+          { value: committees.length, label: "committees" },
+          { value: people.length, label: "senators & officers" },
+          { value: site.meeting.day, label: `open meetings, ${site.meeting.time}` },
+        ]}
+      />
       <WhatWeDo />
       <CommitteesPreview />
       <UpcomingEvents />

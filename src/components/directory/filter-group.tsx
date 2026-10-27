@@ -41,12 +41,12 @@ export function FilterGroup({
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between rounded-md py-1 text-left text-sm font-medium text-ink"
+        className="flex w-full items-center justify-between py-1 text-left font-mono text-[11px] tracking-[0.08em] text-ink uppercase"
       >
         <span className="flex items-center gap-2">
           {title}
           {selected.length ? (
-            <span className="rounded-pill bg-mc-purple px-1.5 py-px text-[10px] font-medium text-white">
+            <span className="rounded-[3px] bg-ink px-1.5 py-px font-mono text-[10px] text-white">
               {selected.length}
             </span>
           ) : null}
@@ -67,7 +67,7 @@ export function FilterGroup({
               key={o.value}
               htmlFor={inputId}
               className={cn(
-                "flex cursor-pointer items-center gap-2.5 rounded-md px-1.5 py-1.5 text-sm transition-colors hover:bg-surface",
+                "flex cursor-pointer items-center gap-2.5 rounded-md px-1.5 py-1.5 text-[14px] transition-colors hover:bg-ink/[0.03]",
                 checked ? "text-ink" : "text-ink-muted",
               )}
             >
@@ -75,7 +75,7 @@ export function FilterGroup({
                 id={inputId}
                 checked={checked}
                 onCheckedChange={() => toggle(o.value)}
-                className="data-[state=checked]:border-mc-purple data-[state=checked]:bg-mc-purple"
+                className="rounded-[3px] border-line-strong data-[state=checked]:border-ink data-[state=checked]:bg-ink"
               />
               <span className="flex-1">{o.label}</span>
               {typeof o.count === "number" ? (

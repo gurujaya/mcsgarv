@@ -51,7 +51,7 @@ export default function AboutPage() {
         description="The Student Government Association is the official representative body for all students on the Montgomery College Rockville Campus. It represents student interests, works closely with College leadership, and advocates for a positive campus experience."
       />
 
-      <Container className="grid gap-12 lg:grid-cols-12">
+      <Container className="grid gap-12 pt-12 md:pt-16 lg:grid-cols-12">
         <div className="prose-sga lg:col-span-7">
           <h2>Mission</h2>
           <p>
@@ -71,9 +71,7 @@ export default function AboutPage() {
         </div>
         <aside className="lg:col-span-5">
           <div className="sticky top-24 rounded-card border border-line bg-surface p-6">
-            <h2 className="text-xs font-medium tracking-[0.14em] text-ink uppercase">
-              At a glance
-            </h2>
+            <h2 className="eyebrow">At a glance</h2>
             <dl className="mt-4 space-y-3 text-sm">
               <div className="flex justify-between gap-4 border-b border-line pb-3">
                 <dt className="text-ink-muted">Campus</dt>
@@ -118,7 +116,7 @@ export default function AboutPage() {
               as="li"
               className="rounded-card border border-line bg-surface p-6"
             >
-              <span className="font-serif text-3xl font-semibold text-mc-purple/60">
+              <span className="font-mono text-[12px] tracking-[0.08em] text-ink-muted uppercase">
                 0{i + 1}
               </span>
               <h3 className="mt-3 text-lg font-medium text-ink">{r.title}</h3>
@@ -180,7 +178,7 @@ export default function AboutPage() {
           {values.map((v) => (
             <li
               key={v}
-              className="rounded-pill border border-line bg-surface px-4 py-2 text-sm font-medium text-ink"
+              className="rounded-md border border-line bg-surface px-3.5 py-2 text-[13px] text-ink"
             >
               {v}
             </li>
@@ -190,7 +188,7 @@ export default function AboutPage() {
 
       <Container className="pb-8">
         <div className="rounded-card bg-mc-purple px-8 py-12 text-white md:px-12">
-          <h2 className="max-w-[22ch] font-serif text-3xl font-semibold tracking-tight md:text-4xl">
+          <h2 className="display max-w-[22ch] text-[30px] md:text-4xl md:text-[36px]">
             History is still being written. Help write the {site.term} chapter.
           </h2>
           <p className="mt-4 max-w-[55ch] text-white/80">

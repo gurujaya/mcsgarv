@@ -73,8 +73,8 @@ export function SealPlaceholder({
         x="50"
         y="76"
         textAnchor="middle"
-        fontFamily="var(--font-serif), Georgia, serif"
-        fontWeight="700"
+        fontFamily="var(--font-sans), system-ui, sans-serif"
+        fontWeight="600"
         fontSize="26"
         fill="#fff"
       >

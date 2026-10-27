@@ -77,20 +77,20 @@ export default function FundingPage() {
         <div className="mt-8 flex flex-wrap gap-3">
           <a
             href="#request"
-            className="inline-flex h-11 items-center rounded-pill bg-mc-orange px-5 text-sm font-medium text-ink transition hover:brightness-95"
+            className="inline-flex h-11 items-center rounded-md bg-mc-purple px-5 text-[14px] font-medium text-white transition-colors hover:bg-[#45186f]"
           >
             Request funding
           </a>
           <Link
             href="/committees/budget-panel"
-            className="inline-flex h-11 items-center rounded-pill border border-line bg-surface px-5 text-sm font-medium text-ink transition-colors hover:border-mc-purple/40 hover:text-mc-purple"
+            className="inline-flex h-11 items-center rounded-pill border border-line bg-surface px-5 text-sm font-medium text-ink transition-colors hover:border-line-strong hover:text-mc-purple"
           >
             About the Budget Panel
           </Link>
         </div>
       </PageHeader>
 
-      <Container className="grid gap-12 lg:grid-cols-12">
+      <Container className="grid gap-12 pt-12 md:pt-16 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <SectionHeading
             eyebrow="Process"
@@ -103,7 +103,7 @@ export default function FundingPage() {
                 key={s.title}
                 className="flex gap-5 rounded-card border border-line bg-surface p-6"
               >
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-mc-purple font-serif text-lg font-semibold text-white">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-line-strong font-mono text-[12px] text-ink">
                   {i + 1}
                 </span>
                 <div>
@@ -127,9 +127,7 @@ export default function FundingPage() {
         <aside className="lg:col-span-5">
           <div className="sticky top-24 space-y-4">
             <div className="rounded-card border border-line bg-surface p-6">
-              <h2 className="text-xs font-medium tracking-[0.14em] text-ink uppercase">
-                What the panel looks for
-              </h2>
+              <h2 className="eyebrow">What the panel looks for</h2>
               <ul className="mt-4 space-y-4">
                 {criteria.map((c) => (
                   <li key={c.label}>

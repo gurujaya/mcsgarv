@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/primitives/container";
 import { SectionHeading } from "@/components/primitives/section-heading";
 import { CTA } from "@/components/primitives/cta";
@@ -49,45 +49,51 @@ export const paths = [
 
 export function GetInvolvedPaths() {
   return (
-    <Container as="section" className="py-20 md:py-28">
-      <SectionHeading
-        eyebrow="Get involved"
-        title="Three ways in."
-        description="You do not have to run for office to shape campus. Pick the level of commitment that fits your semester."
-        action={{ label: "All the details", href: "/get-involved" }}
-      />
-      <Reveal className="grid gap-4 lg:grid-cols-3">
-        {paths.map((p) => (
+    <section>
+      <Container className="pt-20 md:pt-28">
+        <SectionHeading
+          eyebrow="05 — Get involved"
+          title="Three ways in."
+          description="You do not have to run for office to shape campus. Pick the level of commitment that fits your semester."
+          action={{ label: "All the details", href: "/get-involved" }}
+        />
+      </Container>
+      <Reveal className="grid border-y border-line lg:grid-cols-3">
+        {paths.map((p, i) => (
           <RevealItem
             key={p.id}
             as="article"
-            className="flex flex-col rounded-card border border-line bg-surface p-6"
+            className={`flex flex-col px-6 py-8 md:px-10 md:py-10 ${i > 0 ? "border-t border-line lg:border-t-0 lg:border-l" : ""}`}
           >
-            <h3 className="font-serif text-2xl font-semibold text-ink">{p.title}</h3>
-            <p className="mt-1.5 text-sm text-ink-muted">{p.tagline}</p>
-            <ul className="mt-5 flex-1 space-y-2.5">
+            <p className="font-mono text-[11px] tracking-[0.08em] text-ink-muted uppercase">
+              Path {i + 1}
+            </p>
+            <h3 className="mt-3 text-[22px] font-medium tracking-[-0.02em] text-ink">
+              {p.title}
+            </h3>
+            <p className="mt-1.5 text-[14px] text-ink-muted">{p.tagline}</p>
+            <ul className="mt-6 flex-1 divide-y divide-line border-y border-line">
               {p.requirements.map((r) => (
-                <li key={r} className="flex gap-2.5 text-sm text-ink-muted">
-                  <Check
-                    className="mt-0.5 size-4 shrink-0 text-mc-green-ink"
-                    aria-hidden
-                  />
-                  <span>{r}</span>
+                <li key={r} className="py-2.5 text-[14px] leading-snug text-ink-muted">
+                  {r}
                 </li>
               ))}
             </ul>
             <div className="mt-6">
-              <CTA href={p.cta.href} variant={p.accent ? "accent" : "ghost"} size="sm">
+              <CTA href={p.cta.href} variant={p.accent ? "primary" : "ghost"} size="sm">
                 {p.cta.label}
+                <ArrowRight className="size-3.5" aria-hidden />
               </CTA>
             </div>
           </RevealItem>
         ))}
       </Reveal>
-      <p className="mt-8 text-sm text-ink-muted">
-        Not sure? Just come to a meeting: {site.meeting.day}s, {site.meeting.time},{" "}
-        {site.meeting.location}.
-      </p>
-    </Container>
+      <Container className="py-6">
+        <p className="font-mono text-[11px] tracking-[0.04em] text-ink-muted uppercase">
+          Not sure? Just come to a meeting · {site.meeting.day}s {site.meeting.time} ·{" "}
+          {site.meeting.location}
+        </p>
+      </Container>
+    </section>
   );
 }

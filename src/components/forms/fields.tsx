@@ -92,7 +92,7 @@ export function FormStatus({
     return (
       <p
         role="status"
-        className="rounded-lg bg-mc-green/10 px-4 py-3 text-sm text-mc-green-ink"
+        className="rounded-md border border-line bg-surface px-4 py-3 text-[14px] text-ink"
       >
         {success}
       </p>
@@ -101,7 +101,7 @@ export function FormStatus({
     return (
       <p
         role="alert"
-        className="rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive"
+        className="rounded-md border border-destructive/30 bg-surface px-4 py-3 text-[14px] text-destructive"
       >
         {error ?? "Something went wrong. Email us instead and we will sort it out."}
       </p>

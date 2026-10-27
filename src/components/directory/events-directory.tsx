@@ -13,6 +13,7 @@ import {
 import { DateTile, EventTypePill, TodayBadge } from "@/components/event-badges";
 import { AddToCalendar } from "@/components/add-to-calendar";
 import { Pill } from "@/components/primitives/pill";
+import { Todo } from "@/components/primitives/todo-chip";
 import { eventTypes } from "@/content/events";
 import { getCommittee } from "@/content/committees";
 import type { Event, EventType } from "@/content/types";
@@ -125,7 +126,7 @@ function EventsDirectoryView({
             title={e.title}
             description={
               <>
-                {e.location}
+                <Todo value={e.location} fallback="Venue to be announced" />
                 {e.host ? (
                   <span className="text-ink-muted/80"> · Hosted by {e.host}</span>
                 ) : null}

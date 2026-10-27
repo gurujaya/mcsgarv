@@ -1,6 +1,6 @@
 # SGA Rockville — Montgomery College Rockville Student Government Association
 
-The official website for the Montgomery College Rockville Campus SGA. Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, shadcn/ui, motion.dev, and a lazy-loaded three.js hero. No CMS: every piece of content is a typed TypeScript file a student officer can edit in a text editor.
+The official website for the Montgomery College Rockville Campus SGA. Built with Next.js 16 (App Router), TypeScript, Tailwind CSS v4, shadcn/ui, and motion.dev. No CMS: every piece of content is a typed TypeScript file a student officer can edit in a text editor.
 
 Live site: set `NEXT_PUBLIC_SITE_URL` (see below). Official MC page: <https://www.montgomerycollege.edu/life-at-mc/student-life/student-government-association/rockville.html>
 
@@ -110,6 +110,10 @@ Everything is in `src/content/site.ts`: email, phone, office room, meeting day/t
 2. In `src/components/primitives/seal.tsx`, change `USE_PLACEHOLDER` to `false`.
 3. Optionally replace `src/app/favicon.ico` and update the `SGA` circle in `src/app/opengraph-image.tsx`.
 
+## Swap the hero photo
+
+Replace `public/images/sga-group.jpg` with any portrait photo (4:5 works best, at least 1200px tall). Update the `alt` text and the caption `TODO` in `src/components/home/hero.tsx`.
+
 ## Forms (contact, interest, funding)
 
 Forms post to the Route Handler at `src/app/api/contact/route.ts`, which forwards the JSON to the URL in the `FORM_ENDPOINT` environment variable. There is no database.
@@ -124,15 +128,15 @@ In development with no endpoint set, submissions are printed to the terminal. In
 
 `scripts/build-search-index.ts` runs automatically before every build and writes `public/search-index.json` from the content files. It indexes pages, committees, people, events, FAQ, and resources. No configuration needed; just edit content and rebuild. Run `npm run search-index` to regenerate it manually during development.
 
-## Brand
+## Design system
 
-Colors come from the Montgomery College Brand Standards guide and are defined once in `src/app/globals.css`:
+The look is deliberately restrained: one typeface, near-monochrome surfaces, hairline rules instead of cards and tints, and MC purple used for one action per screen. Everything is defined once in `src/app/globals.css`:
 
-- Purple `#51237F` (dominant), purple 77% tint `#6E4D94` (the only permitted purple tint)
-- Accents: orange `#FF5E3A`, blue `#0E8AD9`, green `#28A689` (keep to ~10–15% of a page)
-- Fonts: Roboto (UI/body) and Crimson Text (display), loaded via `next/font/google`
-
-Orange is reserved for the single most important call to action on a page and "Today" event badges. The three accents fail WCAG AA as small text on white, so pill text uses darker `-ink` shades (also in `globals.css`); fills always use the official hex.
+- **Type:** Geist (UI, body, display) and Geist Mono (eyebrows, labels, metadata), loaded via `next/font/google`. Role classes: `.display` (tight-tracked headlines), `.lede` (intro paragraphs), `.eyebrow` (mono caps labels). Note: this departs from MC's Roboto + Crimson Text pairing; swap the two font imports in `src/app/layout.tsx` and the `--font-*` lines in `globals.css` to revert.
+- **Color:** page `#FCFCFD`, ink `#0F0B14` (a purple-black), muted ink `#5F5A66`, hairlines are ink at 10% and 22% alpha. MC purple `#51237F` is the only button fill. The MC accents (orange, blue, green) appear only as 6px dots on category chips and the "Today" badge.
+- **Shape:** 8px radius on cards and images, 6px on controls, 4px on chips. No shadows, no hover lift.
+- **Layout:** a 1320px `.site-frame` with vertical hairline rails on large screens. Sections are separated by full-width rules; grids of cells share borders instead of gaps.
+- **Hero photo:** `public/images/sga-group.jpg`. Replace the file to change it; keep a 4:5 portrait crop. Set its caption in `src/components/home/hero.tsx`.
 
 ## Deploy to Vercel
 
@@ -151,7 +155,7 @@ src/
   components/
     directory/         YC-style directory: shell, sidebar filters, rows, URL state
     forms/             react-hook-form + zod forms and the submit helper
-    home/              hero (three.js), stats, section components
+    home/              hero (photo), stats, section components
     layout/            header, footer, ⌘K command menu, providers
     primitives/        Container, Pill, SectionHeading, Reveal, Seal, Avatar, CTA
     ui/                shadcn/ui components
@@ -159,6 +163,7 @@ src/
   lib/                 dates, ICS export, search index, TODO helpers
 scripts/               build-search-index.ts
 public/brand/          seal
+public/images/         hero photo
 public/people/         senator photos
 ```
 

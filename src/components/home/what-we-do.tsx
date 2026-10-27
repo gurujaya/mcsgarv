@@ -3,60 +3,55 @@ import { Reveal, RevealItem } from "@/components/primitives/reveal";
 import { SectionHeading } from "@/components/primitives/section-heading";
 import { Container } from "@/components/primitives/container";
 
-const cards: { title: string; body: string; icon: LucideIcon; tone: string }[] = [
+const cards: { title: string; body: string; icon: LucideIcon }[] = [
   {
     title: "Advocate",
     body: "We sit in the rooms where campus decisions get made and bring your concerns with us: dining, safety, facilities, tuition, accessibility.",
     icon: Megaphone,
-    tone: "bg-mc-purple/8 text-mc-purple",
   },
   {
     title: "Fund",
     body: "Student activity fees are your money. The Budget Panel reviews every club request so it goes toward events that actually reach students.",
     icon: Wallet,
-    tone: "bg-mc-green/10 text-mc-green-ink",
   },
   {
     title: "Program",
     body: "From the talent show to Club Rush, SGA and SAB plan the events that turn a commuter campus into a community.",
     icon: PartyPopper,
-    tone: "bg-mc-blue/10 text-mc-blue-ink",
   },
   {
     title: "Connect",
     body: "We’re the bridge between 15,000 students, 130+ clubs, Student Life, and College leadership. If you don’t know who to ask, ask us.",
     icon: Link2,
-    tone: "bg-mc-orange/10 text-mc-orange-ink",
   },
 ];
 
 export function WhatWeDo() {
   return (
-    <Container as="section" className="scroll-mt-24 py-20 md:py-28">
-      <div id="what-we-do" className="scroll-mt-28" />
-      <SectionHeading
-        eyebrow="What SGA does"
-        title="Four jobs. One campus."
-        description="Everything SGA does falls under one of these. If it affects students on the Rockville Campus, it is our business."
-        action={{ label: "More about SGA", href: "/about" }}
-      />
-      <Reveal className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {cards.map((c) => (
+    <section id="what-we-do" className="scroll-mt-20 border-b border-line">
+      <Container className="pt-20 md:pt-28">
+        <SectionHeading
+          eyebrow="01 — What SGA does"
+          title="Four jobs. One campus."
+          description="Everything SGA does falls under one of these. If it affects students on the Rockville Campus, it is our business."
+          action={{ label: "More about SGA", href: "/about" }}
+        />
+      </Container>
+      <Reveal className="grid border-t border-line sm:grid-cols-2 lg:grid-cols-4">
+        {cards.map((c, i) => (
           <RevealItem
             key={c.title}
             as="article"
-            className="group rounded-card border border-line bg-surface p-6 transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-sm"
+            className={`px-6 py-8 md:px-10 md:py-10 ${i > 0 ? "border-t border-line sm:border-t-0" : ""} ${i % 2 === 1 ? "sm:border-l sm:border-line" : ""} ${i >= 2 ? "sm:border-t lg:border-t-0" : ""} ${i > 0 ? "lg:border-l lg:border-line" : ""}`}
           >
-            <span
-              className={`flex size-11 items-center justify-center rounded-[10px] ${c.tone}`}
-            >
-              <c.icon className="size-5" aria-hidden />
-            </span>
-            <h3 className="mt-5 font-serif text-2xl font-semibold text-ink">{c.title}</h3>
-            <p className="mt-2 text-[15px] leading-relaxed text-ink-muted">{c.body}</p>
+            <c.icon className="size-5 stroke-[1.5] text-ink" aria-hidden />
+            <h3 className="mt-8 text-[20px] font-medium tracking-[-0.02em] text-ink">
+              {c.title}
+            </h3>
+            <p className="mt-2.5 text-[15px] leading-[1.6] text-ink-muted">{c.body}</p>
           </RevealItem>
         ))}
       </Reveal>
-    </Container>
+    </section>
   );
 }

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Container } from "@/components/primitives/container";
 import { Seal } from "@/components/primitives/seal";
 import { SocialIcon } from "@/components/primitives/social-icons";
 import { navLinks, secondaryLinks } from "./nav-links";
@@ -8,25 +7,18 @@ import { isTodo } from "@/lib/todo";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-24 border-t border-line bg-surface">
-      <Container className="grid gap-10 py-14 md:grid-cols-12">
-        <div className="md:col-span-5">
-          <Link href="/" className="inline-flex items-center gap-3">
-            <Seal size={44} />
-            <span className="flex flex-col leading-tight">
-              <span className="font-serif text-xl font-semibold text-ink">
-                SGA Rockville
-              </span>
-              <span className="text-xs text-ink-muted">
-                Montgomery College · Rockville Campus
-              </span>
-            </span>
+    <footer className="mt-24 border-t border-line">
+      <div className="grid gap-12 px-6 py-16 md:px-10 lg:grid-cols-12">
+        <div className="lg:col-span-5">
+          <Link href="/" className="inline-flex items-center gap-2.5">
+            <Seal size={26} />
+            <span className="text-[15px] font-medium text-ink">SGA Rockville</span>
           </Link>
-          <p className="mt-5 max-w-sm text-sm leading-relaxed text-ink-muted">
-            Made by students, for students. The Student Government Association is the
-            official representative body for every student on the Rockville Campus.
+          <p className="mt-5 max-w-[38ch] text-[14px] leading-[1.6] text-ink-muted">
+            Made by students, for students. The official representative body for every
+            student on the Montgomery College Rockville Campus.
           </p>
-          <ul className="mt-6 flex items-center gap-2">
+          <ul className="mt-6 flex items-center gap-1.5">
             {site.socials.map((s) => (
               <li key={s.kind}>
                 <a
@@ -34,36 +26,21 @@ export function SiteFooter() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${s.label}${isTodo(s.handle) ? "" : ` ${s.handle}`}`}
-                  className="flex size-9 items-center justify-center rounded-pill border border-line text-ink-muted transition-colors hover:border-mc-purple/40 hover:text-mc-purple"
+                  className="flex size-8 items-center justify-center rounded-md border border-line text-ink-muted transition-colors hover:border-line-strong hover:text-ink"
                 >
-                  <SocialIcon kind={s.kind} className="size-4" />
+                  <SocialIcon kind={s.kind} className="size-3.5" />
                 </a>
               </li>
             ))}
           </ul>
         </div>
 
-        <div className="md:col-span-2">
-          <h3 className="text-xs font-medium tracking-[0.14em] text-ink uppercase">
-            Explore
-          </h3>
-          <ul className="mt-4 space-y-2.5">
-            {navLinks.map((l) => (
+        <div className="lg:col-span-2">
+          <h3 className="eyebrow">Explore</h3>
+          <ul className="mt-4 space-y-2">
+            {[...navLinks, ...secondaryLinks].map((l) => (
               <li key={l.href}>
-                <Link
-                  href={l.href}
-                  className="text-sm text-ink-muted hover:text-mc-purple"
-                >
-                  {l.label}
-                </Link>
-              </li>
-            ))}
-            {secondaryLinks.map((l) => (
-              <li key={l.href}>
-                <Link
-                  href={l.href}
-                  className="text-sm text-ink-muted hover:text-mc-purple"
-                >
+                <Link href={l.href} className="text-[14px] text-ink-muted hover:text-ink">
                   {l.label}
                 </Link>
               </li>
@@ -71,11 +48,9 @@ export function SiteFooter() {
           </ul>
         </div>
 
-        <div className="md:col-span-5">
-          <h3 className="text-xs font-medium tracking-[0.14em] text-ink uppercase">
-            Find us
-          </h3>
-          <address className="mt-4 space-y-2.5 text-sm text-ink-muted not-italic">
+        <div className="lg:col-span-5">
+          <h3 className="eyebrow">Find us</h3>
+          <address className="mt-4 space-y-3 text-[14px] leading-[1.6] text-ink-muted not-italic">
             <p>
               {site.office.within}, {site.office.room}
               <br />
@@ -84,11 +59,11 @@ export function SiteFooter() {
               {site.office.street}, {site.office.city}
             </p>
             <p>
-              <a href={`mailto:${site.email}`} className="hover:text-mc-purple">
+              <a href={`mailto:${site.email}`} className="hover:text-ink">
                 {site.email}
               </a>
               <br />
-              <a href={site.phoneHref} className="hover:text-mc-purple">
+              <a href={site.phoneHref} className="hover:text-ink">
                 {site.phone}
               </a>
             </p>
@@ -100,29 +75,29 @@ export function SiteFooter() {
                 href={site.studentLife.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-mc-purple"
+                className="hover:text-ink"
               >
                 MC Office of Student Life ↗
               </a>
             </p>
           </address>
         </div>
-      </Container>
+      </div>
       <div className="border-t border-line">
-        <Container className="flex flex-col gap-2 py-5 text-xs text-ink-muted sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-2 px-6 py-5 font-mono text-[11px] tracking-[0.02em] text-ink-muted uppercase sm:flex-row sm:items-center sm:justify-between md:px-10">
           <p>© {new Date().getFullYear()} Montgomery College Rockville SGA</p>
           <p>
-            Student-run. Not an official publication of Montgomery College.{" "}
+            Student-run ·{" "}
             <a
               href={site.mcSgaPageUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="underline-offset-4 hover:text-mc-purple hover:underline"
+              className="hover:text-ink"
             >
               Official MC SGA page
             </a>
           </p>
-        </Container>
+        </div>
       </div>
     </footer>
   );

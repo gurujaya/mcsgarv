@@ -29,7 +29,7 @@ export function AddToCalendar({
       onClick={onClick}
       className={
         className ??
-        "relative z-10 inline-flex items-center gap-1.5 rounded-pill border border-line bg-surface px-2.5 py-1 text-xs font-medium text-ink-muted transition-colors hover:border-mc-purple/40 hover:text-mc-purple"
+        "relative z-10 inline-flex h-[22px] items-center gap-1 rounded-[4px] border border-line bg-surface px-1.5 font-mono text-[11px] text-ink-muted transition-colors hover:border-line-strong hover:text-ink"
       }
       aria-label={`Add ${event.title} to calendar`}
     >

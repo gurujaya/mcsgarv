@@ -26,8 +26,10 @@ export type DirectoryRowProps = {
   animate?: "list" | "reveal" | "none";
 };
 
+/* decision: rows are a ruled list, not stacked cards. Hairline between rows,
+   a faint wash on hover, nothing moves. */
 const rowClass =
-  "group relative flex gap-4 rounded-card border border-line bg-surface/60 px-4 py-3.5 transition-[background-color,border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-mc-purple/30 hover:bg-surface hover:shadow-sm focus-within:border-mc-purple/40 md:items-center";
+  "group relative flex gap-4 border-b border-line px-3 py-4 transition-colors duration-150 hover:bg-ink/[0.025] focus-within:bg-ink/[0.025] md:items-center md:px-4";
 
 export function DirectoryRow({
   href,
@@ -43,32 +45,32 @@ export function DirectoryRow({
 }: DirectoryRowProps) {
   const inner = (
     <>
-      <div className="flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-[10px]">
+      <div className="flex size-10 shrink-0 items-center justify-center overflow-hidden">
         {leading}
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-1 md:flex-row md:items-center md:gap-4">
         <div className="min-w-0 flex-1">
-          <h3 className="text-[15px] font-medium text-ink">
+          <h3 className="text-[15px] font-medium tracking-[-0.01em] text-ink">
             {external ? (
               <a
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="after:absolute after:inset-0 after:rounded-card focus-visible:outline-none"
+                className="after:absolute after:inset-0 focus-visible:outline-none"
               >
                 {title}
               </a>
             ) : (
               <Link
                 href={href}
-                className="after:absolute after:inset-0 after:rounded-card focus-visible:outline-none"
+                className="after:absolute after:inset-0 focus-visible:outline-none"
               >
                 {title}
               </Link>
             )}
           </h3>
           {description ? (
-            <p className="mt-0.5 line-clamp-2 text-sm leading-snug text-ink-muted md:line-clamp-1">
+            <p className="mt-0.5 line-clamp-2 text-[14px] leading-snug text-ink-muted md:line-clamp-1">
               {description}
             </p>
           ) : null}
@@ -78,7 +80,11 @@ export function DirectoryRow({
             {pills ? (
               <div className="flex flex-wrap gap-1.5 md:justify-end">{pills}</div>
             ) : null}
-            {meta ? <div className="text-xs text-ink-muted">{meta}</div> : null}
+            {meta ? (
+              <div className="font-mono text-[11px] tracking-[0.02em] text-ink-muted">
+                {meta}
+              </div>
+            ) : null}
           </div>
         ) : null}
       </div>
@@ -118,7 +124,6 @@ export function DirectoryRow({
 
 /** Square tile used as the row's `leading` slot when there is no image. */
 export function IconTile({
-  tone = "purple",
   children,
   className,
 }: {
@@ -126,19 +131,11 @@ export function IconTile({
   children: React.ReactNode;
   className?: string;
 }) {
-  const tones = {
-    purple: "bg-mc-purple/8 text-mc-purple",
-    blue: "bg-mc-blue/10 text-mc-blue-ink",
-    green: "bg-mc-green/10 text-mc-green-ink",
-    orange: "bg-mc-orange/10 text-mc-orange-ink",
-    neutral: "bg-ink/6 text-ink-muted",
-  };
   return (
     <span
       aria-hidden
       className={cn(
-        "flex size-12 items-center justify-center rounded-[10px] [&_svg]:size-5",
-        tones[tone],
+        "flex size-10 items-center justify-center rounded-[6px] border border-line bg-surface text-ink [&_svg]:size-[18px] [&_svg]:stroke-[1.5]",
         className,
       )}
     >

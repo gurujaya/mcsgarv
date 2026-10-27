@@ -6,37 +6,40 @@ import { DateTile, EventTypePill, TodayBadge } from "@/components/event-badges";
 import { events } from "@/content/events";
 import { fmtEventWhen, splitEvents } from "@/lib/dates";
 import { Reveal } from "@/components/primitives/reveal";
+import { Todo } from "@/components/primitives/todo-chip";
 
 export function UpcomingEvents() {
   const { upcoming } = splitEvents(events);
-  // Show at most one occurrence of each recurring event in the preview.
   const seen = new Set<string>();
-  const next3 = upcoming
+  const next4 = upcoming
     .filter((e) => {
       const base = e.recurring ? e.title : e.slug;
       if (seen.has(base)) return false;
       seen.add(base);
       return true;
     })
-    .slice(0, 3);
+    .slice(0, 4);
 
   return (
-    <Container as="section" className="py-20 md:py-28">
-      <SectionHeading
-        eyebrow="Events"
-        title="Coming up on campus"
-        description="Open meetings, cultural nights, Club Rush, Advocacy Day. If SGA or SAB is running it, it is here."
-        action={{ label: "View all events", href: "/events" }}
-      />
-      <Reveal as="ul" className="flex flex-col gap-2">
-        {next3.map((e) => (
+    <section className="border-b border-line">
+      <Container className="pt-20 md:pt-28">
+        <SectionHeading
+          eyebrow="03 — Events"
+          title="Coming up on campus"
+          description="Open meetings, cultural nights, Club Rush, Advocacy Day. If SGA or SAB is running it, it is here."
+          action={{ label: "View all events", href: "/events" }}
+        />
+      </Container>
+      <Reveal as="ul" className="flex flex-col border-t border-line">
+        {next4.map((e) => (
           <DirectoryRow
             key={e.slug}
             animate="reveal"
             href={`/events#${e.slug}`}
+            className="px-6 md:px-10"
             leading={<DateTile iso={e.start} approximate={e.approximate} />}
             title={e.title}
-            description={e.location}
+            description={<Todo value={e.location} fallback="Venue to be announced" />}
             pills={
               <>
                 <TodayBadge event={e} />
@@ -47,15 +50,14 @@ export function UpcomingEvents() {
           />
         ))}
       </Reveal>
-      <p className="mt-6 text-sm text-ink-muted">
-        Want your club’s event listed?{" "}
-        <Link
-          href="/contact"
-          className="text-mc-purple underline-offset-4 hover:underline"
-        >
-          Tell the Public Outreach committee.
-        </Link>
-      </p>
-    </Container>
+      <Container className="py-5">
+        <p className="font-mono text-[11px] tracking-[0.04em] text-ink-muted uppercase">
+          Want your club’s event listed?{" "}
+          <Link href="/contact" className="text-ink underline underline-offset-4">
+            Tell Public Outreach
+          </Link>
+        </p>
+      </Container>
+    </section>
   );
 }

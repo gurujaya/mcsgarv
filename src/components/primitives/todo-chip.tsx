@@ -13,7 +13,7 @@ export function TodoChip({ note, className }: { note?: string; className?: strin
     <span
       title={note}
       className={cn(
-        "inline-flex items-center gap-1 rounded-pill bg-todo-bg px-2 py-0.5 text-[11px] font-medium text-todo",
+        "inline-flex items-center gap-1 rounded-[4px] bg-todo-bg px-1.5 py-0.5 font-mono text-[10px] tracking-[0.04em] text-todo uppercase",
         className,
       )}
     >
