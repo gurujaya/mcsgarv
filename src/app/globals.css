@@ -1,0 +1,214 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ------------------------------------------------------------------ */
+/* Montgomery College brand system                                     */
+/* Source: MC Brand Standards and Usage Guide. Use the HEX values      */
+/* below verbatim. Purple is dominant; accents cover ≤10–15% of a page.*/
+/* ------------------------------------------------------------------ */
+@theme {
+  /* Primary */
+  --color-mc-purple: #51237f; /* Pantone 2617 — dominant */
+  --color-mc-purple-77: #6e4d94; /* official 77% tint — the ONLY permitted purple tint */
+
+  /* Accents (no tints as fills; see pill note below) */
+  --color-mc-orange: #ff5e3a; /* Pantone 179 */
+  --color-mc-blue: #0e8ad9; /* Pantone 2925 */
+  --color-mc-green: #28a689; /* Pantone 339 */
+
+  /* decision: the three accents fail WCAG AA (4.5:1) as small text on white
+     (orange 3.0:1, blue 3.7:1, green 3.0:1). These "-ink" shades are used ONLY
+     for pill/chip TEXT so category chips stay readable. Fills always use the
+     official HEX. */
+  --color-mc-orange-ink: #b83a1a;
+  --color-mc-blue-ink: #0a6aa8;
+  --color-mc-green-ink: #1b7a64;
+
+  /* Neutrals */
+  --color-mc-gray-light: #9fa1a4; /* Pantone 423 */
+  --color-mc-gray-dark: #666666; /* Cool Gray 10 */
+  --color-mc-black: #000000;
+  --color-mc-white: #ffffff;
+
+  /* Site-level tokens (derived, for YC-style surfaces) */
+  --color-bg: #faf9fc;
+  --color-surface: #ffffff;
+  --color-line: #e6e3ec;
+  --color-ink: #1a1523;
+  --color-ink-muted: #666666;
+  --color-todo: #b45309; /* amber "Needs content" chip, dev only */
+  --color-todo-bg: #fef3c7;
+
+  --radius-card: 12px;
+  --radius-pill: 999px;
+
+  --container-site: 1200px;
+
+  --animate-marquee: marquee 40s linear infinite;
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* Fonts come from next/font (variables set on <html>), so map them inline. */
+@theme inline {
+  --font-sans: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-crimson), ui-serif, Georgia, serif;
+  --font-heading: var(--font-crimson), ui-serif, Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* shadcn/ui semantic tokens → MC brand */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Light mode only for v1 (MC brand is light). Dark values can be added under
+   `.dark` later; every component reads semantic tokens, not raw hex. */
+:root {
+  --background: #faf9fc;
+  --foreground: #1a1523;
+  --card: #ffffff;
+  --card-foreground: #1a1523;
+  --popover: #ffffff;
+  --popover-foreground: #1a1523;
+  --primary: #51237f;
+  --primary-foreground: #ffffff;
+  --secondary: #f1eef6;
+  --secondary-foreground: #51237f;
+  --muted: #f3f1f7;
+  --muted-foreground: #666666;
+  --accent: #f1eef6;
+  --accent-foreground: #51237f;
+  --destructive: #b91c1c;
+  --border: #e6e3ec;
+  --input: #e6e3ec;
+  --ring: #51237f;
+  --chart-1: #51237f;
+  --chart-2: #6e4d94;
+  --chart-3: #0e8ad9;
+  --chart-4: #28a689;
+  --chart-5: #ff5e3a;
+  --radius: 0.625rem;
+  --sidebar: #faf9fc;
+  --sidebar-foreground: #1a1523;
+  --sidebar-primary: #51237f;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f1eef6;
+  --sidebar-accent-foreground: #51237f;
+  --sidebar-border: #e6e3ec;
+  --sidebar-ring: #51237f;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-bg text-ink;
+    font-feature-settings:
+      "kern" 1,
+      "liga" 1;
+    text-rendering: optimizeLegibility;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-mc-purple);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--color-mc-purple) 18%, transparent);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  .prose-sga {
+    @apply text-[15px] leading-relaxed text-ink-muted;
+    max-width: 70ch;
+  }
+  .prose-sga h2 {
+    @apply mt-10 mb-3 font-serif text-3xl font-semibold tracking-tight text-ink;
+  }
+  .prose-sga h3 {
+    @apply mt-8 mb-2 text-lg font-medium text-ink;
+  }
+  .prose-sga p {
+    @apply mb-4;
+  }
+  .prose-sga ul,
+  .prose-sga ol {
+    @apply mb-4 space-y-1.5 pl-5;
+  }
+  .prose-sga ul {
+    @apply list-disc;
+  }
+  .prose-sga ol {
+    @apply list-decimal;
+  }
+  .prose-sga a {
+    @apply text-mc-purple underline decoration-mc-purple/30 underline-offset-4 hover:decoration-mc-purple;
+  }
+  .prose-sga strong {
+    @apply font-medium text-ink;
+  }
+  .prose-sga blockquote {
+    @apply my-6 border-l-2 border-mc-purple pl-5 font-serif text-xl text-ink italic;
+  }
+  .prose-sga hr {
+    @apply my-10 border-line;
+  }
+}
