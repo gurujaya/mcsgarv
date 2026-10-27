@@ -29,7 +29,7 @@ export default function EventsPage() {
         compact
         eyebrow="Events"
         title="What’s happening on campus."
-        description={`SGA open meetings are every ${site.meeting.day} at ${site.meeting.time.split("–")[0]} PM in ${site.meeting.location}. Everything else SGA and SAB run is listed here.`}
+        description={`SGA open meetings are every other ${site.meeting.day} at ${site.meeting.time.split("–")[0]} PM in ${site.meeting.location}. Everything else SGA and SAB run is listed here.`}
       >
         <p className="mt-4 text-xs text-ink-muted">
           Dates marked “TBD” are approximate.{" "}

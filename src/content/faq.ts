@@ -18,7 +18,7 @@ export const faq: FAQ[] = [
   {
     category: "meetings",
     q: "Who can attend SGA meetings?",
-    a: "Everyone. Open meetings are every Monday from 4:00 to 6:00 PM in the Office of Student Life (SV 104A). You do not need to be a senator, sign up, or stay the whole time.",
+    a: "Everyone. Open meetings are every other Monday from 4:00 to 6:00 PM in the Office of Student Life (SV 104A). Check the Events page for the next date. You do not need to be a senator, sign up, or stay the whole time.",
   },
   {
     category: "meetings",
@@ -28,7 +28,7 @@ export const faq: FAQ[] = [
   {
     category: "joining",
     q: "How do I become a Senator-at-Large?",
-    a: "You need to be in good standing with the College and free from Code of Conduct violations (minor infractions are at the discretion of the Dean of Student Affairs), keep a cumulative GPA of 2.0 or higher each semester while in office, and attend SGA meetings weekly.\n\nTurn in a completed application to the Office of Student Life. Candidates interview with current SGA members. Senator positions are elected. See the Get Involved page for the current cycle.",
+    a: "You need to be in good standing with the College and free from Code of Conduct violations (minor infractions are at the discretion of the Dean of Student Affairs), keep a cumulative GPA of 2.0 or higher each semester while in office, and attend every SGA meeting (every other Monday).\n\nTurn in a completed application to the Office of Student Life. Candidates interview with current SGA members. Senator positions are elected. See the Get Involved page for the current cycle.",
   },
   {
     category: "joining",
@@ -43,7 +43,7 @@ export const faq: FAQ[] = [
   {
     category: "joining",
     q: "What is the time commitment?",
-    a: "Senators attend the weekly Monday meeting (4–6 PM) plus committee work, which is usually one to three hours a week depending on what is going on. Committee-only members commit to their committee's schedule. Officers put in more.",
+    a: "Senators attend the open meeting every other Monday (4–6 PM) plus committee work, which is usually one to three hours a week depending on what is going on. Committee-only members commit to their committee's schedule. Officers put in more.",
   },
   {
     category: "joining",

@@ -22,7 +22,8 @@ If your club needs money for an event, start on the Funding page. The panel meet
     category: "finance",
     openTo: "senators-only",
     chair: "Treasurer",
-    meets: "During the Monday SGA meeting block (4–6 PM) as requests come in",
+    meets:
+      "During the SGA meeting block (every other Monday, 4–6 PM) as requests come in",
     contact: "sgarv@montgomerycollege.edu",
     color: "purple",
     pills: ["Finance", "Treasurer-chaired"],

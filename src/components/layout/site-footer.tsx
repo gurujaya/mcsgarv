@@ -67,9 +67,7 @@ export function SiteFooter() {
                 {site.phone}
               </a>
             </p>
-            <p className="text-ink">
-              Open meetings: {site.meeting.day}s, {site.meeting.time}
-            </p>
+            <p className="text-ink">Open meetings: {site.meeting.short}</p>
             <p>
               <a
                 href={site.studentLife.url}

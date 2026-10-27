@@ -35,7 +35,16 @@ export const site = {
   phoneHref: "tel:+12405677177",
 
   meeting: {
-    label: "Open meetings every Monday",
+    label: "Open meetings every other Monday",
+    /** Short form for headers and footers. */
+    short: "Every other Monday, 4:00–6:00 PM",
+    cadence: "biweekly" as const,
+    /**
+     * A real meeting Monday that fixes the two-week cycle (ISO date, Eastern).
+     * TODO: confirm this anchor; if the next meeting is Nov 2 rather than Nov 9,
+     * change it to "2026-10-19".
+     */
+    anchor: "2026-10-26",
     day: "Monday",
     time: "4:00–6:00 PM",
     location: "Office of Student Life, SV 104A",

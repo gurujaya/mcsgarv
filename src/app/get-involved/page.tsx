@@ -87,7 +87,7 @@ export default function GetInvolvedPage() {
                 {[
                   "In good standing with the College and free from Code of Conduct violations",
                   "Cumulative GPA of 2.0 or higher each semester while in office",
-                  "Attend SGA meetings weekly",
+                  "Attend every SGA meeting (every other Monday, 4–6 PM)",
                   "Completed application turned in to the Office of Student Life",
                   "Interview with current SGA members",
                 ].map((r) => (
@@ -264,7 +264,7 @@ export default function GetInvolvedPage() {
             <SectionHeading
               eyebrow="Path 0"
               title="Just come to a meeting."
-              description={`Open meetings are every ${site.meeting.day}, ${site.meeting.time}, in the ${site.meeting.location}. ${site.meeting.note} You can sit in the back, or you can speak during open floor.`}
+              description={`Open meetings are every other ${site.meeting.day}, ${site.meeting.time}, in the ${site.meeting.location}. ${site.meeting.note} You can sit in the back, or you can speak during open floor.`}
               className="mb-6"
             />
             <CTA href="/events?type=meeting" variant="ghost" size="sm">

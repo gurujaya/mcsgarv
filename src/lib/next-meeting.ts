@@ -1,14 +1,14 @@
 import { TZ } from "./dates";
+import { site } from "@/content/site";
 
-const MEETING_WEEKDAY = 1; // Monday
 const MEETING_START = { h: 16, m: 0 };
 const MEETING_END = { h: 18, m: 0 };
+const CYCLE_DAYS = site.meeting.cadence === "biweekly" ? 14 : 7;
 
 function parts(d: Date) {
   const f = new Intl.DateTimeFormat("en-US", {
     timeZone: TZ,
     hourCycle: "h23",
-    weekday: "short",
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
@@ -42,22 +42,41 @@ export type MeetingStatus =
   | { kind: "live"; endsAt: Date }
   | { kind: "upcoming"; startsAt: Date; days: number; hours: number; minutes: number };
 
-/** Next Monday 4–6 PM Eastern relative to `now`, or "live" during the meeting. */
+/**
+ * Next open meeting relative to `now`, or "live" while one is in session.
+ * Meetings fall every CYCLE_DAYS from the anchor Monday in site.ts.
+ */
 export function nextMeeting(now = new Date()): MeetingStatus {
-  const p = parts(now);
-  const daysAhead = (MEETING_WEEKDAY - p.wd + 7) % 7;
-  const start = fromLocal(p.y, p.mo, p.d + daysAhead, MEETING_START.h, MEETING_START.m);
-  const end = fromLocal(p.y, p.mo, p.d + daysAhead, MEETING_END.h, MEETING_END.m);
-  if (now >= start && now < end) return { kind: "live", endsAt: end };
-  const next =
-    now >= end
-      ? fromLocal(p.y, p.mo, p.d + daysAhead + 7, MEETING_START.h, MEETING_START.m)
-      : start;
-  const ms = next.getTime() - now.getTime();
-  const days = Math.floor(ms / 86_400_000);
-  const hours = Math.floor((ms % 86_400_000) / 3_600_000);
-  const minutes = Math.floor((ms % 3_600_000) / 60_000);
-  return { kind: "upcoming", startsAt: next, days, hours, minutes };
+  const [ay, am, ad] = site.meeting.anchor.split("-").map(Number);
+  const anchor = fromLocal(ay, am, ad, MEETING_START.h, MEETING_START.m);
+  // Whole cycles elapsed since the anchor (may be negative before it).
+  const elapsed = Math.floor(
+    (now.getTime() - anchor.getTime()) / (CYCLE_DAYS * 86_400_000),
+  );
+  for (const k of [elapsed, elapsed + 1, elapsed + 2]) {
+    const s = fromLocal(ay, am, ad + k * CYCLE_DAYS, MEETING_START.h, MEETING_START.m);
+    const e = fromLocal(ay, am, ad + k * CYCLE_DAYS, MEETING_END.h, MEETING_END.m);
+    if (now >= s && now < e) return { kind: "live", endsAt: e };
+    if (now < s) {
+      const ms = s.getTime() - now.getTime();
+      return {
+        kind: "upcoming",
+        startsAt: s,
+        days: Math.floor(ms / 86_400_000),
+        hours: Math.floor((ms % 86_400_000) / 3_600_000),
+        minutes: Math.floor((ms % 3_600_000) / 60_000),
+      };
+    }
+  }
+  // Unreachable in practice; fall back to one cycle out.
+  const s2 = fromLocal(
+    ay,
+    am,
+    ad + (elapsed + 3) * CYCLE_DAYS,
+    MEETING_START.h,
+    MEETING_START.m,
+  );
+  return { kind: "upcoming", startsAt: s2, days: CYCLE_DAYS, hours: 0, minutes: 0 };
 }
 
 export function localClock(now = new Date()): string {

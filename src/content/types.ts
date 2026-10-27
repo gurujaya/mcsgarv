@@ -74,8 +74,8 @@ export type Event = {
   past?: boolean;
   /** Date is approximate (month known, day not confirmed). Shows "Date TBD". */
   approximate?: boolean;
-  /** Weekly recurring event. `start` is the first occurrence; the site expands it. */
-  recurring?: "weekly";
+  /** Recurring event. `start` is one real occurrence; the site expands forward from it. */
+  recurring?: "weekly" | "biweekly";
   /** Who runs it when it is not SGA (e.g. "Office of Student Life"). */
   host?: string;
 };

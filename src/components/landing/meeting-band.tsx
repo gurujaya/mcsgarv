@@ -18,10 +18,10 @@ export function MeetingBand() {
       <div className="relative mx-auto flex w-full max-w-[1400px] flex-col gap-10 px-6 pt-40 pb-14 md:flex-row md:items-end md:justify-between md:px-10 md:pb-20">
         <div>
           <p className="font-mono text-[11px] tracking-[0.14em] text-white/70 uppercase">
-            Open meetings · {site.meeting.day}s {site.meeting.time} · {site.office.room}
+            Open meetings · {site.meeting.short} · {site.office.room}
           </p>
           <h2 className="serif-display mt-5 max-w-[14ch] text-[44px] text-white md:text-[84px]">
-            Every Monday at four. Everyone’s invited.
+            Every other Monday at four. Everyone’s invited.
           </h2>
         </div>
         <div className="flex flex-col gap-4 md:items-end">

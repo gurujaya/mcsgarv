@@ -55,7 +55,7 @@ export function MeetingStatus({ className }: { className?: string }) {
         ) : null}
       </span>
       <span className="whitespace-nowrap" suppressHydrationWarning>
-        {text ? text.label : "Meetings · Mondays 4–6 PM"}
+        {text ? text.label : "Meetings · every other Monday, 4–6 PM"}
       </span>
       <span
         className="hidden whitespace-nowrap text-ink-faint 2xl:inline"

@@ -41,7 +41,7 @@ const glance = [
     "Committees",
     `${committees.length}, ${committees.filter((c) => c.openTo === "all-students").length} open to any student`,
   ],
-  ["Open meetings", `${site.meeting.day}s, ${site.meeting.time}`],
+  ["Open meetings", site.meeting.short],
   ["Office", `${site.office.room}, ${site.office.within}`],
   ["Advising office", `${site.studentLife.name}, ${site.studentLife.room}`],
   ["Term", site.term],

@@ -90,7 +90,7 @@ Open `src/content/events.ts` and append an object:
 
 - Events sort into **Upcoming** and **Past** automatically by date. You can force `past: true`.
 - `approximate: true` shows "Date TBD" with the month when the day is not confirmed.
-- `recurring: "weekly"` (e.g. the Monday open meeting) expands into the next 8 weeks automatically. `start` is any one occurrence.
+- `recurring: "weekly"` or `"biweekly"` (the open meeting is biweekly) expands forward automatically. `start` must be a real occurrence; for biweekly events it fixes which Mondays are meeting Mondays. The nav countdown reads the same anchor from `site.meeting.anchor` in `site.ts`.
 - Every upcoming event gets an **.ics** button that downloads a calendar file.
 - The home page and `/events` revalidate hourly on Vercel, so "upcoming" stays current without a rebuild.
 
@@ -138,7 +138,7 @@ The look is deliberately restrained: one typeface, near-monochrome surfaces, hai
 - **Layout:** a 1320px `.site-frame` with vertical hairline rails on large screens. Sections are separated by full-width rules; grids of cells share borders instead of gaps.
 - **Landing page:** a warm-paper hero whose only visual is the group photo rendered as an ink halftone dot screen through a small three.js shader (`src/components/landing/hero-shader.tsx`, React Three Fiber, loaded at idle after the page is interactive, with a masked grayscale photo as the fallback when WebGL or motion is unavailable). Then intro + stats, the "Four jobs" cells, a committee index, the full-bleed photo band, and the next four events. Each section is one file in `src/components/landing/`.
 - **Photos and video:** `public/images/` holds `sga-group.jpg` (hero halftone source and About figure), `sga-group-wide.jpg` (16:9 crop), `fall-on-the-quad.jpg` and `fall-fest-pair.jpg` (home "Campus life" figures), and `open-meeting.jpg` (Get Involved, and the poster for the video). `public/video/open-meeting.mp4` is a muted 35-second H.264 loop (1120px, ~3.4 MB) used in the home "Every Monday at four" band; it plays only while on screen and never autoplays for people who prefer reduced motion. To replace it: `ffmpeg -i in.mp4 -an -vf "scale=1120:-2,fps=24" -c:v libx264 -crf 27 -pix_fmt yuv420p -movflags +faststart public/video/open-meeting.mp4`.
-- **Nav:** a celled bar (brand, links, live meeting status, search, Apply) that condenses on scroll. `src/components/layout/nav-links.ts` defines the items; "Committees" and "Resources" open numbered editorial dropdowns, and committee entries are generated from `committees.ts`. The status cell counts down to the next Monday 4 PM meeting (`src/lib/next-meeting.ts`) and turns green while it is in session. On phones the menu is a full-screen serif list.
+- **Nav:** a celled bar (brand, links, live meeting status, search, Apply) that condenses on scroll. `src/components/layout/nav-links.ts` defines the items; "Committees" and "Resources" open numbered editorial dropdowns, and committee entries are generated from `committees.ts`. The status cell counts down to the next open meeting (every other Monday, 4 PM, anchored by `site.meeting.anchor`; `src/lib/next-meeting.ts`) and turns green while it is in session. On phones the menu is a full-screen serif list.
 
 ## Deploy to Vercel
 

@@ -123,13 +123,15 @@ function addDays(iso: string, days: number): string {
 }
 
 /**
- * Expand weekly recurring events into concrete occurrences from `now` forward.
+ * Expand recurring events (weekly or every two weeks) into concrete occurrences
+ * from `now` forward. `start` must be a real occurrence so biweekly cycles stay
+ * in phase.
  * Non-recurring events pass through unchanged.
  */
 export function expandEvents(list: Event[], now = new Date()): Event[] {
   const out: Event[] = [];
   for (const e of list) {
-    if (e.recurring !== "weekly") {
+    if (!e.recurring) {
       out.push(e);
       continue;
     }
@@ -138,8 +140,9 @@ export function expandEvents(list: Event[], now = new Date()): Event[] {
       : 0;
     let cursor = e.start;
     // Advance to the first occurrence that has not ended yet.
+    const step = e.recurring === "biweekly" ? 14 : 7;
     while (new Date(cursor).getTime() + durationMs < now.getTime()) {
-      cursor = addDays(cursor, 7);
+      cursor = addDays(cursor, step);
     }
     for (let i = 0; i < WEEKS_TO_EXPAND; i++) {
       const start = cursor;
@@ -152,7 +155,7 @@ export function expandEvents(list: Event[], now = new Date()): Event[] {
         start,
         end,
       });
-      cursor = addDays(cursor, 7);
+      cursor = addDays(cursor, step);
     }
   }
   return out;

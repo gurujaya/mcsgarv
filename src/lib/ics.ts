@@ -46,7 +46,11 @@ export function buildIcs(e: Event): string {
     `DESCRIPTION:${escapeText(e.description)}`,
     `LOCATION:${escapeText(e.location)}`,
     `URL:${site.url}/events#${e.slug}`,
-    ...(e.recurring === "weekly" ? ["RRULE:FREQ=WEEKLY"] : []),
+    ...(e.recurring === "weekly"
+      ? ["RRULE:FREQ=WEEKLY"]
+      : e.recurring === "biweekly"
+        ? ["RRULE:FREQ=WEEKLY;INTERVAL=2"]
+        : []),
     "END:VEVENT",
     "END:VCALENDAR",
   ];

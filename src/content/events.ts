@@ -10,7 +10,8 @@ import type { Event, EventType } from "./types";
  * off and the site will sort it by date automatically.
  *
  * `approximate: true` means the month is known but the day is not confirmed.
- * `recurring: "weekly"` expands the event into the next several weeks.
+ * `recurring: "weekly"` or `"biweekly"` expands the event forward from `start`
+ * (which must be a real occurrence; for biweekly it fixes the cycle).
  *
  * TODO: add Fall 2026 events from the SGA Instagram (Desi After Dark, etc.)
  *       with dates and covers.
@@ -20,13 +21,15 @@ export const events: Event[] = [
   {
     slug: "sga-open-meeting",
     title: "SGA Open Meeting",
-    start: "2026-08-31T16:00:00-04:00",
-    end: "2026-08-31T18:00:00-04:00",
+    // start = a real meeting Monday; the cycle repeats every two weeks from it.
+    // TODO: confirm the anchor (see site.ts → meeting.anchor).
+    start: "2026-10-26T16:00:00-04:00",
+    end: "2026-10-26T18:00:00-04:00",
     location: "Office of Student Life, SV 104A",
     type: "meeting",
-    recurring: "weekly",
+    recurring: "biweekly",
     description:
-      "The weekly SGA meeting is open to every Rockville student. Hear what senators are working on, raise a concern during open floor, and see how decisions get made. No sign-up needed. Just walk in.",
+      "The SGA open meeting, every other Monday, is open to every Rockville student. Hear what senators are working on, raise a concern during open floor, and see how decisions get made. No sign-up needed. Just walk in.",
   },
   {
     slug: "connect-over-coffee",
