@@ -160,6 +160,11 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
                       {chairPerson
                         ? `${chairPerson.name} (${chairPerson.role})`
                         : (c.chair ?? "Elected by the committee")}
+                      {c.coChair ? (
+                        <span className="block text-ink-muted">
+                          Co-chair: {c.coChair}
+                        </span>
+                      ) : null}
                     </dd>
                   </div>
                 </div>

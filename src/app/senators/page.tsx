@@ -42,7 +42,14 @@ function Committees({ p }: { p: Person }) {
   if (!list.length) return null;
   return (
     <p className="mt-1 font-mono text-[10px] tracking-[0.06em] text-ink-muted uppercase">
-      {list.map((c) => c!.shortName ?? c!.name).join(" · ")}
+      {list
+        .map((c) => {
+          const label = c!.shortName ?? c!.name;
+          if (c!.chair === p.name) return `${label} · Chair`;
+          if (c!.coChair === p.name) return `${label} · Co-chair`;
+          return label;
+        })
+        .join(" · ")}
     </p>
   );
 }

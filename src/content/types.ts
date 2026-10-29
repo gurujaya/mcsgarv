@@ -22,6 +22,7 @@ export type Committee = {
   category: CommitteeCategory;
   openTo: "all-students" | "senators-only";
   chair?: string; // name or role e.g. "Treasurer"
+  coChair?: string; // name
   meets?: string; // "Mondays 4–6 PM, SV 104A" or "TBD"
   contact?: string; // email
   color: CommitteeColor;
