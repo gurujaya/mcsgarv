@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { Reveal, RevealItem } from "@/components/primitives/reveal";
 import { Todo } from "@/components/primitives/todo-chip";
 import { committees } from "@/content/committees";
 import { elected } from "@/content/people";
