@@ -73,7 +73,7 @@ export const people: Person[] = [
     photo: "/people/amirali-jalili.jpg",
     name: "Amirali Jalili",
     role: "Senator-at-Large",
-    committees: ["community-service"],
+    committees: ["community-service", "public-outreach"],
   },
   // Group record: "Kivembele, Edna". MC page: "EdnaJoan". Keeping the MC page form.
   {
@@ -122,7 +122,7 @@ export const people: Person[] = [
     photo: "/people/paniz-salehi.jpg",
     name: "Paniz Salehi",
     role: "Senator-at-Large",
-    committees: ["community-service"],
+    committees: ["community-service", "public-outreach"],
   },
   // Group record spells it "Corrianne"; the MC page had "Corriane". Using the record.
   {
@@ -174,7 +174,7 @@ export const people: Person[] = [
     photo: "/people/advika-babu.jpg",
     name: "Advika Babu",
     role: "Senator-at-Large",
-    committees: ["community-service"],
+    committees: ["community-service", "public-outreach"],
   },
   {
     slug: "ana-bocachica",
@@ -195,7 +195,7 @@ export const people: Person[] = [
     photo: "/people/sahasra-chittampelli.jpg",
     name: "Sahasra Chittampelli",
     role: "Senator-at-Large",
-    committees: ["community-service"],
+    committees: ["community-service", "public-outreach"],
   },
   {
     slug: "samantha-melton",
@@ -209,7 +209,7 @@ export const people: Person[] = [
     photo: "/people/dana-narh.jpg",
     name: "Dana Narh",
     role: "Senator-at-Large",
-    committees: ["community-service"],
+    committees: ["community-service", "public-outreach"],
   },
   {
     slug: "khadija-saleck-ould-belkhair",
@@ -229,7 +229,7 @@ export const people: Person[] = [
     photo: "/people/eden-tenagashaw.jpg",
     name: "Eden Tenagashaw",
     role: "Senator-at-Large",
-    committees: ["community-service"],
+    committees: ["community-service", "public-outreach"],
   },
 
   // Advisor: Director of Student Life and an owner of the SGA group.
