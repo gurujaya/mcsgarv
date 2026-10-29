@@ -181,7 +181,7 @@ export const people: Person[] = [
     photo: "/people/ana-bocachica.jpg",
     name: "Ana Bocachica",
     role: "Senator-at-Large",
-    committees: [],
+    committees: ["community-service"],
   },
   {
     slug: "nourhayet-chaherli",
