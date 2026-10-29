@@ -122,7 +122,7 @@ export const people: Person[] = [
     photo: "/people/paniz-salehi.jpg",
     name: "Paniz Salehi",
     role: "Senator-at-Large",
-    committees: [],
+    committees: ["community-service"],
   },
   // Group record spells it "Corrianne"; the MC page had "Corriane". Using the record.
   {
@@ -151,7 +151,7 @@ export const people: Person[] = [
     photo: "/people/joselyn-ulloa.jpg",
     name: "Joselyn Ulloa",
     role: "Senator-at-Large",
-    committees: ["public-outreach"],
+    committees: ["community-service", "public-outreach"],
   },
   {
     slug: "guru-jayaprakash",
