@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Mail } from "lucide-react";
 import Image from "next/image";
-import { Avatar } from "@/components/primitives/avatar";
 import { TodoChip } from "@/components/primitives/todo-chip";
 import { getCommittee } from "@/content/committees";
-import { advisors, elected, officers, senators } from "@/content/people";
+import { advisors, elected, initials, officers, senators } from "@/content/people";
 import type { Person } from "@/content/types";
 import { site } from "@/content/site";
 
@@ -29,14 +28,12 @@ function PersonCard({ p, large }: { p: Person; large?: boolean }) {
           />
         </div>
       ) : (
-        <Avatar
-          name={p.name}
-          photo={p.photo}
-          size={large ? "xl" : "lg"}
-          className={
-            large ? "max-sm:size-16 max-sm:text-lg" : "max-sm:size-12 max-sm:text-sm"
-          }
-        />
+        <div
+          aria-hidden
+          className="flex aspect-[4/5] w-full items-center justify-center border border-line bg-bg font-mono text-[22px] tracking-[0.06em] text-ink-faint"
+        >
+          {initials(p.name)}
+        </div>
       )}
       <p className="mt-6 font-mono text-[11px] tracking-[0.1em] text-ink-muted uppercase">
         {p.role}
@@ -130,7 +127,7 @@ export default function SenatorsPage() {
         </h1>
         <p className="mt-8 max-w-[52ch] text-[17px] leading-[1.55] text-ink-muted">
           {officers.length} Executive Board officers and {senators.length}{" "}
-          Senators-at-Large. Every one of them is at the Monday open meeting,{" "}
+          Senators-at-Large. Every one of them is at the open meeting every other Monday,{" "}
           {site.meeting.time}, so the fastest way to reach them is to show up.
         </p>
         <p className="mt-6 text-[12px] text-ink-muted">
