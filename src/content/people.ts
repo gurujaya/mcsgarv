@@ -156,7 +156,7 @@ export const people: Person[] = [
   {
     slug: "guru-jayaprakash",
     photo: "/people/guru-jayaprakash.jpg",
-    name: "Guruprasath (Guru) Jayaprakash",
+    name: "Guru Jayaprakash",
     role: "Senator-at-Large",
     committees: ["public-outreach"],
   },
