@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Mail, Clock, Users, UserCheck, ExternalLink } from "lucide-react";
 import { Container } from "@/components/primitives/container";
 import { Pill } from "@/components/primitives/pill";
 import { CTA } from "@/components/primitives/cta";
-import { Avatar } from "@/components/primitives/avatar";
 import { Todo, TodoChip } from "@/components/primitives/todo-chip";
 import { CommitteeIcon } from "@/components/committee-icon";
 import { committees, getCommittee, committeeCategories } from "@/content/committees";
-import { people } from "@/content/people";
+import { initials, people } from "@/content/people";
 import { site } from "@/content/site";
 import { isTodo } from "@/lib/todo";
 
@@ -38,7 +38,14 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
   const c = getCommittee(slug);
   if (!c) notFound();
 
-  const members = people.filter((p) => p.committees.includes(c.slug));
+  const last = (p: { name: string }) => p.name.trim().split(/\s+/).slice(-1)[0] ?? "";
+  const members = people
+    .filter((p) => p.committees.includes(c.slug))
+    .sort((a, b) => {
+      const rank = (p: { name: string }) =>
+        c.chair === p.name ? 0 : c.coChair === p.name ? 1 : 2;
+      return rank(a) - rank(b) || last(a).localeCompare(last(b));
+    });
   const paragraphs = c.description.split(/\n\s*\n/);
   const chairPerson = c.chair
     ? people.find((p) => p.role === c.chair || p.name === c.chair)
@@ -115,31 +122,56 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
             </>
           ) : null}
 
+          <h2 className="mt-12 text-xs font-medium tracking-[0.14em] text-ink uppercase">
+            Members
+            <span className="ml-2 font-mono text-[11px] text-ink-faint">
+              {members.length}
+            </span>
+          </h2>
           {members.length ? (
-            <>
-              <h2 className="eyebrow mt-12">Members</h2>
-              <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-                {members.map((m) => (
-                  <li
-                    key={m.slug}
-                    className="flex items-center gap-3 rounded-card border border-line bg-surface p-3"
-                  >
-                    <Avatar name={m.name} photo={m.photo} size="sm" />
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-medium text-ink">{m.name}</p>
-                      <p className="text-xs text-ink-muted">{m.role}</p>
-                    </div>
+            <ul className="mt-4 grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-3 md:grid-cols-4">
+              {members.map((m) => {
+                const tag =
+                  c.chair === m.name ? "Chair" : c.coChair === m.name ? "Co-chair" : null;
+                return (
+                  <li key={m.slug} className="flex flex-col bg-surface">
+                    <Link href={`/senators#${m.slug}`} className="group block">
+                      <div className="relative aspect-square overflow-hidden bg-bg">
+                        {m.photo ? (
+                          <Image
+                            src={m.photo}
+                            alt={m.name}
+                            fill
+                            sizes="(min-width: 768px) 200px, 50vw"
+                            className="object-cover object-top grayscale transition-[filter] duration-500 group-hover:grayscale-0"
+                          />
+                        ) : (
+                          <div className="flex size-full items-center justify-center font-mono text-[20px] tracking-[0.06em] text-ink-faint">
+                            {initials(m.name)}
+                          </div>
+                        )}
+                        {tag ? (
+                          <span className="absolute top-2 left-2 bg-ink px-1.5 py-0.5 font-mono text-[10px] tracking-[0.1em] text-white uppercase">
+                            {tag}
+                          </span>
+                        ) : null}
+                      </div>
+                      <div className="px-3 pt-2.5 pb-3">
+                        <p className="text-[14px] leading-[1.2] font-medium text-ink">
+                          {m.name}
+                        </p>
+                        <p className="mt-1 font-mono text-[10px] tracking-[0.06em] text-ink-muted uppercase">
+                          {m.role}
+                        </p>
+                      </div>
+                    </Link>
                   </li>
-                ))}
-              </ul>
-              <p className="mt-3 text-xs text-ink-muted">
-                Committee rosters are being updated.{" "}
-                <TodoChip note="Add committee assignments in people.ts" />
-              </p>
-            </>
+                );
+              })}
+            </ul>
           ) : (
-            <p className="mt-12 text-sm text-ink-muted">
-              Committee roster coming soon.{" "}
+            <p className="mt-3 text-sm text-ink-muted">
+              Roster coming soon.{" "}
               <TodoChip note="Add committee assignments in people.ts" />
             </p>
           )}
