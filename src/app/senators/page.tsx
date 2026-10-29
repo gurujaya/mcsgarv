@@ -140,20 +140,20 @@ export default function SenatorsPage() {
         eyebrow="Executive Board"
         title="Officers"
         people={officers}
-        cols="sm:grid-cols-2 lg:grid-cols-4"
+        cols="grid-cols-2 lg:grid-cols-4"
         large
       />
       <Group
         eyebrow="Senate"
         title="Senators-at-Large"
         people={senators}
-        cols="sm:grid-cols-2 lg:grid-cols-4"
+        cols="grid-cols-2 lg:grid-cols-4"
       />
       <Group
         eyebrow="Office of Student Life"
         title="Advisors"
         people={advisors}
-        cols="sm:grid-cols-2 lg:grid-cols-4"
+        cols="grid-cols-2 lg:grid-cols-4"
       />
 
       <section className="border-t border-line">
