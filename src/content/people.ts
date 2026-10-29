@@ -35,7 +35,7 @@ export const people: Person[] = [
     photo: "/people/mahdiul-mahdi.jpg",
     name: "Mahdiul Mahdi",
     role: "Secretary",
-    committees: [],
+    committees: ["community-service"],
   },
   {
     slug: "nadia-omer",
@@ -58,14 +58,14 @@ export const people: Person[] = [
     photo: "/people/lina-ben-younes.jpg",
     name: "Lina Ben Younes",
     role: "Senator-at-Large",
-    committees: [],
+    committees: ["community-service"],
   },
   {
     slug: "chamod-ekanayake",
     photo: "/people/chamod-ekanayake.jpg",
     name: "Chamod Ekanayake",
     role: "Senator-at-Large",
-    committees: [],
+    committees: ["community-service"],
   },
   // Group record: "Jalili, Amir Ali". MC page: "Amirali". Keeping the MC page form.
   {
@@ -87,21 +87,21 @@ export const people: Person[] = [
     photo: "/people/tania-marquina.jpg",
     name: "Tania Marquina",
     role: "Senator-at-Large",
-    committees: [],
+    committees: ["community-service"],
   },
   {
     slug: "eaindra-mon",
     photo: "/people/eaindra-mon.jpg",
     name: "Eaindra Mon",
     role: "Senator-at-Large",
-    committees: [],
+    committees: ["community-service"],
   },
   {
     slug: "haressh-nair",
     photo: "/people/haressh-nair.jpg",
     name: "Haressh Nair",
     role: "Senator-at-Large",
-    committees: [],
+    committees: ["community-service"],
   },
   {
     slug: "jesse-odhiambo",
@@ -115,14 +115,14 @@ export const people: Person[] = [
     photo: "/people/joshua-oyeneyin.jpg",
     name: "Joshua Oyeneyin",
     role: "Senator-at-Large",
-    committees: [],
+    committees: ["community-service"],
   },
   {
     slug: "paniz-salehi",
     photo: "/people/paniz-salehi.jpg",
     name: "Paniz Salehi",
     role: "Senator-at-Large",
-    committees: ["community-service"],
+    committees: [],
   },
   // Group record spells it "Corrianne"; the MC page had "Corriane". Using the record.
   {
@@ -137,21 +137,21 @@ export const people: Person[] = [
     photo: "/people/muhammad-tayyab.jpg",
     name: "Muhammad Tayyab",
     role: "Senator-at-Large",
-    committees: [],
+    committees: ["community-service"],
   },
   {
     slug: "akhyan-tamang",
     photo: "/people/akhyan-tamang.jpg",
     name: "Akhyan Tamang",
     role: "Senator-at-Large",
-    committees: [],
+    committees: ["community-service"],
   },
   {
     slug: "joselyn-ulloa",
     photo: "/people/joselyn-ulloa.jpg",
     name: "Joselyn Ulloa",
     role: "Senator-at-Large",
-    committees: ["community-service", "public-outreach"],
+    committees: ["public-outreach"],
   },
   {
     slug: "guru-jayaprakash",
@@ -167,7 +167,7 @@ export const people: Person[] = [
     slug: "nila-amin",
     name: "Nila Amin",
     role: "Senator-at-Large",
-    committees: [],
+    committees: ["community-service"],
   },
   {
     slug: "advika-babu",
@@ -188,7 +188,7 @@ export const people: Person[] = [
     photo: "/people/nourhayet-chaherli.jpg",
     name: "Nourhayet Chaherli",
     role: "Senator-at-Large",
-    committees: [],
+    committees: ["community-service"],
   },
   {
     slug: "sahasra-chittampelli",
@@ -202,7 +202,7 @@ export const people: Person[] = [
     photo: "/people/samantha-melton.jpg",
     name: "Samantha Melton",
     role: "Senator-at-Large",
-    committees: [],
+    committees: ["community-service"],
   },
   {
     slug: "dana-narh",
@@ -222,7 +222,7 @@ export const people: Person[] = [
     slug: "douglas-salerno",
     name: "Douglas Salerno",
     role: "Senator-at-Large",
-    committees: [],
+    committees: ["community-service"],
   },
   {
     slug: "eden-tenagashaw",
