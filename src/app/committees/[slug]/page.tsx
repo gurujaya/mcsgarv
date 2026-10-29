@@ -129,12 +129,12 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
             </span>
           </h2>
           {members.length ? (
-            <ul className="mt-4 grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-3 md:grid-cols-4">
+            <ul className="mt-4 grid grid-cols-2 border-t border-l border-line sm:grid-cols-3 md:grid-cols-4">
               {members.map((m) => {
                 const tag =
                   c.chair === m.name ? "Chair" : c.coChair === m.name ? "Co-chair" : null;
                 return (
-                  <li key={m.slug} className="flex flex-col bg-surface">
+                  <li key={m.slug} className="flex flex-col border-r border-b border-line bg-surface">
                     <Link href={`/senators#${m.slug}`} className="group block">
                       <div className="relative aspect-square overflow-hidden bg-bg">
                         {m.photo ? (
