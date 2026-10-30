@@ -25,7 +25,12 @@ const jobs = [
     verb: "Represent",
     claim: "Someone elected by students is in the room when decisions get made.",
     how: "SGA represents the student body to the College administration. When campus or College leadership needs to know what students think, SGA is who they ask, and SGA brings what it has heard at open meetings and in committees.",
-    where: "campus leadership meetings, the Office of Student Life, and College-wide councils",
+    mechanisms: [
+      { label: "Open meetings", href: "/events?type=meeting", note: "Where the position is decided" },
+      { label: "Campus leadership meetings", note: "Where it is carried" },
+      { label: "Office of Student Life", href: site.studentLife.url, note: "Advises SGA" },
+      { label: "College-wide councils" },
+    ],
   },
   {
     n: "2",
@@ -33,7 +38,11 @@ const jobs = [
     verb: "Fund",
     claim: "Student activity fees are spent on students, by a panel of students.",
     how: "SGA recommends the financial expenditures for student activities. Recognized clubs request money through the Budget Panel, chaired by the Treasurer, which evaluates each request on whether it promotes student engagement and strengthens campus community.",
-    where: "the Budget Panel, with processing by the Office of Student Life",
+    mechanisms: [
+      { label: "The Budget Panel", href: "/committees/budget-panel", note: "Chaired by the Treasurer" },
+      { label: "How to request funding", href: "/funding", note: "For recognized clubs" },
+      { label: "Office of Student Life", note: "Processes approved funds" },
+    ],
   },
   {
     n: "3",
@@ -41,7 +50,13 @@ const jobs = [
     verb: "Listen",
     claim: "Student opinion is collected on purpose, not by accident.",
     how: "SGA secures and invites student opinions regarding official policies and priorities: open floor at every meeting, the contact form, tabling at Club Rush, and committees like Food and WDCE that exist to gather feedback from specific groups.",
-    where: "open meetings, committees, tabling, and this site",
+    mechanisms: [
+      { label: "Open floor", href: "/events?type=meeting", note: "At every open meeting" },
+      { label: "Contact form", href: "/contact", note: "Any time" },
+      { label: "Food Committee", href: "/committees/food", note: "Campus dining" },
+      { label: "WDCE Committee", href: "/committees/wdce", note: "WDCE students" },
+      { label: "Tabling at Club Rush" },
+    ],
   },
   {
     n: "4",
@@ -49,7 +64,11 @@ const jobs = [
     verb: "Build",
     claim: "A commuter campus gets the events that make it feel like one place.",
     how: "SGA develops activities and events that enhance students’ academic and social experiences, and the Student Activities Board plans the social, cultural, and recreational calendar: the talent show, cultural nights, Club Rush, the International Ball.",
-    where: "the Student Activities Board, Public Outreach, and partner offices",
+    mechanisms: [
+      { label: "Student Activities Board", href: "/committees/sab", note: "Open to every student" },
+      { label: "Public Outreach", href: "/committees/public-outreach", note: "Gets the word out" },
+      { label: "Events calendar", href: "/events", note: "What is coming up" },
+    ],
   },
 ];
 
@@ -207,9 +226,9 @@ export default function AboutPage() {
               Four jobs. Each one has a mechanism.
             </h2>
             <p className="max-w-[40ch] text-[15px] leading-[1.6] text-white/60 md:col-span-5">
-              These are SGA’s four responsibilities as the College defines them. A
-              responsibility without a mechanism is a slogan, so each one comes with how
-              it actually happens.
+              The College gives SGA four responsibilities. A responsibility without a
+              mechanism is a slogan, so each one here comes with the room, panel, form, or
+              board where it actually happens, and a link to it.
             </p>
           </div>
         </div>

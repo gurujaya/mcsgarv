@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import Link from "next/link";
 import { cn } from "cn";
 import { BuildFig, FundFig, ListenFig, RepresentFig } from "./figures";
 
@@ -13,12 +14,20 @@ const FIGS = {
 } as const;
 export type FigKey = keyof typeof FIGS;
 
+export type Mechanism = {
+  label: string;
+  /** Internal path or external URL where this mechanism lives. */
+  href?: string;
+  /** Short fact set to the right of the label. */
+  note?: string;
+};
+
 export type Chapter = {
   n: string;
   verb: string;
   claim: string;
   how: string;
-  where: string;
+  mechanisms: Mechanism[];
   fig: FigKey;
 };
 
@@ -61,24 +70,56 @@ export function MandateScroller({ chapters }: { chapters: Chapter[] }) {
             ref={(el) => {
               refs.current[i] = el;
             }}
-            className="flex min-h-[70svh] flex-col justify-center border-t border-white/10 py-16 first:border-t-0 lg:min-h-[92svh] lg:py-24 lg:last:min-h-[64svh]"
+            className="flex min-h-[60svh] flex-col justify-center border-t border-white/10 py-16 first:border-t-0 lg:min-h-[82svh] lg:py-20 lg:last:min-h-[56svh]"
           >
             {/* inline figure on small screens */}
             <div className="iso-dark lg:hidden">
               {React.createElement(FIGS[c.fig], { className: "h-[220px] w-full" })}
             </div>
-            <h3 className="serif-display mt-8 text-[64px] text-white md:text-[112px]">
+            <h3 className="serif-display mt-8 text-[56px] text-white md:text-[88px]">
               {c.verb}
             </h3>
-            <p className="mt-6 max-w-[26ch] font-serif text-[26px] leading-[1.15] tracking-[-0.01em] text-white/85 md:text-[34px]">
+            <p className="mt-5 max-w-[26ch] font-serif text-[24px] leading-[1.15] tracking-[-0.01em] text-white/85 md:text-[30px]">
               {c.claim}
             </p>
             <p className="mt-6 max-w-[52ch] text-[15px] leading-[1.65] text-white/60">
               {c.how}
             </p>
-            <p className="mt-6 max-w-[52ch] text-[14px] leading-[1.6] text-white/45">
-              Where it happens: {c.where}.
-            </p>
+            {/* The mechanism: the real places this job happens, linked where we have a page. */}
+            <ul className="mt-9 max-w-[52ch] border-t border-white/15">
+              {c.mechanisms.map((m) => {
+                const inner = (
+                  <>
+                    <span className="text-[15px] text-white">{m.label}</span>
+                    {m.note ? (
+                      <span className="text-[13px] text-white/45 sm:text-right">{m.note}</span>
+                    ) : null}
+                  </>
+                );
+                const row =
+                  "flex flex-col gap-0.5 py-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6";
+                return (
+                  <li key={m.label} className="border-b border-white/15">
+                    {m.href ? (
+                      <Link
+                        href={m.href}
+                        className={cn(row, "group/m")}
+                        {...(m.href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
+                      >
+                        <span className="text-[15px] text-white underline decoration-white/30 underline-offset-[5px] transition-colors group-hover/m:decoration-white">
+                          {m.label}
+                        </span>
+                        {m.note ? (
+                          <span className="text-[13px] text-white/45 sm:text-right">{m.note}</span>
+                        ) : null}
+                      </Link>
+                    ) : (
+                      <div className={row}>{inner}</div>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
           </li>
         ))}
       </ol>
