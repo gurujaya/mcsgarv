@@ -63,11 +63,8 @@ export function MandateScroller({ chapters }: { chapters: Chapter[] }) {
             }}
             className="flex min-h-[70svh] flex-col justify-center border-t border-white/10 py-16 first:border-t-0 lg:min-h-[92svh] lg:py-24 lg:last:min-h-[64svh]"
           >
-            <p className="font-mono text-[11px] tracking-[0.14em] text-white/45 uppercase">
-              Fig 02.{i + 1} · {c.n} of 04
-            </p>
             {/* inline figure on small screens */}
-            <div className="iso-dark mt-8 lg:hidden">
+            <div className="iso-dark lg:hidden">
               {React.createElement(FIGS[c.fig], { className: "h-[220px] w-full" })}
             </div>
             <h3 className="serif-display mt-8 text-[64px] text-white md:text-[112px]">
@@ -79,9 +76,8 @@ export function MandateScroller({ chapters }: { chapters: Chapter[] }) {
             <p className="mt-6 max-w-[52ch] text-[15px] leading-[1.65] text-white/60">
               {c.how}
             </p>
-            <p className="mt-8 font-mono text-[11px] leading-[1.9] tracking-[0.08em] text-white/45 uppercase">
-              <span className="text-white/50">Where it happens — </span>
-              {c.where}
+            <p className="mt-6 max-w-[52ch] text-[14px] leading-[1.6] text-white/45">
+              Where it happens: {c.where}.
             </p>
           </li>
         ))}
@@ -126,7 +122,7 @@ export function MandateScroller({ chapters }: { chapters: Chapter[] }) {
             </AnimatePresence>
           </div>
           {/* progress */}
-          <ol className="mx-auto mt-6 flex w-full max-w-[640px] items-center gap-6 font-mono text-[11px] tracking-[0.12em] uppercase">
+          <ol className="mx-auto mt-6 flex w-full max-w-[640px] items-center gap-6 text-[13px]">
             {chapters.map((c, i) => (
               <li key={c.n} className="flex items-center gap-3">
                 <span

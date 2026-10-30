@@ -168,11 +168,11 @@ export function ConduitFig({ className }: { className?: string }) {
             x={lx}
             y={ly + 1}
             textAnchor="middle"
-            fontFamily="var(--font-mono)"
-            fontSize="2.6"
+            fontFamily="var(--font-sans)"
+            fontSize="2.8"
             fill="var(--color-ink-muted)"
           >
-            0{s.i + 1}
+            {s.i + 1}
           </text>
         );
       })}

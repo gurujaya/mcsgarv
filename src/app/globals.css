@@ -227,6 +227,45 @@
     --iso-ink-right: #3b2159;
     --iso-ink-front: #2e1847;
   }
+  /* Sentence-case buttons in the body face. Primary is the only purple fill.
+     Plain CSS on purpose: these rules were dropped when written with @apply. */
+  .button-primary,
+  .button-secondary {
+    display: inline-flex;
+    height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    padding-inline: 1.25rem;
+    font-size: 15px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background-color 200ms, border-color 200ms;
+  }
+  .button-primary {
+    background-color: var(--color-mc-purple);
+    color: #fff;
+  }
+  .button-primary:hover {
+    background-color: #44196c;
+  }
+  .button-secondary {
+    border: 1px solid var(--color-line-strong);
+    color: var(--color-ink);
+  }
+  .button-secondary:hover {
+    border-color: var(--color-ink);
+  }
+  .text-link {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-line-strong);
+    text-underline-offset: 5px;
+    transition: text-decoration-color 200ms;
+  }
+  .text-link:hover {
+    text-decoration-color: var(--color-ink);
+  }
   .mono-button {
     @apply inline-flex h-10 items-center justify-center gap-2 rounded-[5px] px-4 font-mono text-[12px] tracking-[0.08em] whitespace-nowrap uppercase transition-colors duration-200;
   }
