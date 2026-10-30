@@ -2,7 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Mail } from "lucide-react";
+import { Suspense } from "react";
 import { TodoChip } from "@/components/primitives/todo-chip";
+import {
+  SenateGrid,
+  SenateGridStatic,
+  type SenateFilter,
+  type SenateMember,
+} from "@/components/senate-grid";
 import { committees, getCommittee } from "@/content/committees";
 import { advisors, elected, initials, officers, senators } from "@/content/people";
 import type { Person } from "@/content/types";
@@ -20,6 +27,35 @@ const lastName = (p: Person) =>
     .split(/\s+/)
     .slice(-1)[0] ?? "";
 const senateSorted = [...senators].sort((a, b) => lastName(a).localeCompare(lastName(b)));
+
+const senateMembers: SenateMember[] = senateSorted.map((p) => ({
+  slug: p.slug,
+  name: p.name,
+  photo: p.photo,
+  email: p.email,
+  unconfirmed: p.unconfirmed,
+  seats: p.committees
+    .map((slug) => getCommittee(slug))
+    .filter((c): c is NonNullable<typeof c> => !!c)
+    .map((c) => ({
+      slug: c.slug,
+      label: c.shortName ?? c.name,
+      tag:
+        c.chair === p.name
+          ? ("Chair" as const)
+          : c.coChair === p.name
+            ? ("Co-chair" as const)
+            : undefined,
+    })),
+}));
+
+const senateFilters: SenateFilter[] = committees
+  .map((c) => ({
+    slug: c.slug,
+    label: c.shortName ?? c.name,
+    count: senateMembers.filter((m) => m.seats.some((s) => s.slug === c.slug)).length,
+  }))
+  .filter((f) => f.count > 0);
 
 function Portrait({ p, className = "" }: { p: Person; className?: string }) {
   return p.photo ? (
@@ -178,64 +214,45 @@ export default function SenatorsPage() {
               A–Z by last name
             </p>
           </div>
-          <ol className="mt-10 grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-3 lg:grid-cols-6">
-            {senateSorted.map((p, i) => (
-              <li key={p.slug} id={p.slug} className="group flex flex-col bg-surface">
-                <div className="relative aspect-square overflow-hidden bg-bg">
-                  <Portrait
-                    p={p}
-                    className="grayscale group-hover:scale-[1.03] group-hover:grayscale-0"
-                  />
-                  <span className="absolute top-2 left-2 font-mono text-[10px] tracking-[0.1em] text-ink/70 mix-blend-multiply">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                </div>
-                <div className="flex flex-1 flex-col px-3 pt-3 pb-3.5">
-                  <h3 className="text-[14px] leading-[1.2] font-medium tracking-[-0.01em] text-ink">
-                    {p.name}
-                  </h3>
-                  <Committees p={p} />
-                  {p.unconfirmed ? (
-                    <div className="mt-2">
-                      <TodoChip note="Confirm this person's role" />
-                    </div>
+          <div className="mt-8">
+            <Suspense
+              fallback={
+                <SenateGridStatic members={senateMembers} filters={senateFilters} />
+              }
+            >
+              <SenateGrid members={senateMembers} filters={senateFilters} />
+            </Suspense>
+          </div>
+          {advisors.map((p) => (
+            <div
+              key={p.slug}
+              id={p.slug}
+              className="mt-px flex flex-col gap-3 border border-line bg-surface px-5 py-5 sm:flex-row sm:items-center sm:justify-between"
+            >
+              <div>
+                <p className="font-mono text-[10px] tracking-[0.12em] text-ink-muted uppercase">
+                  Advisor · Office of Student Life
+                </p>
+                <p className="mt-1.5 text-[16px] font-medium text-ink">
+                  {p.name}
+                  {p.bio ? (
+                    <span className="font-normal text-ink-muted"> · {p.bio}</span>
                   ) : null}
-                </div>
-              </li>
-            ))}
-            {advisors.map((p) => (
-              <li
-                key={p.slug}
-                id={p.slug}
-                className="col-span-2 flex flex-col justify-center bg-bg sm:col-span-1 lg:col-span-4"
-              >
-                <div className="flex flex-col gap-4 px-5 py-5 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <p className="font-mono text-[10px] tracking-[0.12em] text-ink-muted uppercase">
-                      Advisor · Office of Student Life
-                    </p>
-                    <p className="mt-1.5 text-[16px] font-medium text-ink">
-                      {p.name}
-                      {p.bio ? (
-                        <span className="font-normal text-ink-muted"> · {p.bio}</span>
-                      ) : null}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    {p.email ? (
-                      <a
-                        href={`mailto:${p.email}`}
-                        className="font-mono text-[11px] tracking-[0.06em] text-ink underline underline-offset-4"
-                      >
-                        {p.email}
-                      </a>
-                    ) : null}
-                    {p.unconfirmed ? <TodoChip note="Confirm the advisor title" /> : null}
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ol>
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                {p.email ? (
+                  <a
+                    href={`mailto:${p.email}`}
+                    className="font-mono text-[11px] tracking-[0.06em] text-ink underline underline-offset-4"
+                  >
+                    {p.email}
+                  </a>
+                ) : null}
+                {p.unconfirmed ? <TodoChip note="Confirm the advisor title" /> : null}
+              </div>
+            </div>
+          ))}
           <p className="mt-4 font-mono text-[11px] tracking-[0.04em] text-ink-muted uppercase">
             Roster from montgomerycollege.edu and the SGA group · photos from the Senator
             Headshots album{" "}
