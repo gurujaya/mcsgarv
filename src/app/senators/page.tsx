@@ -41,7 +41,7 @@ const senateMembers: SenateMember[] = senateSorted.map((p) => ({
       slug: c.slug,
       label: c.shortName ?? c.name,
       tag:
-        c.chair === p.name
+        (c.chair === p.name || c.chair === p.role)
           ? ("Chair" as const)
           : c.coChair === p.name
             ? ("Co-chair" as const)
@@ -81,7 +81,7 @@ function Committees({ p }: { p: Person }) {
       {list
         .map((c) => {
           const label = c!.shortName ?? c!.name;
-          if (c!.chair === p.name) return `${label} · Chair`;
+          if (c!.chair === p.name || c!.chair === p.role) return `${label} · Chair`;
           if (c!.coChair === p.name) return `${label} · Co-chair`;
           return label;
         })

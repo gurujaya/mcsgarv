@@ -21,7 +21,7 @@ export const people: Person[] = [
     photo: "/people/lizelle-rodriguez.jpg",
     name: "Lizelle Rodriguez",
     role: "President",
-    committees: [],
+    committees: ["ethics"],
   },
   {
     slug: "anthony-rivera",
@@ -35,7 +35,7 @@ export const people: Person[] = [
     photo: "/people/mahdiul-mahdi.jpg",
     name: "Mahdiul Mahdi",
     role: "Secretary",
-    committees: ["community-service"],
+    committees: ["community-service", "ethics"],
   },
   {
     slug: "nadia-omer",
@@ -51,7 +51,7 @@ export const people: Person[] = [
     photo: "/people/tanzeel-agarib.jpg",
     name: "Tanzeel Agarib",
     role: "Senator-at-Large",
-    committees: [],
+    committees: ["budget-panel"],
   },
   {
     slug: "lina-ben-younes",
@@ -94,7 +94,7 @@ export const people: Person[] = [
     photo: "/people/eaindra-mon.jpg",
     name: "Eaindra Mon",
     role: "Senator-at-Large",
-    committees: ["community-service"],
+    committees: ["community-service", "ethics"],
   },
   {
     slug: "haressh-nair",
@@ -108,7 +108,7 @@ export const people: Person[] = [
     photo: "/people/jesse-odhiambo.jpg",
     name: "Jesse Odhiambo",
     role: "Senator-at-Large",
-    committees: [],
+    committees: ["budget-panel"],
   },
   {
     slug: "joshua-oyeneyin",
@@ -122,7 +122,7 @@ export const people: Person[] = [
     photo: "/people/paniz-salehi.jpg",
     name: "Paniz Salehi",
     role: "Senator-at-Large",
-    committees: ["community-service", "public-outreach"],
+    committees: ["community-service", "public-outreach", "budget-panel"],
   },
   // Group record spells it "Corrianne"; the MC page had "Corriane". Using the record.
   {
@@ -137,7 +137,7 @@ export const people: Person[] = [
     photo: "/people/muhammad-tayyab.jpg",
     name: "Muhammad Tayyab",
     role: "Senator-at-Large",
-    committees: ["community-service"],
+    committees: ["community-service", "budget-panel", "ethics"],
   },
   {
     slug: "akhyan-tamang",
@@ -202,7 +202,7 @@ export const people: Person[] = [
     photo: "/people/samantha-melton.jpg",
     name: "Samantha Melton",
     role: "Senator-at-Large",
-    committees: ["community-service"],
+    committees: ["community-service", "ethics"],
   },
   {
     slug: "dana-narh",
@@ -222,7 +222,7 @@ export const people: Person[] = [
     slug: "douglas-salerno",
     name: "Douglas Salerno",
     role: "Senator-at-Large",
-    committees: ["community-service"],
+    committees: ["community-service", "ethics"],
   },
   {
     slug: "eden-tenagashaw",

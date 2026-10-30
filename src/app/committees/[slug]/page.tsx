@@ -43,7 +43,7 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
     .filter((p) => p.committees.includes(c.slug))
     .sort((a, b) => {
       const rank = (p: { name: string }) =>
-        c.chair === p.name ? 0 : c.coChair === p.name ? 1 : 2;
+        (c.chair === p.name || c.chair === p.role) ? 0 : c.coChair === p.name ? 1 : 2;
       return rank(a) - rank(b) || last(a).localeCompare(last(b));
     });
   const paragraphs = c.description.split(/\n\s*\n/);
@@ -132,7 +132,7 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
             <ul className="mt-4 grid grid-cols-2 border-t border-l border-line sm:grid-cols-3 md:grid-cols-4">
               {members.map((m) => {
                 const tag =
-                  c.chair === m.name ? "Chair" : c.coChair === m.name ? "Co-chair" : null;
+                  (c.chair === m.name || c.chair === m.role) ? "Chair" : c.coChair === m.name ? "Co-chair" : null;
                 return (
                   <li key={m.slug} className="flex flex-col border-r border-b border-line bg-surface">
                     <Link href={`/senators#${m.slug}`} className="group block">
