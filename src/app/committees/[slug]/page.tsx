@@ -42,7 +42,7 @@ export default async function CommitteePage({ params }: PageProps<"/committees/[
   const members = people
     .filter((p) => p.committees.includes(c.slug))
     .sort((a, b) => {
-      const rank = (p: { name: string }) =>
+      const rank = (p: { name: string; role?: string }) =>
         (c.chair === p.name || c.chair === p.role) ? 0 : c.coChair === p.name ? 1 : 2;
       return rank(a) - rank(b) || last(a).localeCompare(last(b));
     });
