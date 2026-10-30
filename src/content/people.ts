@@ -158,7 +158,7 @@ export const people: Person[] = [
     photo: "/people/guru-jayaprakash.jpg",
     name: "Guru Jayaprakash",
     role: "Senator-at-Large",
-    committees: ["public-outreach"],
+    committees: ["public-outreach", "community-service"],
   },
 
   // In the SGA group but not yet on the MC page (sworn in after it was updated).

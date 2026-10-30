@@ -49,6 +49,8 @@ The committee partners with MC's Service-Learning and Civic Engagement office so
 The committee is staffed by senators. If you want to help organize drives, run for a seat; if you just want to volunteer at one, watch the Events page.`,
     category: "service",
     openTo: "senators-only",
+    chair: "Muhammad Tayyab",
+    coChair: "Eaindra Mon",
     meets: "TODO: confirm meeting time",
     contact: "sgarv@montgomerycollege.edu",
     color: "green",
