@@ -1,9 +1,21 @@
 import { committees } from "@/content/committees";
 
+export type NavChild = {
+  label: string;
+  href: string;
+  /** Short form shown after the name, e.g. "SAB". */
+  abbr?: string;
+  description?: string;
+  /** One-line fact set apart from the description, e.g. who may join. */
+  note?: string;
+};
+
 export type NavItem = {
   label: string;
   href: string;
-  children?: { label: string; href: string; description?: string }[];
+  /** Sentence shown beside the drawer grid. Facts only. */
+  blurb?: string;
+  children?: NavChild[];
 };
 
 export const navItems: NavItem[] = [
@@ -11,35 +23,32 @@ export const navItems: NavItem[] = [
   {
     label: "Committees",
     href: "/committees",
+    blurb:
+      "Seven committees carry the SGA's work between meetings. Senators sit on each one. The Student Activities Board also seats any Rockville student.",
     children: committees.map((c) => ({
-      label: c.shortName ? `${c.name} (${c.shortName})` : c.name,
+      label: c.name,
+      abbr: c.shortName && !c.name.includes(c.shortName) ? c.shortName : undefined,
       href: `/committees/${c.slug}`,
       description: c.tagline,
+      note: c.openTo === "all-students" ? "Open to every Rockville student" : undefined,
     })),
   },
   { label: "Senators", href: "/senators" },
   { label: "Events", href: "/events" },
-  { label: "Get Involved", href: "/get-involved" },
+  { label: "Get involved", href: "/get-involved" },
   {
     label: "Resources",
     href: "/resources",
+    blurb: "Funding rules, the constitution, campus forms, and the people to reach.",
     children: [
+      { label: "Club funding", href: "/funding", description: "How the Budget Panel works" },
       {
-        label: "Club funding",
-        href: "/funding",
-        description: "How the Budget Panel works",
-      },
-      {
-        label: "Resources & links",
+        label: "Resources and links",
         href: "/resources",
         description: "Student Life, forms, campus services",
       },
       { label: "FAQ", href: "/faq", description: "Meetings, joining, funding" },
-      {
-        label: "Constitution",
-        href: "/constitution",
-        description: "The governing document",
-      },
+      { label: "Constitution", href: "/constitution", description: "The governing document" },
       { label: "Contact", href: "/contact", description: "Office, email, open meeting" },
     ],
   },
