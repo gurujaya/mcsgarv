@@ -30,6 +30,8 @@ export type Committee = {
   responsibilities: string[];
   howToJoin?: string;
   links?: { label: string; href: string }[];
+  /** Show SGA's social channels on this page (the committee that runs them). */
+  showSocials?: boolean;
   /** Set to true when the description is a draft an officer must confirm. */
   draft?: boolean;
 };

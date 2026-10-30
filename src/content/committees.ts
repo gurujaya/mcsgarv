@@ -122,6 +122,7 @@ Staffed by senators, fed by everyone. If you have opinions about what is (or is 
     shortName: "PO",
     chair: "Joselyn Ulloa",
     coChair: "Guru Jayaprakash",
+    showSocials: true,
     tagline: "SGA's voice on Instagram, TikTok, X, flyers, and tables around campus.",
     description: `Public Outreach runs SGA's communications. If you have seen an SGA post, flyer, or table on the Quad, that was PO.
 
