@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Link from "next/link";
 import { Container } from "@/components/primitives/container";
 import { ConcernForm } from "@/components/forms/concern-form";
@@ -83,7 +84,9 @@ export default function ConcernsPage() {
               ? "Every concern SGA takes on is listed here with who has it and where it stands."
               : `${items.length} this term. ${open} open, ${resolved} resolved.`}
           </p>
-          <ConcernBoard items={items} />
+          <Suspense fallback={<div className="mt-8 border-t border-line" aria-hidden />}>
+            <ConcernBoard items={items} />
+          </Suspense>
         </Container>
       </section>
     </>
