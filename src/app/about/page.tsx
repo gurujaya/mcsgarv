@@ -344,7 +344,7 @@ export default function AboutPage() {
                 Step one starts at any open meeting, {site.meeting.short.replace("Every", "every")}.
               </p>
               <div className="flex gap-3">
-                <Link href="/contact" className="button-secondary">
+                <Link href="/concerns" className="button-secondary">
                   Raise a concern
                 </Link>
                 <Link href="/events?type=meeting" className="button-primary">

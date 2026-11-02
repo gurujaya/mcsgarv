@@ -41,6 +41,7 @@ export const navItems: NavItem[] = [
     href: "/resources",
     blurb: "Funding rules, the constitution, campus forms, and the people to reach.",
     children: [
+      { label: "Raise a concern", href: "/concerns", description: "And follow what happens to it" },
       { label: "Club funding", href: "/funding", description: "How the Budget Panel works" },
       {
         label: "Resources and links",
@@ -57,6 +58,7 @@ export const navItems: NavItem[] = [
 /** Flat list for the footer and mobile menu. */
 export const navLinks = navItems.map(({ label, href }) => ({ label, href }));
 export const secondaryLinks = [
+  { label: "Concerns", href: "/concerns" },
   { label: "Funding", href: "/funding" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },

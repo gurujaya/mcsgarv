@@ -1,4 +1,4 @@
-export type FormKind = "contact" | "interest" | "funding";
+export type FormKind = "contact" | "interest" | "funding" | "concern";
 
 export async function submitForm(
   kind: FormKind,

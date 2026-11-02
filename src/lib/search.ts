@@ -47,6 +47,14 @@ const pages: SearchItem[] = [
     href: "/get-involved",
   },
   {
+    id: "page-concerns",
+    kind: "page",
+    title: "Raise a concern",
+    subtitle: "Submit a problem and follow its status",
+    href: "/concerns",
+    keywords: "complaint problem issue feedback tracker",
+  },
+  {
     id: "page-funding",
     kind: "page",
     title: "Club Funding",

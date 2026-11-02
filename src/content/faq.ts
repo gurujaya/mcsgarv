@@ -23,7 +23,7 @@ export const faq: FAQ[] = [
   {
     category: "meetings",
     q: "How do I raise a concern or idea?",
-    a: "Three ways. Come to a Monday open meeting and speak during open floor. Email sgarv@montgomerycollege.edu. Or use the form on the Contact page, which goes to the SGA Secretary. We will tell you which senator or committee is picking it up.",
+    a: "Three ways. Come to a Monday open meeting and speak during open floor. Email sgarv@montgomerycollege.edu. Or use the form on the Concerns page, which goes to the SGA Secretary. Once it is logged, it appears on that page with who is working on it and where it stands.",
   },
   {
     category: "joining",

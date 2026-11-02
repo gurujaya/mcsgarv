@@ -94,3 +94,37 @@ export type ResourceLink = {
   category: "sga" | "student-life" | "campus" | "advocacy" | "forms";
   external?: boolean;
 };
+
+/* ---------------------------------------------------------------------------
+ * Constituent concerns: problems students raise, tracked in public.
+ * ------------------------------------------------------------------------- */
+
+export type ConcernStatus = "received" | "in-progress" | "resolved" | "closed";
+
+export type ConcernCategory =
+  | "dining"
+  | "safety"
+  | "facilities"
+  | "parking"
+  | "academics"
+  | "accessibility"
+  | "policy"
+  | "events"
+  | "other";
+
+export type Concern = {
+  /** Stable id, e.g. "2026-001". Used as the URL anchor; never reuse one. */
+  id: string;
+  /** One neutral line describing the problem. Never include a student's name. */
+  title: string;
+  category: ConcernCategory;
+  status: ConcernStatus;
+  /** Day it was raised, YYYY-MM-DD. */
+  raised: string;
+  /** Committee slug that owns it, if one does. */
+  committee?: string;
+  /** Person slug of the senator carrying it, if one does. */
+  senator?: string;
+  /** Dated notes, oldest first. The last one is what shows as the current state. */
+  updates: { date: string; note: string }[];
+};

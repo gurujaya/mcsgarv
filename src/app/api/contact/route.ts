@@ -9,7 +9,7 @@ import { z } from "zod";
  */
 const payload = z
   .object({
-    form: z.enum(["contact", "interest", "funding"]),
+    form: z.enum(["contact", "interest", "funding", "concern"]),
     website: z.string().optional(), // honeypot: anything non-empty is a bot
   })
   .passthrough();

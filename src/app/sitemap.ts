@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/senators",
     "/events",
     "/get-involved",
+    "/concerns",
     "/funding",
     "/resources",
     "/faq",
